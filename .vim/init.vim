@@ -40,7 +40,7 @@ filetype off
 
 " theme
 syntax enable
-colorscheme gruvbox
+colorscheme zenburn
 set background=dark
 
 " line numbers
