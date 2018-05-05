@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ll='ls -lahF' # Long view and show hidden
+alias df='df -h' # Disk free, in gigabytes, not bytes
+alias du='du -hc' # Calculate total disk usage for a folder
+
