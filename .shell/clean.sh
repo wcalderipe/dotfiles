@@ -1,6 +1,8 @@
 echo "Removing dotfiles..."
 rm -f \
   .zshrc \
+  .tmux-conf \
+  README.md
 
 echo "Removing scripts..."
 rm -rf ~/.shell/
