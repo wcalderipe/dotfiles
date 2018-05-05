@@ -20,4 +20,7 @@ rm -rf ~/.iterm/
 echo "Removing config manager at ~/.my-conf..."
 rm -rf ~/.my-conf
 
+echo "Removing nvim configurations"
+rm -rf ~/.config/nvim
+
 echo "DONE!"
