@@ -8,4 +8,7 @@ if [[ ! -d ~/.my-conf ]]; then
   echo -e '[status]\n  showUntrackedFiles = no' >> $HOME/.my-conf/config
 fi
 
+echo "Installing zprezto..."
+git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
+
 $HOME/.shell/macos-preferences.sh

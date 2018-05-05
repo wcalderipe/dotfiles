@@ -1,11 +1,15 @@
 echo "Removing dotfiles..."
 rm -f \
-  .zshrc \
   .tmux-conf \
+  .zpreztorc \
+  .zshrc \
   README.md
 
 echo "Removing scripts..."
 rm -rf ~/.shell/
+
+echo "Removing zprezto..."
+rm -rf ~/.zprezto/
 
 echo "Removing config manager at ~/.my-conf..."
 rm -rf ~/.my-conf
