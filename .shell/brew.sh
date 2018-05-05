@@ -46,8 +46,9 @@ brew upgrade
 installed_formulas=`brew list`
 declare -a formulas=( \
   "cmake" \
-  "gnu-sed --with-default-names" \
   "git" \
+  "gnu-sed --with-default-names" \
+  "neovim" \
   "tig" \
   "tmux" \
   "zsh" \
