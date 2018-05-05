@@ -14,6 +14,9 @@ rm -rf ~/.shell/
 echo "Removing zprezto..."
 rm -rf ~/.zprezto/
 
+echo "Removing iTerm configurations"
+rm -rf ~/.iterm/
+
 echo "Removing config manager at ~/.my-conf..."
 rm -rf ~/.my-conf
 
