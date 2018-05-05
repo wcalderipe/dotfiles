@@ -5,4 +5,7 @@ rm -f \
 echo "Removing scripts..."
 rm -rf ~/.shell/
 
+echo "Removing config manager at ~/.my-conf..."
+rm -rf ~/.my-conf
+
 echo "DONE!"
