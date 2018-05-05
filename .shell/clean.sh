@@ -24,6 +24,6 @@ echo "Removing vimfiles..."
 rm -rf ~/.vim/
 
 echo "Removing nvim configurations..."
-rm -rf ~/.config/nvim/
+rm -rf ~/.config/nvim
 
 echo "DONE!"
