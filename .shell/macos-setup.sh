@@ -11,4 +11,7 @@ fi
 echo "Installing zprezto..."
 git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
 
+echo "Configuring nvim..."
+ln -s $HOME/.vimfiles $HOME/.config/nvim
+
 $HOME/.shell/macos-preferences.sh
