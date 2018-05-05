@@ -21,7 +21,7 @@ echo "Removing config manager at ~/.my-conf..."
 rm -rf ~/.my-conf/
 
 echo "Removing vimfiles..."
-rm -rf ~/.vimfiles/
+rm -rf ~/.vim/
 
 echo "Removing nvim configurations..."
 rm -rf ~/.config/nvim/

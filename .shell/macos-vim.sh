@@ -2,4 +2,4 @@
 
 pip3 install neovim
 
-ln -s $HOME/.vimfiles $HOME/.config/nvim
+ln -s $HOME/.vim $HOME/.config/nvim
