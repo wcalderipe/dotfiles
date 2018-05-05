@@ -1,6 +1,6 @@
 echo "Removing dotfiles..."
 rm -f \
-  .tmux-conf \
+  .tmux.conf \
   .zpreztorc \
   .zshrc \
   README.md
