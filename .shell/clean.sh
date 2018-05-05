@@ -8,6 +8,9 @@ rm -f \
 echo "Removing scripts..."
 rm -rf ~/.shell/
 
+echo "Uninstalling Tmux..."
+rm -rf ~/.tmux/
+
 echo "Removing zprezto..."
 rm -rf ~/.zprezto/
 
