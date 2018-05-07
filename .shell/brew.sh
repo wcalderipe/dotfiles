@@ -48,7 +48,8 @@ declare -a formulas=( \
   "cmake" \
   "git" \
   "gnu-sed --with-default-names" \
-  "neovim" \
+  "luajit" \
+  "vim --with-luajit --with-override-system-vi" \
   "tig" \
   "tmux" \
   "zsh" \
@@ -65,7 +66,6 @@ declare -a casks=( \
   "google-chrome" \
   "gpgtools" \
   "iterm2" \
-  "skype" \
   "spotify" \
   "telegram" \
   "caffeine" \
