@@ -61,3 +61,6 @@ set foldmethod=syntax
 
 " disable status line colors
 set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
+
+" enable backspace in insert mode
+set backspace=2
