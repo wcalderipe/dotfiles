@@ -1,6 +1,10 @@
 " plugin system block
 call plug#begin('~/.vim/plugged')
 
+" adapters to neovim needed by deoplete 
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+
 " theme
 Plug 'chriskempson/base16-vim'
 
@@ -26,7 +30,6 @@ Plug 'mileszs/ack.vim'
 
 " editor enchanters
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
 
@@ -52,9 +55,9 @@ set cc=80
 " do not break lines at end of the screen
 set nowrap
 
-" disable status line colors
-set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
-
 " folding
 set foldlevelstart=10
 set foldmethod=syntax
+
+" disable status line colors
+set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
