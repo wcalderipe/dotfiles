@@ -1,6 +1,7 @@
 echo "Removing dotfiles..."
 rm -f \
   .tmux.conf \
+  .vimrc \
   .zpreztorc \
   .zshrc \
   README.md
@@ -19,9 +20,6 @@ rm -rf ~/.iterm/
 
 echo "Removing vim configurations..."
 rm -rf ~/.vim/
-
-echo "Removing nvim configurations..."
-rm -rf ~/.config/nvim
 
 echo "Removing config manager at ~/.my-conf..."
 rm -rf ~/.my-conf/
