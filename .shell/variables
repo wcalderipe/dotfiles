@@ -2,7 +2,7 @@
 
 export BROWSER=google-chrome
 
-export PATH=/bin:/usr/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/bin:/usr/bin:/bin
 
 # Colors {
   RED="\[\033[0;31m\]"
