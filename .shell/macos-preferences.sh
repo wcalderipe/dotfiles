@@ -23,6 +23,7 @@ sudo systemsetup -setcomputersleep Off > /dev/null
   defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
   # Map the Caps Lock to Ctrl in the main MacBook keyboard
+  # This configuration only will work when you restart your computer
   MAIN_MACBOOK_KEYBOARD_ID="1452-591-0"
 
   KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL="<dict>"
