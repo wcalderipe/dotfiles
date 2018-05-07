@@ -17,13 +17,13 @@ rm -rf ~/.zprezto/
 echo "Removing iTerm configurations..."
 rm -rf ~/.iterm/
 
-echo "Removing config manager at ~/.my-conf..."
-rm -rf ~/.my-conf/
-
-echo "Removing vimfiles..."
+echo "Removing vim configurations..."
 rm -rf ~/.vim/
 
 echo "Removing nvim configurations..."
 rm -rf ~/.config/nvim
+
+echo "Removing config manager at ~/.my-conf..."
+rm -rf ~/.my-conf/
 
 echo "DONE!"

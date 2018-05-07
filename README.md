@@ -1,5 +1,6 @@
 # Dotfiles
 
+
 ## MacOS Setup
 
 ```bash
@@ -10,3 +11,18 @@ curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/cl
 curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/macos-setup.sh | /bin/bash
 ```
 
+
+## Usage
+
+Use the conf alias to manage all configuration files with git.
+
+```bash
+conf status
+conf add .gitconfig
+conf commit -m 'Add gitconfig'
+conf push origin master
+```
+
+## References
+
+- https://github.com/ilmotta/dotfiles
