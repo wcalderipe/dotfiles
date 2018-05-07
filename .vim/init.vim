@@ -2,7 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " theme
-Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 " javascript
 Plug 'pangloss/vim-javascript'
@@ -40,7 +40,7 @@ filetype off
 
 " theme
 syntax enable
-colorscheme zenburn
+colors zenburn
 set background=dark
 
 " line numbers
