@@ -1,6 +1,10 @@
 [user]
   name = William Calderipe
   email = wcalderipe@gmail.com
+[alias]
+  st = status
+  ad = add --patch
+  cm = commit --verbose
 [core]
   editor = vim
 [push]
