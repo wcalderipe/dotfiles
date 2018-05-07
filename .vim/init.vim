@@ -52,6 +52,9 @@ set cc=80
 " do not break lines at end of the screen
 set nowrap
 
+" disable status line colors
+set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
+
 " folding
 set foldlevelstart=10
 set foldmethod=syntax
