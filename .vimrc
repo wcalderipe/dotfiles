@@ -1,5 +1,5 @@
 " plugin system block
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " theme
 Plug 'chriskempson/base16-vim'
