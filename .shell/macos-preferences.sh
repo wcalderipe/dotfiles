@@ -21,6 +21,20 @@ sudo systemsetup -setcomputersleep Off > /dev/null
 
   # Reduce delay
   defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+  # Map the Caps Lock to Ctrl in the main MacBook keyboard
+  MAIN_MACBOOK_KEYBOARD_ID="1452-591-0"
+
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL="<dict>"
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL+="<key>HIDKeyboardModifierMappingDst</key>"
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL+="<integer>2</integer>"
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL+="<key>HIDKeyboardModifierMappingSrc</key>"
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL+="<integer>0</integer>"
+  KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL+="</dict>"
+
+  defaults -currentHost \
+    write -g com.apple.keyboard.modifiermapping.${MAIN_MACBOOK_KEYBOARD_ID} \
+    -array $KEYBOARD_MODIFIER_CAPSLOCK_TO_CTRL
 # }}
 
 # Finder {{
