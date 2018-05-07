@@ -1,0 +1,7 @@
+[user]
+  name = William Calderipe
+  email = wcalderipe@gmail.com
+[core]
+  editor = vim
+[push]
+  default = simple
