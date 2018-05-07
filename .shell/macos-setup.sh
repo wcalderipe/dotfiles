@@ -11,7 +11,10 @@ fi
 echo "Installing zprezto..."
 git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
 
-echo "Configuring nvim..."
-$HOME/.shell/macos-vim.sh
+# Add vim-plug to autoload
+if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+  curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 $HOME/.shell/macos-preferences.sh
