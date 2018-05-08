@@ -62,13 +62,15 @@ done
 installed_casks=`brew cask list`
 declare -a casks=( \
   "atom" \
+  "boostnote" \
+  "caffeine" \
   "firefox" \
+  "flux" \
   "google-chrome" \
   "gpgtools" \
   "iterm2" \
   "spotify" \
   "telegram" \
-  "caffeine" \
 )
 
 for cask in "${casks[@]}"; do
