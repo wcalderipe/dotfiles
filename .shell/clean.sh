@@ -1,5 +1,6 @@
 echo "Removing dotfiles..."
 rm -f \
+  .gitconfig \
   .tmux.conf \
   .vimrc \
   .zpreztorc \
