@@ -1,69 +1,73 @@
-" plugin system block
+" Initilize Plug
 call plug#begin('~/.vim/plugged')
 
-" adapters to neovim needed by deoplete 
+" Adapters to neovim (needed by deoplete and neomake)
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'roxma/nvim-yarp'
 
-" theme
+" Theme
 Plug 'chriskempson/base16-vim'
 
-" javascript
+" JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript'] }
 
-" less and css syntax highlight
+" LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
 
-" async runner 
+" Async task runner
 Plug 'neomake/neomake'
 
-" async autocomplete
+" Async autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" fuzzy file finder
+" Fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
-" word finder
+" Word search
 Plug 'mileszs/ack.vim'
 
-" editor enchanters
+" Detect and strip trailing whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
+" Editor enchanters
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
 
-" initialize plugin system
+" Start Plug system
 call plug#end()
 
-" load initializers *.vim
+" Load plugins custom configurations from ~/.vim/initializers
 runtime! initializers/*.vim
 
+" Disable file type detection
 filetype off
 
-" theme
+" Colors
 syntax enable
 colors zenburn
 set background=dark
 
-" line numbers
+" Show line numbers
 set nu
 
-" 80 characters ruler
+" Show 80 characters ruler
 set cc=80
 
-" do not break lines at end of the screen
+" Don't break lines at end of screen
 set nowrap
 
-" folding
+" Code folding
 set foldlevelstart=10
 set foldmethod=syntax
 
-" disable status line colors
+" Disable status bar line colors
 set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
 
-" enable backspace in insert mode
+" Enable backspace in insert mode
 set backspace=2
 
-" Pretty-print JSON
+" Add custom command to pretty-print JSON
 com! FormatJSON %!json_pp
