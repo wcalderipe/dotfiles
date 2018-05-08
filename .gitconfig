@@ -4,7 +4,7 @@
 [alias]
   st = status
   ad = add --patch
-  cm = commit --verbose
+  co = commit --verbose
 [core]
   editor = vim
 [push]
