@@ -48,10 +48,12 @@ declare -a formulas=( \
   "cmake" \
   "git" \
   "gnu-sed --with-default-names" \
+  "gnupg" \
   "luajit" \
-  "vim --with-luajit --with-override-system-vi" \
+  "pass" \
   "tig" \
   "tmux" \
+  "vim --with-luajit --with-override-system-vi" \
   "zsh" \
 )
 
