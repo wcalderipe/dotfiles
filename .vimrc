@@ -69,5 +69,10 @@ set statusline=%<%.80f\ %h%w%m%r%y%=%-12(\ %l,%c\ %)%P
 " Enable backspace in insert mode
 set backspace=2
 
+" Don't write backup files
+set nowritebackup
+set noswapfile
+set nobackup
+
 " Add custom command to pretty-print JSON
 com! FormatJSON %!json_pp
