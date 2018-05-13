@@ -92,6 +92,10 @@ sudo systemsetup -setcomputersleep Off > /dev/null
 
   # Remove the animation when hiding/showing the Dock
   defaults write com.apple.dock autohide-time-modifier -int 0
+
+  # Change style to dark mode
+  # May need relaunch Dock, use `killall Dock` command
+  defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # }}
 
 # App Store {{
