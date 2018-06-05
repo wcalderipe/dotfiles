@@ -4,6 +4,8 @@ export BROWSER=google-chrome
 
 export PATH=/usr/local/bin:/usr/bin:/bin
 
+export NVM_DIR="$HOME/.nvm"
+
 # Colors {
   RED="\[\033[0;31m\]"
   PINK="\[\033[1;31m\]"
@@ -19,12 +21,12 @@ export PATH=/usr/local/bin:/usr/bin:/bin
 
   export CLICOLOR=1
 
-  # Documentation about ls colors: 
+  # Documentation about ls colors:
   # http://linux-sxs.org/housekeeping/lscolors.html
   export LSCOLORS=GxFxCxDxBxegedabagaced
 
   export GREP_COLOR='1;31'
-  
+
   export TERM=xterm-256color
 # }
 
