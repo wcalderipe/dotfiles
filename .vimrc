@@ -12,6 +12,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript'] }
 
+" TypeScript
+Plug 'leafgarland/typescript-vim'
+
 " LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
 
