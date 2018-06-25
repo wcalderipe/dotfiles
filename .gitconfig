@@ -5,6 +5,7 @@
   st = status
   ad = add --patch
   co = commit --verbose
+  lo = log --pretty=oneline
 [core]
   editor = vim
 [push]
