@@ -4,6 +4,9 @@ export BROWSER=google-chrome
 
 export PATH=/usr/local/bin:/usr/bin:/bin
 
+# Add homebrew path
+export PATH="/usr/local/sbin:$PATH"
+
 export NVM_DIR="$HOME/.nvm"
 
 # Colors {
