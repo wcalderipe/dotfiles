@@ -5,6 +5,7 @@
 
 ```bash
 # Install brew formulas (optional step)
+# If you're in a fresh MacOS machine you must run this scripts before macos-setup.sh 
 curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/brew.sh | /bin/bash
 
 # Clean up to start from scratch (optional step)
