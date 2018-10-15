@@ -62,6 +62,7 @@ done
 installed_casks=`brew cask list`
 declare -a casks=( \
   "gpgtools" \
+  "docker" \
   "iterm2" \
   "visual-studio-code" \
   "spectacle" \
