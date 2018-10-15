@@ -39,7 +39,6 @@ switch_to_brew_installed_zsh () {
 }
 
 install_homebrew
-brew tap caskroom/versions # For Java 7
 brew update
 brew upgrade
 
@@ -48,9 +47,8 @@ declare -a formulas=( \
   "cmake" \
   "git" \
   "gnu-sed --with-default-names" \
-  "gnupg" \
+  "gnupg2" \
   "luajit" \
-  "pass" \
   "tig" \
   "tmux" \
   "vim --with-luajit --with-override-system-vi" \
@@ -63,14 +61,12 @@ done
 
 installed_casks=`brew cask list`
 declare -a casks=( \
-  "atom" \
-  "boostnote" \
-  "caffeine" \
-  "firefox" \
-  "flux" \
-  "google-chrome" \
   "gpgtools" \
   "iterm2" \
+  "visual-studio-code" \
+  "spectacle" \
+  "boostnote" \
+  "caffeine" \
   "spotify" \
   "telegram" \
 )
