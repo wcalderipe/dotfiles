@@ -33,9 +33,20 @@ install_formula () {
 
 switch_to_brew_installed_zsh () {
   if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
-    echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;
-    chsh -s /usr/local/bin/zsh;
+    echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells
+    chsh -s /usr/local/bin/zsh
   fi
+}
+
+setup_vscode () {
+  # Create command line shortcut
+  ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/vscode
+
+  # Install extensions
+  cat $HOME/.vscode/extensions.txt | xargs -L 1 vscode --install-extension
+
+  # Setup settings
+  cp $HOME/.vscode/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 }
 
 install_homebrew
@@ -77,4 +88,5 @@ for cask in "${casks[@]}"; do
 done
 
 switch_to_brew_installed_zsh
+setup_vscode
 brew cleanup
