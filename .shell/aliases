@@ -2,8 +2,13 @@
 
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ll='ls -lahF' # Long view and show hidden
-alias df='df -h' # Disk free, in gigabytes, not bytes
-alias du='du -hc' # Calculate total disk usage for a folder
+alias workspace='cd $HOME/workspace'
+
+# Long view and show hidden
+alias ll='ls -lahF'
+# Disk free, in gigabytes, not bytes
+alias df='df -h'
+# Calculate total disk usage for a folder
+alias du='du -hc'
 
 alias conf='/usr/bin/git --git-dir=$HOME/.my-conf/ --work-tree=$HOME' # Manage .my-conf git files
