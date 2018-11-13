@@ -6,6 +6,7 @@
   ad = add --patch
   co = commit --verbose
   lo = log --pretty=oneline
+  todo = grep -EI 'TODO(:|\\s)|FIXME(:|\\s)'
 [core]
   editor = vim
 [push]
