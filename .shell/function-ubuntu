@@ -39,6 +39,7 @@ install_basic_dependencies () {
     xclip \
     zsh \
     vim \
+    tmux \
     curl \
     gopass \
     nodejs \
