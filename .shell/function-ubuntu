@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+setup_gnome () {
+  # Modify capslock to be ctrl. Also, set compose key to print screen in order
+  # to write special characters in a US keyboard (requires gnome-tweak-tool)
+  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:prsc']"
+
+  gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+  gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+
+  gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+  gsettings set org.gnome.desktop.interface show-battery-percentage true
+  gsettings set org.gnome.desktop.interface clock-format 12h
+  gsettings set org.gnome.desktop.interface clock-show-weekday true
+  gsettings set org.gnome.desktop.interface clock-show-date true
+
+  gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
+  gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+  gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+}
+
+setup_gnome_terminal_base16_solarized_profile () {
+  git clone https://github.com/chriskempson/base16-gnome-terminal.git /tmp/base16-gnome-terminal
+  source /tmp/base16-gnome-terminal/base16-solarized.dark.sh
+}
+
+install_basic_dependencies () {
+  sudo apt-get update
+
+  sudo apt-get install --yes \
+    build-essential \
+    exuberant-ctags \
+    git \
+    libreadline-dev \
+    libssl-dev \
+    openjdk-8-jdk \
+    silversearcher-ag \
+    tig \
+    xclip \
+    zsh \
+    vim \
+    curl \
+    gopass \
+    nodejs \
+    telegram-desktop \
+    gnome-tweak-tool
+
+  mkdir -p $HOME/.local/bin \
+    && ln -fs /usr/bin/python3 $HOME/.local/bin/python
+}
+
+# After installation, log out and log in for the group changes to take effect.
+install_docker () {
+  which docker &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo apt-key adv \
+      --keyserver hkp://ha.pool.sks-keyservers.net:80 \
+      --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+    echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" \
+      | sudo tee /etc/apt/sources.list.d/docker.list
+
+    sudo apt-get install --yes \
+      linux-image-extra-$(uname -r) linux-image-extra-virtual \
+      apt-transport-https ca-certificates
+
+    sudo apt-get install --yes docker-engine
+    sudo gpasswd -a ${USER} docker
+  else
+    echo "~> docker found. Skipping installation"
+  fi
+}
+
+
+install_npm () {
+  which npm &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo apt-get install --yes npm
+    npm install --global npm@latest
+  else
+    echo "~> npm found. Skipping installation"
+  fi
+}
+
+install_google_chrome () {
+  which google-chrome &> /dev/null
+  if [[ $? != 0 ]]; then
+    wget --output-document /tmp/google-chrome.deb \
+      https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+      && sudo dpkg --install /tmp/google-chrome.deb
+  else
+    echo "~> google-chrome found. Skipping installation"
+  fi
+}
+

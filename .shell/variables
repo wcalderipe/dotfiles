@@ -2,12 +2,11 @@
 
 export BROWSER=google-chrome
 
-export PATH=/usr/local/bin:/usr/bin:/bin
-
-# Add homebrew path
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$HOME/.local/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
+
+export EDITOR=vim
 
 # Colors {
   RED="\[\033[0;31m\]"
@@ -31,18 +30,6 @@ export NVM_DIR="$HOME/.nvm"
   export GREP_COLOR='1;31'
 
   export TERM=xterm-256color
-# }
-
-# Editor {
-  # Use Neovim if available, otherwise fallback to Vim
-  which nvim &> /dev/null
-  if [[ $? == 0 ]]; then
-    editor=nvim
-  else
-    editor=vim
-  fi
-
-  export EDITOR=$editor
 # }
 
 # History {

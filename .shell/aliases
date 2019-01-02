@@ -2,13 +2,21 @@
 
 alias ..='cd ..'
 alias ...='cd ../..'
-alias workspace='cd $HOME/workspace'
+alias dev='cd $HOME/dev'
 
 # Long view and show hidden
 alias ll='ls -lahF'
+
 # Disk free, in gigabytes, not bytes
 alias df='df -h'
+
 # Calculate total disk usage for a folder
 alias du='du -hc'
 
-alias conf='/usr/bin/git --git-dir=$HOME/.my-conf/ --work-tree=$HOME' # Manage .my-conf git files
+# Manage .my-conf git files
+alias conf='/usr/bin/git --git-dir=$HOME/.my-conf/ --work-tree=$HOME'
+
+if [[ "$(uname --kernel-name)" = "Linux" ]]; then
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -out'
+fi
