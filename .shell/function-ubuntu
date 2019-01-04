@@ -26,7 +26,6 @@ setup_gnome_terminal_base16_solarized_profile () {
 
 install_basic_dependencies () {
   sudo apt-get update
-
   sudo apt-get install --yes \
     build-essential \
     exuberant-ctags \
@@ -38,16 +37,13 @@ install_basic_dependencies () {
     tig \
     xclip \
     zsh \
-    vim \
+    vim-gnome \
     tmux \
     curl \
     gopass \
     nodejs \
     telegram-desktop \
     gnome-tweak-tool
-
-  mkdir -p $HOME/.local/bin \
-    && ln -fs /usr/bin/python3 $HOME/.local/bin/python
 }
 
 # After installation, log out and log in for the group changes to take effect.
@@ -77,7 +73,6 @@ install_npm () {
   which npm &> /dev/null
   if [[ $? != 0 ]]; then
     sudo apt-get install --yes npm
-    npm install --global npm@latest
   else
     echo "~> npm found. Skipping installation"
   fi

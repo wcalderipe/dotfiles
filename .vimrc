@@ -56,8 +56,8 @@ set background=dark
 " Show line numbers
 set nu
 
-" Show 80 characters ruler
-set cc=80
+" Show 80 and 120 characters ruler
+set cc=80,120
 
 " Don't break lines at end of screen
 set nowrap
