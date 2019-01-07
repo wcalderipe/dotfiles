@@ -5,22 +5,20 @@ sudo -v
 
 if [[ ! -d "$HOME/dev/dotfiles" ]]; then
   mkdir -p $HOME/dev
-  local dotfiles_path=$HOME/dev/dotfiles
-  git clone https://github.com/wcalderipe/dotfiles.git $dotfiles_path
-
+  git clone https://github.com/wcalderipe/dotfiles.git $HOME/dev/dotfiles
   # TODO: Delete checkout step before merge linux branch into master
-  cd $dotfiles_path && git fetch && git checkout linux
-  
-  ln -sf $dotfiles_path/.vim        $HOME
-  ln -sf $dotfiles_path/.vimrc      $HOME
-  ln -sf $dotfiles_path/.shell      $HOME
-  ln -sf $dotfiles_path/.vscode     $HOME
-  ln -sf $dotfiles_path/.zshrc      $HOME
-  ln -sf $dotfiles_path/.zpreztorc  $HOME
-  ln -sf $dotfiles_path/.gitconfig  $HOME
-  ln -sf $dotfiles_path/.gitignore  $HOME
-  ln -sf $dotfiles_path/.tmux.conf  $HOME
-  ln -sf $dotfiles_path/.iterm      $HOME
+  cd $HOME/dev/dotfiles && git fetch && git checkout linux
+
+  ln -sf $HOME/dev/dotfiles/.vim        $HOME
+  ln -sf $HOME/dev/dotfiles/.vimrc      $HOME
+  ln -sf $HOME/dev/dotfiles/.shell      $HOME
+  ln -sf $HOME/dev/dotfiles/.vscode     $HOME
+  ln -sf $HOME/dev/dotfiles/.zshrc      $HOME
+  ln -sf $HOME/dev/dotfiles/.zpreztorc  $HOME
+  ln -sf $HOME/dev/dotfiles/.gitconfig  $HOME
+  ln -sf $HOME/dev/dotfiles/.gitignore  $HOME
+  ln -sf $HOME/dev/dotfiles/.tmux.conf  $HOME
+  ln -sf $HOME/dev/dotfiles/.iterm      $HOME
 else
   echo "~> dotfiles repository already cloned."
 fi
