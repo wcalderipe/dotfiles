@@ -2,7 +2,7 @@
   name = William Calderipe
   email = wcalderipe@gmail.com
 [alias]
-  st = status
+  st = status --untracked-files
   ad = add --patch
   co = commit --verbose
   lo = log --pretty=oneline
