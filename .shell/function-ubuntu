@@ -28,18 +28,19 @@ install_basic_dependencies () {
   sudo apt-get update
   sudo apt-get install --yes \
     build-essential \
-    exuberant-ctags \
     git \
+    curl \
+    xclip \
+    htop \
+    exuberant-ctags \
     libreadline-dev \
     libssl-dev \
     openjdk-8-jdk \
     silversearcher-ag \
     tig \
-    xclip \
     zsh \
     vim-gnome \
     tmux \
-    curl \
     gopass \
     nodejs \
     telegram-desktop \
