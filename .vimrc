@@ -1,28 +1,22 @@
 " Initilize Plug
 call plug#begin('~/.vim/plugged')
 
-" Adapters to neovim (needed by deoplete and neomake)
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
-
 " Theme
 Plug 'chriskempson/base16-vim'
+
+" Lint engine
+Plug 'w0rp/ale'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript'] }
 
-" TypeScript
+" TypeScript syntax highlight and omni-completion
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
 " LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
-
-" Async task runner
-Plug 'neomake/neomake'
-
-" Async autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
