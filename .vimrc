@@ -18,6 +18,9 @@ Plug 'Quramy/tsuquyomi'
 " LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
 
+" Markdown preview
+Plug 'iamcco/markdown-preview.vim'
+
 " Fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'

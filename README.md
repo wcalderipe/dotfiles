@@ -38,6 +38,7 @@ curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/se
 | normal | `<C-t>`       | Navigate the cursor back after `<C-]>`                                |
 | normal | `<C-^>`       | Show list of location where the symbol under the cursos is referenced |
 
+
 ## References
 
 - https://github.com/ilmotta/dotfiles
