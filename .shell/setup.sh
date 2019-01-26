@@ -44,6 +44,7 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   source $HOME/.shell/function-ubuntu
   install_basic_dependencies
   install_docker
+  install_docker_compose
   install_npm
   install_google_chrome
   install_ripgrep

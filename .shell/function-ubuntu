@@ -62,13 +62,26 @@ install_docker () {
       linux-image-extra-$(uname -r) linux-image-extra-virtual \
       apt-transport-https ca-certificates
 
-    sudo apt-get install --yes docker-engine
+    sudo apt-get install --yes docker-engine docker-compose
     sudo gpasswd -a ${USER} docker
   else
     echo "~> docker found. Skipping installation"
   fi
 }
 
+install_docker_compose () {
+  which docker-compose &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo curl \
+      -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` \
+      -o /usr/local/bin/docker-compose
+
+    sudo chmod +x /usr/local/bin/docker-compose
+  else
+    echo "~> docker-compose found. Skipping installation"
+  fi
+
+}
 
 install_npm () {
   which npm &> /dev/null
