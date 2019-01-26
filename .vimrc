@@ -59,6 +59,12 @@ set cc=80,120
 " Don't break lines at end of screen
 set nowrap
 
+" Highlight found searches
+set hlsearch
+
+" Split vertical windows right to the current windows
+set splitright
+
 " Code folding
 set foldlevelstart=10
 set foldmethod=syntax
