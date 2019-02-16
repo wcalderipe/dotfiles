@@ -114,3 +114,18 @@ install_ripgrep () {
     echo "~> ripgrep found. Skipping installation"
   fi
 }
+
+install_gnome_terminal_zenburn_color () {
+  sudo apt install dconf-cli
+
+  if [[ ! -e "/tmp/gnome-terminal-colors" ]]; then
+    git clone https://github.com/gnumoksha/gnome-terminal-colors.git /tmp/gnome-terminal-colors
+  fi
+
+  CURRENT_PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+
+  /tmp/gnome-terminal-colors/install.sh \
+    --profile $(echo $CURRENT_PROFILE) \
+    --scheme zenburn \
+    --skip-dircolors
+}

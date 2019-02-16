@@ -48,5 +48,6 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   install_npm
   install_google_chrome
   install_ripgrep
+  install_gnome_terminal_zenburn_color
   setup_gnome
 fi
