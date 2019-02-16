@@ -8,6 +8,12 @@ export NVM_DIR="$HOME/.nvm"
 
 export EDITOR=vim
 
+# Fix hide cursor bug when moving back along
+# Reference:
+# - https://github.com/zsh-users/zsh-syntax-highlighting/issues/171
+# - https://github.com/howardcochran/hcc-dotfiles/commit/23a1b97ba7fffe0013ecde497f3f2cc1f3910795
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
 # Colors {
   RED="\[\033[0;31m\]"
   PINK="\[\033[1;31m\]"
