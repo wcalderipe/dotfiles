@@ -13,7 +13,8 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript'] }
 
 " TypeScript syntax highlight and omni-completion
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" TODO: Remove or uncomment tsuquyomi based in the outcome of this https://github.com/Quramy/tsuquyomi/issues/279
+" Plug 'Quramy/tsuquyomi'
 
 " LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
@@ -35,6 +36,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'prettier/vim-prettier'
 
 " Start Plug system
 call plug#end()
