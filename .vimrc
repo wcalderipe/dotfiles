@@ -1,28 +1,26 @@
 " Initilize Plug
 call plug#begin('~/.vim/plugged')
 
-" Adapters to neovim (needed by deoplete and neomake)
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
-
 " Theme
 Plug 'chriskempson/base16-vim'
+
+" Lint engine
+Plug 'w0rp/ale'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript'] }
 
-" TypeScript
+" TypeScript syntax highlight and omni-completion
 Plug 'leafgarland/typescript-vim'
+" TODO: Remove or uncomment tsuquyomi based in the outcome of this https://github.com/Quramy/tsuquyomi/issues/279
+" Plug 'Quramy/tsuquyomi'
 
 " LESS and CSS syntax highlight
 Plug 'groenewege/vim-less'
 
-" Async task runner
-Plug 'neomake/neomake'
-
-" Async autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Markdown preview
+Plug 'iamcco/markdown-preview.vim'
 
 " Fuzzy file search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -38,6 +36,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'prettier/vim-prettier'
 
 " Start Plug system
 call plug#end()
@@ -56,11 +56,17 @@ set background=dark
 " Show line numbers
 set nu
 
-" Show 80 characters ruler
-set cc=80
+" Show 80 and 120 characters ruler
+set cc=80,120
 
 " Don't break lines at end of screen
 set nowrap
+
+" Highlight found searches
+set hlsearch
+
+" Split vertical windows right to the current windows
+set splitright
 
 " Code folding
 set foldlevelstart=10

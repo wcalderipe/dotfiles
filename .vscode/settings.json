@@ -3,6 +3,9 @@
     "editor.minimap.enabled": false,
     "editor.rulers": [120],
     "explorer.confirmDragAndDrop": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "vim.overrideCopy" :false,
+    "vim.useCtrlKeys": true,
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Zenburn",
@@ -11,5 +14,4 @@
     "workbench.editor.showTabs": false,
     "workbench.sideBar.location": "right",
     "workbench.statusBar.visible": false,
-    "typescript.updateImportsOnFileMove.enabled": "always"
 }
