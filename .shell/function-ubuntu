@@ -3,7 +3,7 @@
 setup_gnome () {
   # Modify capslock to be ctrl. Also, set compose key to print screen in order
   # to write special characters in a US keyboard (requires gnome-tweak-tool)
-  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:prsc']"
+  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:ralt']"
 
   gsettings set org.gnome.desktop.peripherals.keyboard delay 200
   gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
