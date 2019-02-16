@@ -6,8 +6,6 @@ sudo -v
 if [[ ! -d "$HOME/dev/dotfiles" ]]; then
   mkdir -p $HOME/dev
   git clone https://github.com/wcalderipe/dotfiles.git $HOME/dev/dotfiles
-  # TODO: Delete checkout step before merge linux branch into master
-  cd $HOME/dev/dotfiles && git fetch && git checkout linux
 
   ln -sf $HOME/dev/dotfiles/.vim        $HOME
   ln -sf $HOME/dev/dotfiles/.vimrc      $HOME
