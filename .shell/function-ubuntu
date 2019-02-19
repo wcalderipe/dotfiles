@@ -140,3 +140,39 @@ install_emacs () {
     echo "~> emacs found. Skipping installation"
   fi
 }
+
+install_clojure_lein () {
+  which lein &> /dev/null
+  if [[ $? != 0 ]]; then
+    local url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    local lein_path=$HOME/.local/bin/lein
+    mkdir -p $HOME/.local/bin
+
+    curl $url --output $lein_path \
+      && chmod +x $lein_path \
+      && lein -v
+  else
+    echo "~> lein found. Skipping installation"
+  fi
+}
+
+
+# TODO: Use snapcraft to install some utility packages
+# https://snapcraft.io/pats-boostnote
+# https://snapcraft.io/slack
+# https://snapcraft.io/telegram-desktop
+# https://snapcraft.io/skype
+# https://snapcraft.io/vscode
+# https://snapcraft.io/postman
+# https://snapcraft.io/spotify
+# https://snapcraft.io/gimp
+# install_snapcraft () {
+#   which snap &> /dev/null
+#   if [[ $? != 0 ]]; then
+#     sudo add-apt-repository ppa:snappy-dev/tools
+#     sudo apt update
+#     sudo apt install --yes snapcraft
+#   else
+#     echo "~> snapcraft found. Skipping installation"
+#   fi
+# }
