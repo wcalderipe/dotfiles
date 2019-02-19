@@ -18,6 +18,7 @@ if [[ ! -d "$HOME/dev/dotfiles" ]]; then
   ln -sf $HOME/dev/dotfiles/.tmux.conf  $HOME
   ln -sf $HOME/dev/dotfiles/.iterm      $HOME
   ln -sf $HOME/dev/dotfiles/.emacs.d	$HOME
+  ln -sf $HOME/dev/dotfiles/.lein	$HOME
 else
   echo "~> dotfiles repository already cloned."
 fi
