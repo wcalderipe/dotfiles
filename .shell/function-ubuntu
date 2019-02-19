@@ -129,3 +129,14 @@ install_gnome_terminal_zenburn_color () {
     --scheme zenburn \
     --skip-dircolors
 }
+
+install_emacs () {
+  which emacs &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo add-apt-repository ppa:kelleyk/emacs
+    sudo apt-get update
+    sudo apt install --yes emacs26
+  else
+    echo "~> emacs found. Skipping installation"
+  fi
+}

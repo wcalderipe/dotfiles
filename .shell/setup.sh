@@ -17,6 +17,7 @@ if [[ ! -d "$HOME/dev/dotfiles" ]]; then
   ln -sf $HOME/dev/dotfiles/.gitignore  $HOME
   ln -sf $HOME/dev/dotfiles/.tmux.conf  $HOME
   ln -sf $HOME/dev/dotfiles/.iterm      $HOME
+  ln -sf $HOME/dev/dotfiles/.emacs.d	$HOME
 else
   echo "~> dotfiles repository already cloned."
 fi
@@ -47,5 +48,6 @@ if [[ "$(expr substr $(uname -s) 1 5)" == "Linux" ]]; then
   install_google_chrome
   install_ripgrep
   install_gnome_terminal_zenburn_color
+  install_emacs
   setup_gnome
 fi
