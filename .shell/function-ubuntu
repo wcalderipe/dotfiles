@@ -92,6 +92,17 @@ install_npm () {
   fi
 }
 
+install_yarn () {
+  which yarn &> /dev/null
+  if [[ $? != 0 ]]; then
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt update && sudo apt install --yes yarn
+  else
+    echo "~> yarn found. Skipping installation"
+  fi
+}
+
 install_google_chrome () {
   which google-chrome &> /dev/null
   if [[ $? != 0 ]]; then
@@ -141,6 +152,7 @@ install_emacs () {
   fi
 }
 
+# TODO: Call fn in setup.sh
 install_clojure_lein () {
   which lein &> /dev/null
   if [[ $? != 0 ]]; then
@@ -157,22 +169,51 @@ install_clojure_lein () {
 }
 
 
-# TODO: Use snapcraft to install some utility packages
-# https://snapcraft.io/pats-boostnote
-# https://snapcraft.io/slack
-# https://snapcraft.io/telegram-desktop
-# https://snapcraft.io/skype
-# https://snapcraft.io/vscode
-# https://snapcraft.io/postman
-# https://snapcraft.io/spotify
-# https://snapcraft.io/gimp
-# install_snapcraft () {
-#   which snap &> /dev/null
-#   if [[ $? != 0 ]]; then
-#     sudo add-apt-repository ppa:snappy-dev/tools
-#     sudo apt update
-#     sudo apt install --yes snapcraft
-#   else
-#     echo "~> snapcraft found. Skipping installation"
-#   fi
-# }
+install_snapcraft () {
+  which snap &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo add-apt-repository ppa:snappy-dev/tools
+    sudo apt update
+    sudo apt install --yes snapcraft
+  else
+    echo "~> snapcraft found. Skipping installation"
+  fi
+}
+
+
+# TODO: Call fn in setup.sh
+install_utility_apps () {
+  sudo snap install spotify
+  sudo snap install slack --classic
+  sudo snap install telegram-desktop
+  sudo snap install pats-boostnote --edge
+  sudo snap install postman
+  sudo snap install gimp
+  sudo snap install vscode --classic
+}
+
+install_zoom () {
+  which zoom &> /dev/null
+  if [[ $? != 0 ]]; then
+    local package_name=zoom_amd64.deb
+    local url=https://zoom.us/client/latest/$package_name
+    cd /tmp
+    wget $url
+    sudo apt-get install -y libxcb-xtest0
+    sudo dpkg -i $package_name
+    sudo apt-get -f install
+    rm -f $package_name
+  else
+    echo "zoom already installed."
+  fi
+}
+
+install_fzf () {
+  which fzf &> /dev/null
+  if [[ $? != 0 ]]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+    $HOME/.fzf/install
+  else
+    echo "~> fzf found. Skipping installation"
+  fi
+}

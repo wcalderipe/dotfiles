@@ -6,7 +6,9 @@ source ~/.zprezto/init.zsh
 [[ -f ~/.shell/aliases ]] && source ~/.shell/aliases
 [[ -f ~/private-variables ]] && source ~/private-variables
 [[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # Enable Ctrl-R for navigating through the history.
 bindkey "^R" history-incremental-search-backward
+
 
