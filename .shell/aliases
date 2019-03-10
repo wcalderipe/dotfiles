@@ -16,6 +16,8 @@ alias du='du -hc'
 # Manage .my-conf git files
 alias conf='/usr/bin/git --git-dir=$HOME/.my-conf/ --work-tree=$HOME'
 
+alias spotify='spotify --force-device-scale-factor=1.5 &>/dev/null &'
+
 if [[ "$(uname --kernel-name)" = "Linux" ]]; then
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -out'
