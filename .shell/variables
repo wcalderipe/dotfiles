@@ -2,7 +2,7 @@
 
 export BROWSER=google-chrome
 
-export PATH="/usr/local/sbin:$HOME/.local/bin:$PATH"
+export PATH="/usr/local/sbin:$HOME/.local/bin:$(yarn global bin):$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 
