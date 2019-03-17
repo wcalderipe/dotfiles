@@ -43,7 +43,8 @@ install_basic_dependencies () {
     tmux \
     gopass \
     nodejs \
-    gnome-tweak-tool
+    gnome-tweak-tool \
+    jq
 }
 
 # After installation, log out and log in for the group changes to take effect.
