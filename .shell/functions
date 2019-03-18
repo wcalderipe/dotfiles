@@ -266,16 +266,23 @@ install-zprezto () {
   fi
 }
 
+# TODO: Check if boostnote is already installed
+# TODO: Add to install-everything
+install-boostnote () {
+  wget --output-document /tmp/boostnote.deb \
+    https://github.com/BoostIO/boost-releases/releases/download/v0.11.15/boostnote_0.11.15_amd64.deb \
+    && sudo dpkg --install /tmp/boostnote.deb
+}
+
 install-applications () {
   which snap &> /dev/null
   if [[ $? != 0 ]]; then
+    log "snapcraft is required."
+  else
     sudo snap install spotify
     sudo snap install slack --classic
     sudo snap install telegram-desktop
-    sudo snap install pats-boostnote --edge
     sudo snap install postman
-  else
-    log "snapcraft is required."
   fi
 }
 
