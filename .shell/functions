@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
-setup_gnome () {
+log () {
+  local text=$1
+  echo "[INFO] ${text}"
+}
+
+my-gnome-setup () {
+  log "Setup gnome preferences"
+
   # Modify capslock to be ctrl. Also, set compose key to print screen in order
   # to write special characters in a US keyboard (requires gnome-tweak-tool)
   gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:ralt']"
@@ -19,14 +26,37 @@ setup_gnome () {
   gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
 }
 
-setup_gnome_terminal_base16_solarized_profile () {
+setup-gnome-terminal-base16-solarized-profile () {
   git clone https://github.com/chriskempson/base16-gnome-terminal.git /tmp/base16-gnome-terminal
   source /tmp/base16-gnome-terminal/base16-solarized.dark.sh
 }
 
-install_basic_dependencies () {
-  sudo apt-get update
-  sudo apt-get install --yes \
+clone-dotfiles () {
+  if [[ ! -d "$HOME/dev/dotfiles" ]]; then
+    mkdir -p $HOME/dev
+    git clone git@github.com:ilmotta/dotfiles.git $HOME/dev/dotfiles
+  else
+    log "dotfiles repository already cloned."
+  fi
+}
+
+create-symlinks-to-dotfiles () {
+  local dotfiles_path=$HOME/dev/dotfiles
+
+  ln -sf $dotfiles_path/.vim        $HOME
+  ln -sf $dotfiles_path/.vimrc      $HOME
+  ln -sf $dotfiles_path/.shell      $HOME
+  ln -sf $dotfiles_path/.vscode     $HOME
+  ln -sf $dotfiles_path/.zshrc      $HOME
+  ln -sf $dotfiles_path/.zpreztorc  $HOME
+  ln -sf $dotfiles_path/.gitconfig  $HOME
+  ln -sf $dotfiles_path/.gitignore  $HOME
+  ln -sf $dotfiles_path/.tmux.conf  $HOME
+}
+
+install-basic-dependencies () {
+  sudo apt update
+  sudo apt install --yes \
     build-essential \
     git \
     curl \
@@ -48,7 +78,7 @@ install_basic_dependencies () {
 }
 
 # After installation, log out and log in for the group changes to take effect.
-install_docker () {
+install-docker () {
   which docker &> /dev/null
   if [[ $? != 0 ]]; then
     sudo apt-key adv \
@@ -58,18 +88,18 @@ install_docker () {
     echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" \
       | sudo tee /etc/apt/sources.list.d/docker.list
 
-    sudo apt-get install --yes \
+    sudo apt install --yes \
       linux-image-extra-$(uname -r) linux-image-extra-virtual \
       apt-transport-https ca-certificates
 
-    sudo apt-get install --yes docker-engine docker-compose
+    sudo apt install --yes docker-engine docker-compose
     sudo gpasswd -a ${USER} docker
   else
-    echo "~> docker found. Skipping installation"
+    log "docker already installed."
   fi
 }
 
-install_docker_compose () {
+install-docker-compose () {
   which docker-compose &> /dev/null
   if [[ $? != 0 ]]; then
     sudo curl \
@@ -78,55 +108,53 @@ install_docker_compose () {
 
     sudo chmod +x /usr/local/bin/docker-compose
   else
-    echo "~> docker-compose found. Skipping installation"
+    log "docker-compose already installed."
   fi
-
 }
 
-install_npm () {
+install-npm () {
   which npm &> /dev/null
   if [[ $? != 0 ]]; then
-    sudo apt-get install --yes npm
+    sudo apt install --yes npm
   else
-    echo "~> npm found. Skipping installation"
+    log "npm already installed."
   fi
 }
 
-install_yarn () {
+install-yarn () {
   which yarn &> /dev/null
   if [[ $? != 0 ]]; then
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update && sudo apt install --yes yarn
   else
-    echo "~> yarn found. Skipping installation"
+    log "yarn already installed."
   fi
 }
 
-install_google_chrome () {
+install-google-chrome () {
   which google-chrome &> /dev/null
   if [[ $? != 0 ]]; then
     wget --output-document /tmp/google-chrome.deb \
       https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
       && sudo dpkg --install /tmp/google-chrome.deb
   else
-    echo "~> google-chrome found. Skipping installation"
+    log "google-chrome already installed."
   fi
 }
 
-# Required by vim fzf plugin (see .vim/initializers/fzf.vim)
-install_ripgrep () {
+install-ripgrep () {
   which rg &> /dev/null
   if [[ $? != 0 ]]; then
     wget --output-document /tmp/ripgrep.deb \
       https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb \
       && sudo dpkg --install /tmp/ripgrep.deb
   else
-    echo "~> ripgrep found. Skipping installation"
+    log "ripgrep already installed."
   fi
 }
 
-install_gnome_terminal_zenburn_color () {
+install-gnome-terminal-zenburn-color () {
   sudo apt install dconf-cli
 
   if [[ ! -e "/tmp/gnome-terminal-colors" ]]; then
@@ -141,19 +169,18 @@ install_gnome_terminal_zenburn_color () {
     --skip-dircolors
 }
 
-install_emacs () {
+install-emacs () {
   which emacs &> /dev/null
   if [[ $? != 0 ]]; then
     sudo add-apt-repository ppa:kelleyk/emacs
-    sudo apt-get update
+    sudo apt update
     sudo apt install --yes emacs26
   else
-    echo "~> emacs found. Skipping installation"
+    log "emacs already installed."
   fi
 }
 
-# TODO: Call fn in setup.sh
-install_clojure_lein () {
+install-clojure-lein () {
   which lein &> /dev/null
   if [[ $? != 0 ]]; then
     local url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
@@ -164,56 +191,101 @@ install_clojure_lein () {
       && chmod +x $lein_path \
       && lein -v
   else
-    echo "~> lein found. Skipping installation"
+    log "lein already installed."
   fi
 }
 
-
-install_snapcraft () {
+install-snapcraft () {
   which snap &> /dev/null
   if [[ $? != 0 ]]; then
     sudo add-apt-repository ppa:snappy-dev/tools
     sudo apt update
     sudo apt install --yes snapcraft
   else
-    echo "~> snapcraft found. Skipping installation"
+    log "snapcraft already installed."
   fi
 }
 
-
-# TODO: Call fn in setup.sh
-install_utility_apps () {
-  sudo snap install spotify
-  sudo snap install slack --classic
-  sudo snap install telegram-desktop
-  sudo snap install pats-boostnote --edge
-  sudo snap install postman
-  sudo snap install gimp
-  sudo snap install vscode --classic
-}
-
-install_zoom () {
+install-zoom () {
   which zoom &> /dev/null
   if [[ $? != 0 ]]; then
     local package_name=zoom_amd64.deb
     local url=https://zoom.us/client/latest/$package_name
     cd /tmp
     wget $url
-    sudo apt-get install -y libxcb-xtest0
+    sudo apt install -y libxcb-xtest0
     sudo dpkg -i $package_name
     sudo apt-get -f install
     rm -f $package_name
   else
-    echo "zoom already installed."
+    log "zoom already installed."
   fi
 }
 
-install_fzf () {
+install-fzf () {
   which fzf &> /dev/null
   if [[ $? != 0 ]]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
     $HOME/.fzf/install
   else
-    echo "~> fzf found. Skipping installation"
+    log "fzf already installed."
   fi
+}
+
+install-tmux-tpm () {
+  if [[ ! -d "$HOME/.tmux" ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  else
+    log "tpm already installed."
+  fi
+}
+
+install-vim-plug () {
+  if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  else
+    log "vim-plug already installed."
+  fi
+}
+
+install-zprezto () {
+  if [[ ! -d "$HOME/.zprezto" ]]; then
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
+  else
+    log "zprezto already installed."
+  fi
+}
+
+install-applications () {
+  which snap &> /dev/null
+  if [[ $? != 0 ]]; then
+    sudo snap install spotify
+    sudo snap install slack --classic
+    sudo snap install telegram-desktop
+    sudo snap install pats-boostnote --edge
+    sudo snap install postman
+  else
+    log "snapcraft is required."
+  fi
+}
+
+install-everything () {
+  install-basic-dependencies
+  install-tmux-tpm
+  install-vim-plug
+  install-zprezto
+  install-docker
+  install-docker-compose
+  install-npm
+  install-yarn
+  install-google-chrome
+  install-ripgrep
+  install-emacs
+  install-zoom
+  install-fzf
+  install-clojure-lein
+  install-snapcraft
+  install-gnome-terminal-zenburn-color
+  install-applications
 }
