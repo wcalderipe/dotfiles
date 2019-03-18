@@ -112,6 +112,15 @@ install-docker-compose () {
   fi
 }
 
+install-nvm () {
+  which nvm &> /dev/null
+  if [[ $? != 0 ]]; then
+    git clone https://github.com/creationix/nvm.git $HOME/.nvm
+  else
+    log "nvm already installed."
+  fi
+}
+
 install-npm () {
   which npm &> /dev/null
   if [[ $? != 0 ]]; then
@@ -277,6 +286,7 @@ install-everything () {
   install-zprezto
   install-docker
   install-docker-compose
+  install-nvm
   install-npm
   install-yarn
   install-google-chrome
