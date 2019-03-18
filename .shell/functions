@@ -74,7 +74,8 @@ install-basic-dependencies () {
     gopass \
     nodejs \
     gnome-tweak-tool \
-    jq
+    jq \
+    texinfo # Required by Emacs Magit
 }
 
 # After installation, log out and log in for the group changes to take effect.
