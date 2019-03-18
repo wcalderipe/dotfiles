@@ -11,4 +11,3 @@ source ~/.zprezto/init.zsh
 # Enable Ctrl-R for navigating through the history.
 bindkey "^R" history-incremental-search-backward
 
-

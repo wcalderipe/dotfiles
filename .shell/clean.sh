@@ -1,6 +1,7 @@
 #! /bin/bash
 
-echo "~> Removing dotfiles..."
+echo "[INFO] Removing dotfiles..."
+
 rm -rf \
   ~/.gitconfig \
   ~/.gitignore \
@@ -11,11 +12,6 @@ rm -rf \
   ~/.tmux \
   ~/.shell \
   ~/.zprezto \
-  ~/.iterm \
   ~/.vim \
-  ~/.emacs.d \
-  ~/.lein \
-  ~/.vscode/extensions.txt \
-  ~/.vscode/settings.json
 
-echo "~> DONE!"
+echo "[INFO] Done."
