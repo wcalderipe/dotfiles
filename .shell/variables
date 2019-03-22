@@ -58,3 +58,8 @@ export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 # }
+
+# maven {
+  export M2_HOME="$HOME/maven"
+  export PATH="${M2_HOME}/bin:${PATH}"
+# }

@@ -232,6 +232,24 @@ install-zoom () {
   fi
 }
 
+install-java-mvn () {
+  which mvn &> /dev/null
+  if [[ $? != 0 ]]; then
+    local version=3.3.9
+    local filename=apache-maven-${version}
+    local output_path=$HOME/$filename.tar.gz
+    local unzip_path=$HOME/$filename
+
+    wget --output-document $output_path \
+      http://www-eu.apache.org/dist/maven/maven-3/${version}/binaries/apache-maven-${version}-bin.tar.gz
+    tar -xzvf $output_path
+    mv $unzip_path $HOME/maven
+    rm $output_path
+  else
+    log "mvn already installed."
+  fi
+}
+
 install-fzf () {
   which fzf &> /dev/null
   if [[ $? != 0 ]]; then
@@ -307,6 +325,7 @@ install-everything () {
   install-vim-plug
   install-zprezto
   install-rbenv
+  install-java-mvn
   install-docker
   install-docker-compose
   install-nvm
