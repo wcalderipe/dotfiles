@@ -267,6 +267,20 @@ install-zprezto () {
   fi
 }
 
+install-rbenv () {
+  if [[ ! -d "$HOME/.rbenv" ]]; then
+    sudo apt install --yes zlib1g-dev
+
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+
+    # Add ruby-build to simplify the installation of new ruby versions using
+    # `rbenv install`
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  else
+    log "rbenv already installed."
+  fi
+}
+
 # TODO: Check if boostnote is already installed
 # TODO: Add to install-everything
 install-boostnote () {
@@ -292,6 +306,7 @@ install-everything () {
   install-tmux-tpm
   install-vim-plug
   install-zprezto
+  install-rbenv
   install-docker
   install-docker-compose
   install-nvm

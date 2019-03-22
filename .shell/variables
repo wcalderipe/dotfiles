@@ -54,3 +54,7 @@ export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'
   export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 # }
 
+# rbenv {
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+# }
