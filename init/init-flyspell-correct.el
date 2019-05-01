@@ -1,0 +1,1 @@
+(require 'flyspell-correct-ivy)
