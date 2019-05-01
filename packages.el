@@ -126,7 +126,7 @@
 (el-get-bundle clojure-snippets   :checkout "6068dca")
 
 ;; Fast search interface using Ripgrep.
-(el-get-bundle Wilfred/deadgrep :checkout "8b87ac1")
+(el-get-bundle Wilfred/deadgrep :checkout "865eb35")
 
 ;; On the fly syntax checking (used by linters for instance).
 (el-get-bundle flycheck :checkout "407bcd2")
