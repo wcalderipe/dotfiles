@@ -50,6 +50,10 @@
   (kbd "C-i") 'evil-jump-forward
   (kbd "C-o") 'evil-jump-backward)
 
+;; For some reason this keybinding ceases to exist sometimes, so this
+;; line defines it globally.
+(global-set-key (kbd "C-x C-j") 'dired-jump)
+
 (global-set-key (kbd "C-c C-l") 'my/reload-init-file)
 (global-set-key (kbd "C-C w") 'hydra-window/body)
 (define-key dired-mode-map (kbd "C-c d") 'hydra-dired/body)
