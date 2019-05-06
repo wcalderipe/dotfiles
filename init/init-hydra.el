@@ -3,9 +3,9 @@
 (require 'hydra)
 
 (defhydra hydra-projectile (:hint nil
-                             :foreign-keys nil
-                             :exit t
-                             :idle 0.5)
+                                  :foreign-keys nil
+                                  :exit t
+                                  :idle 0.5)
   "
  PROJECT: %(projectile-project-root)
 
@@ -39,17 +39,18 @@
 
 (defhydra hydra-dired (:hint nil :foreign-keys run :exit nil)
   "
-_v_: view         _m_: mark            _l_: redisplay   _i_: insert subdir   wdired
-_V_: view other   _u_: unmark          _g_: refresh     _$_: hide subdir     C-x C-q: edit
-_o_: open other   _U_: unmark all      _=_: diff        _w_: kill subdir     C-c C-c: commit
-_M_: chmod        _t_: toggle marks    _s_: sort        _X_: shell command   C-c ESC: abort
-_G_: chgrp        _S_: symlink
+_v_: view         _m_: mark           _l_: redisplay       _i_: insert subdir   wdired
+_V_: view other   _u_: unmark         _g_: refresh         _$_: hide subdir     C-x C-q: edit
+_o_: open other   _U_: unmark all     _=_: diff            _w_: kill subdir     C-c C-c: commit
+_M_: chmod        _t_: toggle marks   _s_: sort            _X_: shell command   C-c ESC: abort
+_G_: chgrp        _S_: symlink        _H_: toggle hidden
 _O_: chown        _Z_: zip/unzip
 ^ ^
 "
   ("$" diredp-hide-subdir-nomove)
   ("=" diredp-ediff)
   ("G" dired-do-chgrp)
+  ("H" my/dired-dotfiles-toggle)
   ("M" dired-do-chmod)
   ("O" dired-do-chown)
   ("S" dired-do-symlink)

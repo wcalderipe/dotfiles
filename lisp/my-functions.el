@@ -12,8 +12,20 @@
 (defun my/indent-or-complete ()
   (interactive)
   (if (looking-at "\\_>")
-    (company-complete-common)
+      (company-complete-common)
     (indent-according-to-mode)))
+
+(defun my/dired-dotfiles-toggle ()
+  "Show/hide dot-files"
+  (interactive)
+  (when (equal major-mode 'dired-mode)
+    (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
+        (progn
+          (set (make-local-variable 'dired-dotfiles-show-p) nil)
+          (dired-mark-files-regexp "^\\\.")
+          (dired-do-kill-lines))
+      (progn (revert-buffer) ; otherwise just revert to re-show
+             (set (make-local-variable 'dired-dotfiles-show-p) t)))))
 
 (defun my/use-read-only-mode-in-shell-command-buffers ()
   "I usually use shell command buffers to read text, but not change
@@ -27,18 +39,18 @@
   "Use local eslint from node_modules before global.
   http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable"
   (let* ((root (locate-dominating-file
-                 (or (buffer-file-name) default-directory)
-                 "node_modules"))
-          (eslint (and root (expand-file-name "node_modules/eslint/bin/eslint.js"
-                              root))))
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                             root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
 
 (defun my/counsel-projectile-switch-project-action-dired (project)
   "Open dired when switching projects with counsel-projectile."
   (let ((projectile-switch-project-action
-          (lambda ()
-            (projectile-dired))))
+         (lambda ()
+           (projectile-dired))))
     (counsel-projectile-switch-project-by-name project)))
 
 (defun my/cider-format-and-clean-buffer ()
@@ -56,8 +68,8 @@
   "Kill all other buffers."
   (interactive)
   (mapc 'kill-buffer
-    (delq (current-buffer)
-      (remove-if-not 'buffer-file-name (buffer-list)))))
+        (delq (current-buffer)
+              (remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun my/vim-split ()
   "Splits the current window horizontally and switch to the new window."
@@ -75,22 +87,22 @@
   "Jump to source as if using ctags."
   (interactive)
   (cond ;; Clojure mode.
-    ((eq major-mode 'clojure-mode)
-      (cider-find-var))
+   ((eq major-mode 'clojure-mode)
+    (cider-find-var))
 
-    ;; Javascript mode (requires xref-js2 package to work) or Elisp
-    ;; mode.
-    ((or (eq major-mode 'js2-mode)
-       (eq major-mode 'emacs-lisp-mode))
-      (xref-find-definitions (symbol-name (symbol-at-point))))
+   ;; Javascript mode (requires xref-js2 package to work) or Elisp
+   ;; mode.
+   ((or (eq major-mode 'js2-mode)
+        (eq major-mode 'emacs-lisp-mode))
+    (xref-find-definitions (symbol-name (symbol-at-point))))
 
-    ;; TypeScript mode.
-    ((eq major-mode 'typescript-mode)
-      (tide-jump-to-definition))
+   ;; TypeScript mode.
+   ((eq major-mode 'typescript-mode)
+    (tide-jump-to-definition))
 
-    ;; Rust mode
-    ((eq major-mode 'rust-mode)
-      (racer-find-definition))
+   ;; Rust mode
+   ((eq major-mode 'rust-mode)
+    (racer-find-definition))
 
-    ;; Default jump to source strategy.
-    (t (evil-jump-to-tag))))
+   ;; Default jump to source strategy.
+   (t (evil-jump-to-tag))))
