@@ -153,4 +153,7 @@
 (el-get-bundle syohex/emacs-hcl-mode       :checkout "0f2c5ec")
 (el-get-bundle syohex/emacs-terraform-mode :checkout "6973d1a")
 
+;; Extra font lock rules for a more colourful dired.
+(el-get-bundle purcell/diredfl :checkout "9b2a899")
+
 (el-get 'sync)
