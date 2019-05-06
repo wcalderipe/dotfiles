@@ -149,4 +149,8 @@
 ;; Easily adjust the font size in all Emacs frames.
 (el-get-bundle purcell/default-text-scale :checkout "f425d37")
 
+;; Terraform major mode
+(el-get-bundle syohex/emacs-hcl-mode       :checkout "0f2c5ec")
+(el-get-bundle syohex/emacs-terraform-mode :checkout "6973d1a")
+
 (el-get 'sync)
