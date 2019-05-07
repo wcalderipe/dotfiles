@@ -1,12 +1,9 @@
-(when load-file-name
-  (setq user-emacs-directory (file-name-directory load-file-name)))
-
 (defun my/auto-install-package-manager ()
   (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
   (unless (require 'el-get nil 'noerror)
     (with-current-buffer
-      (url-retrieve-synchronously
-        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
@@ -15,6 +12,9 @@
   ;; after each package has been installed by el-get.
   (setq el-get-user-package-directory (locate-user-emacs-file "init"))
   (load (locate-user-emacs-file "packages.el")))
+
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
 
 ;; First load basic configurations that don't depend on extra packages.
 (load (locate-user-emacs-file "lisp/my-basic-behavior.el"))
