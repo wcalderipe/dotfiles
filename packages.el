@@ -156,4 +156,9 @@
 ;; Extra font lock rules for a more colourful dired.
 (el-get-bundle purcell/diredfl :checkout "9b2a899")
 
+;; This package helps me configure Emacs GUI to use the same variables
+;; set by zshell. For example, this is important to use FZF (fuzzy
+;; finder).
+(el-get-bundle purcell/exec-path-from-shell :checkout "3cfedb8")
+
 (el-get 'sync)
