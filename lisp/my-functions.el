@@ -149,5 +149,9 @@
    ((eq major-mode 'rust-mode)
     (racer-find-definition))
 
+   ;; Elixir mode
+   ((eq major-mode 'elixir-mode)
+    (alchemist-goto-definition-at-point))
+
    ;; Default jump to source strategy.
    (t (evil-jump-to-tag))))

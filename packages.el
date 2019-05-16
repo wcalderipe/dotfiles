@@ -163,4 +163,8 @@
 ;; finder).
 (el-get-bundle purcell/exec-path-from-shell :checkout "3cfedb8")
 
+;; Elixir
+(el-get-bundle elixir-editors/emacs-elixir :checkout "694d133")
+(el-get-bundle tonini/alchemist.el         :checkout "6f99367")
+
 (el-get 'sync)
