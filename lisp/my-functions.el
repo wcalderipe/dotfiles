@@ -15,6 +15,51 @@
       (company-complete-common)
     (indent-according-to-mode)))
 
+(defun my/remove-newline (str)
+  (substring str 0 -1))
+
+(defun my/el-get-is-git-package (package)
+  (let ((default-directory (el-get-package-directory package)))
+    (file-directory-p ".git")))
+
+(defun my/el-get-git-most-recent-commit (package)
+  "Fetch from remote the most recent git commit hash."
+  (let ((default-directory (el-get-package-directory package)))
+    (when (file-directory-p ".git")
+      (let ((origin-url (my/remove-newline (shell-command-to-string "git config --get remote.origin.url"))))
+        (thread-first "git ls-remote %s HEAD | awk '{ print $1 }'"
+          (format origin-url)
+          (shell-command-to-string)
+          (my/remove-newline))))))
+
+(defun my/el-get-installed-packages ()
+  "Return all installed package names."
+  (thread-last (el-get-package-status-alist)
+    (-map 'car)
+    (-filter 'el-get-package-installed-p)
+    (-filter 'my/el-get-is-git-package)
+    (-sort 'string<)))
+
+(defun my/el-get-git-outdated-packages (packages)
+  "Returns an alist of (<package-name> . <commit-hash>) for all
+   outdated packages, i.e. where the remote commit is different than
+   the local one installed by el-get.
+
+   If you'd like to check on all installed packages:
+   ;; => (my/el-get-git-outdated-packages (my/el-get-installed-packages))"
+  (thread-last packages
+    (-filter 'my/el-get-is-git-package)
+    (-map (lambda (pkg)
+            (let ((default-directory (el-get-package-directory pkg)))
+              (let* ((local-commit (my/remove-newline (shell-command-to-string "git rev-parse HEAD")))
+                     (remote-commit (my/el-get-git-most-recent-commit pkg)))
+                (when (and remote-commit (not (string-equal local-commit remote-commit)))
+                  `(,pkg . ,remote-commit))))))
+    (-filter (-not 'null))))
+
+(defun my/el-get-git-all-outdated-packages ()
+  (my/el-get-git-outdated-packages (my/el-get-installed-packages)))
+
 (defun my/dired-dotfiles-toggle ()
   "Show/hide dot-files"
   (interactive)
