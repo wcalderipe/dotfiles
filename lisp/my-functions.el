@@ -138,6 +138,11 @@
         (delq (current-buffer)
               (remove-if-not 'buffer-file-name (buffer-list)))))
 
+(defun my/create-scratch-buffer nil
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (fundamental-mode))
+
 (defun my/vim-split ()
   "Splits the current window horizontally and switch to the new window."
   (interactive)
