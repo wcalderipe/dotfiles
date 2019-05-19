@@ -10,18 +10,18 @@
  PROJECT: %(projectile-project-root)
 
  ^Search^                ^Buffers^                    ^Cache^                 ^Command
-^^^^^^^------------------------------------------------------------------------------------
- _s_: rg (mini-buffer)   _a_: alternate               _c_: cache clear        _R_ run async
- _S_: rg (deadgrep)      _A_: alternate (other win)   _i_: include project    _C_ compile
- ^ ^                     _b_: switch to buffer        _x_: remove project     _T_ test
- ^ ^                     _d_: dired                   _X_: cleanup projects
+^^^^^^^----------------------------------------------------------------------------------------------
+ _s_: rg (mini-buffer)   _a_: alternate               _c_: cache clear        _r_ run async
+ _S_: rg (deadgrep)      _A_: alternate (other win)   _i_: include project    _R_ run async no window
+ ^ ^                     _b_: switch to buffer        _x_: remove project     _C_ compile
+ ^ ^                     _d_: dired                   _X_: cleanup projects   _T_ test
  ^ ^                     _K_: kill all buffers        _z_: cache current
 
 "
   ("A" projectile-find-implementation-or-test-other-window)
   ("C" projectile-compile-project)
   ("K" projectile-kill-buffers)
-  ("R" projectile-run-async-shell-command-in-root)
+  ("R" my/projectile-run-async-shell-command-no-window-in-root)
   ("S" deadgrep)
   ("T" projectile-test-project)
   ("X" projectile-cleanup-known-projects)
@@ -30,6 +30,7 @@
   ("c" projectile-invalidate-cache)
   ("d" projectile-dired)
   ("i" projectile-add-known-project)
+  ("r" projectile-run-async-shell-command-in-root)
   ("s" counsel-projectile-rg)
   ("x" projectile-remove-known-project)
   ("z" projectile-cache-current-file)

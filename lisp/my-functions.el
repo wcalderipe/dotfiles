@@ -15,6 +15,31 @@
       (company-complete-common)
     (indent-according-to-mode)))
 
+(defun my/async-shell-command-no-window (command)
+  "Execute string COMMAND asynchronously without opening buffer."
+  (interactive "sAsync shell command: ")
+  (let* ((buffer-name "*Async Shell Command*")
+         (output-buffer (get-buffer-create buffer-name))
+         (process (let ((display-buffer-alist (list (list buffer-name #'display-buffer-no-window))))
+                    (async-shell-command command output-buffer)
+                    (get-buffer-process output-buffer)))
+         (sentinel `(lambda (process signal)
+                      (when (memq (process-status process) '(exit signal))
+                        (shell-command-sentinel process signal)
+                        ;; Here you could run arbitrary code when the
+                        ;; command is successful.
+                        ;; (when (zerop (process-exit-status process))
+                        ;;   (message "%s" ,cmd))
+                        ))))
+    (when (process-live-p process)
+      (set-process-sentinel process sentinel))))
+
+(defun my/projectile-run-async-shell-command-no-window-in-root ()
+  "Invoke `my/async-shell-command-no-window' in the project's root."
+  (interactive)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
+    (call-interactively 'my/async-shell-command-no-window)))
+
 (defun my/el-get-is-git-package (package)
   (let ((default-directory (el-get-package-directory package)))
     (file-directory-p ".git")))
