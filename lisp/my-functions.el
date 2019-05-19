@@ -15,9 +15,6 @@
       (company-complete-common)
     (indent-according-to-mode)))
 
-(defun my/remove-newline (str)
-  (substring str 0 -1))
-
 (defun my/el-get-is-git-package (package)
   (let ((default-directory (el-get-package-directory package)))
     (file-directory-p ".git")))
@@ -26,11 +23,11 @@
   "Fetch from remote the most recent git commit hash."
   (let ((default-directory (el-get-package-directory package)))
     (when (file-directory-p ".git")
-      (let ((origin-url (my/remove-newline (shell-command-to-string "git config --get remote.origin.url"))))
+      (let ((origin-url (s-chomp (shell-command-to-string "git config --get remote.origin.url"))))
         (thread-first "git ls-remote %s HEAD | awk '{ print $1 }'"
           (format origin-url)
           (shell-command-to-string)
-          (my/remove-newline))))))
+          (s-chomp))))))
 
 (defun my/el-get-installed-packages ()
   "Return all installed package names."
@@ -51,7 +48,7 @@
     (-filter 'my/el-get-is-git-package)
     (-map (lambda (pkg)
             (let ((default-directory (el-get-package-directory pkg)))
-              (let* ((local-commit (my/remove-newline (shell-command-to-string "git rev-parse HEAD")))
+              (let* ((local-commit (s-chomp (shell-command-to-string "git rev-parse HEAD")))
                      (remote-commit (my/el-get-git-most-recent-commit pkg)))
                 (when (and remote-commit (not (string-equal local-commit remote-commit)))
                   `(,pkg . ,remote-commit))))))
