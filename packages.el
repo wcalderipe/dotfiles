@@ -23,6 +23,9 @@
 ;; A minimal and modern mode-line.
 (el-get-bundle doom-modeline :checkout "1c5520d")
 
+;; A light that follows my cursor around so I don't lose it!
+(el-get-bundle beacon :checkout "bde7818")
+
 ;; YASnippet is a template system for Emacs. It allows you to type an
 ;; abbreviation and automatically expand it into function templates.
 ;; The snippet syntax is inspired from TextMate's syntax.
