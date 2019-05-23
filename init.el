@@ -18,7 +18,7 @@
 
 ;; First load basic configurations that don't depend on extra packages.
 (load (locate-user-emacs-file "lisp/my-basic-behavior.el"))
-(load (locate-user-emacs-file "lisp/init-ls-lisp.el"))
+(load (locate-user-emacs-file "lisp/init-dired-ls-lisp.el"))
 
 (my/auto-install-package-manager)
 (my/install-packages)
