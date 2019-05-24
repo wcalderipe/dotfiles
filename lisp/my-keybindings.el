@@ -105,3 +105,6 @@
 ;; pretty much all Projectile projects I work on use Git, so let's
 ;; enable the keybinding globally.
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; Kill the current buffer by default.
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
