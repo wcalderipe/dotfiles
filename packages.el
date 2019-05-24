@@ -173,4 +173,8 @@
 (el-get-bundle elixir-editors/emacs-elixir :checkout "694d133")
 (el-get-bundle tonini/alchemist.el         :checkout "6f99367")
 
+;; Emacs Lisp
+;; Show evaluation results in an overlay.
+(el-get-bundle xiongtx/eros :checkout "dd89102")
+
 (el-get 'sync)
