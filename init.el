@@ -13,21 +13,27 @@
   (setq el-get-user-package-directory (locate-user-emacs-file "init"))
   (load (locate-user-emacs-file "packages.el")))
 
-(when load-file-name
-  (setq user-emacs-directory (file-name-directory load-file-name)))
+(defun my/load-lisp-init-files ()
+  (let* ((this-dir (f-dirname (f-this-file)))
+         (init-files (f-glob "init-*.el" (f-join this-dir "lisp"))))
+    (mapcar 'load init-files)))
 
-;; First load basic configurations that don't depend on extra packages.
-(load (locate-user-emacs-file "lisp/my-basic-behavior.el"))
-(load (locate-user-emacs-file "lisp/init-dired-ls-lisp.el"))
+(defun my/init-emacs ()
+  (when load-file-name
+    (setq user-emacs-directory (file-name-directory load-file-name)))
 
-(my/auto-install-package-manager)
-(my/install-packages)
+  ;; First load basic configurations that don't depend on extra packages.
+  (load (locate-user-emacs-file "lisp/my-basic-behavior.el"))
+  (load (locate-user-emacs-file "lisp/my-functions.el"))
 
-;; Load other customizations.
-(load (locate-user-emacs-file "lisp/my-functions.el"))
-(load (locate-user-emacs-file "lisp/init-modes.el"))
-(load (locate-user-emacs-file "lisp/my-keybindings.el"))
-(load (locate-user-emacs-file "lisp/init-shell-mode.el"))
+  (my/auto-install-package-manager)
+  (my/install-packages)
 
-(when (file-exists-p custom-file)
-  (load custom-file))
+  ;; Load other customizations and lastly the keybindings.
+  (my/load-lisp-init-files)
+  (load (locate-user-emacs-file "lisp/my-keybindings.el"))
+
+  (when (file-exists-p custom-file)
+    (load custom-file)))
+
+(my/init-emacs)

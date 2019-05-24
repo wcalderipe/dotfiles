@@ -5,6 +5,9 @@
 ;; Dependency of the deadgrep package.
 (el-get-bundle s :checkout "03410e6")
 
+;; Modern API for working with files and directories.
+(el-get-bundle rejeep/f.el :checkout "8191672")
+
 ;; A modern list library.
 ;; dash-functional has to be explicitly loaded because it only works
 ;; with Emacs 24+ for its lexical scope.
