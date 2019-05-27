@@ -120,6 +120,11 @@
            (projectile-dired))))
     (counsel-projectile-switch-project-by-name project)))
 
+(defun my/counsel-projectile-switch-project-dotfiles ()
+  "Open my dotfiles project straightaway."
+  (interactive)
+  (my/counsel-projectile-switch-project-action-dired "~/dev/dotfiles"))
+
 (defun my/cider-format-and-clean-buffer ()
   "Format Clojure code in the current buffer and clean the ns form."
   (interactive)

@@ -36,6 +36,7 @@
   ("z" projectile-cache-current-file)
 
   ("p" counsel-projectile-switch-project "switch project")
+  ("." my/counsel-projectile-switch-project-dotfiles "switch dotfiles")
   ("q" nil "quit"))
 
 (defhydra hydra-dired (:hint nil :foreign-keys run :exit nil)
