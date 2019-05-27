@@ -177,4 +177,7 @@
 ;; Show evaluation results in an overlay.
 (el-get-bundle xiongtx/eros :checkout "dd89102")
 
+;; Thesaurus front-end with pluggable backends.
+(el-get-bundle synosaurus :checkout "bc26f5c")
+
 (el-get 'sync)
