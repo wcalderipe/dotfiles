@@ -45,6 +45,7 @@ create-symlinks-to-dotfiles () {
 
   ln -sf $dotfiles_path/.vim        $HOME
   ln -sf $dotfiles_path/.vimrc      $HOME
+  ln -sf $dotfiles_path/.emacs.d    $HOME
   ln -sf $dotfiles_path/.shell      $HOME
   ln -sf $dotfiles_path/.vscode     $HOME
   ln -sf $dotfiles_path/.zshrc      $HOME
