@@ -74,11 +74,9 @@
 (el-get-bundle magit           :checkout "b9c5ed1")
 
 ;; Basic file type modes
-(el-get-bundle groovy-emacs-mode   :checkout "aa531c6")
 (el-get-bundle davazp/graphql-mode :checkout "74ee772")
 (el-get-bundle markdown-mode       :checkout "115f77d")
 (el-get-bundle json-mode           :checkout "0e819e5")
-(el-get-bundle skuro/plantuml-mode :checkout "698a248")
 (el-get-bundle dockerfile-mode     :checkout "ed73e82")
 (el-get-bundle yaml-mode           :checkout "40067a1")
 
@@ -156,10 +154,6 @@
 
 ;; Easily adjust the font size in all Emacs frames.
 (el-get-bundle purcell/default-text-scale :checkout "f425d37")
-
-;; Terraform major mode
-(el-get-bundle syohex/emacs-hcl-mode       :checkout "0f2c5ec")
-(el-get-bundle syohex/emacs-terraform-mode :checkout "6973d1a")
 
 ;; Extra font lock rules for a more colourful dired.
 (el-get-bundle purcell/diredfl :checkout "9b2a899")
