@@ -13,5 +13,7 @@ rm -rf \
   ~/.shell \
   ~/.zprezto \
   ~/.vim \
+  ~/.emacs.d \
+  ~/.lein \
 
 echo "[INFO] Done."

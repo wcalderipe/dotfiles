@@ -8,6 +8,6 @@
   lo = log --pretty=oneline
   todo = grep -EI 'TODO(:|\\s)|FIXME(:|\\s)'
 [core]
-  editor = vim
+  editor = emacsclient --tty
 [push]
   default = simple

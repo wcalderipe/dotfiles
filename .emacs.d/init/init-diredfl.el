@@ -1,0 +1,1 @@
+(diredfl-global-mode)

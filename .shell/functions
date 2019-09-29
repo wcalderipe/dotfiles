@@ -45,6 +45,8 @@ create-symlinks-to-dotfiles () {
 
   ln -sf $dotfiles_path/.vim        $HOME
   ln -sf $dotfiles_path/.vimrc      $HOME
+  ln -sf $dotfiles_path/.emacs.d    $HOME
+  ln -sf $dotfiles_path/.lein	    $HOME
   ln -sf $dotfiles_path/.shell      $HOME
   ln -sf $dotfiles_path/.vscode     $HOME
   ln -sf $dotfiles_path/.zshrc      $HOME
@@ -75,7 +77,6 @@ install-basic-dependencies () {
     nodejs \
     gnome-tweak-tool \
     jq \
-    texinfo # Required by Emacs Magit
 }
 
 # After installation, log out and log in for the group changes to take effect.
@@ -182,9 +183,22 @@ install-gnome-terminal-zenburn-color () {
 install-emacs () {
   which emacs &> /dev/null
   if [[ $? != 0 ]]; then
-    sudo add-apt-repository ppa:kelleyk/emacs
-    sudo apt update
-    sudo apt install --yes emacs26
+    local version=emacs-26.1
+    sudo apt-get install --yes \
+      build-essential \
+      libdbus-1-dev \
+      libncurses-dev \
+      libgnutls30 \
+      libgnutls28-dev \
+      gnutls-bin \
+      texinfo
+
+    cd /tmp
+    wget -nc --no-check-certificate https://ftp.gnu.org/gnu/emacs/$version.tar.gz
+    tar -xzvf $version.tar.gz
+    cd $version
+    ./configure --without-x --prefix=$HOME/.local
+    make && make install
   else
     log "emacs already installed."
   fi
