@@ -160,6 +160,14 @@
   (evil-window-vsplit)
   (evil-window-right 1))
 
+(defun my/typescript-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1))
+
 (defun my/jump-to-source ()
   "Jump to source as if using ctags."
   (interactive)
@@ -174,16 +182,9 @@
     (xref-find-definitions (symbol-name (symbol-at-point))))
 
    ;; TypeScript mode.
+   ;; TODO: tsx files are using web-mode
    ((eq major-mode 'typescript-mode)
     (tide-jump-to-definition))
-
-   ;; Rust mode
-   ((eq major-mode 'rust-mode)
-    (racer-find-definition))
-
-   ;; Elixir mode
-   ((eq major-mode 'elixir-mode)
-    (alchemist-goto-definition-at-point))
 
    ;; Default jump to source strategy.
    (t (evil-jump-to-tag))))

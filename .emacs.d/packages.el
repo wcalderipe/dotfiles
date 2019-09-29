@@ -117,6 +117,7 @@
 (el-get-bundle js2-mode :checkout "ae9fea8")
 (el-get-bundle tide     :checkout "64eb602")
 (el-get-bundle mocha    :checkout "33e1b52")
+(el-get-bundle web-mode :checkout "a31eb85")
 
 ;; Clojure and lots of Cider dependencies.
 ;; *Note*: Cider will connect to marmalade. Make sure your Emacs 26.x is
