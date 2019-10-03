@@ -126,6 +126,7 @@
 ;; version.
 (el-get-bundle remvee/emacs-rails :checkout "45192ac" :load "inflections.el")
 (el-get-bundle edn                :checkout "be9e32d")
+(el-get-bundle emacsmirror/queue  :checkout "3d5746b")
 (el-get-bundle clojure-mode       :checkout "a9cbe6a")
 (el-get-bundle cider              :checkout "62134b4")
 (el-get-bundle clj-refactor       :checkout "3edc678")
