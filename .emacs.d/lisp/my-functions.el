@@ -188,3 +188,16 @@
 
    ;; Default jump to source strategy.
    (t (evil-jump-to-tag))))
+
+(defun my/set-local-indent (n)
+  (message (format "Set local indent to \"%s\"" n))
+  (setq-local c-basic-offset n)
+  (setq-local js-indent-level n)
+  ;; js2-mode: in latest js2-mode, this is an alias of js-indent-level
+  (setq-local js2-basic-offset n)
+  ;; HTML tags in HTML and TSX files
+  (setq-local web-mode-markup-indent-offset n)
+  ;; CSS in HTML and TSX files
+  (setq-local web-mode-css-indent-offset n)
+  ;; JavaScript in HTML and TSX files
+  (setq-local web-mode-code-indent-offset n))
