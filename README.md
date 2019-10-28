@@ -13,14 +13,3 @@ curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/cl
 # Install dotfiles
 curl -Lks https://raw.githubusercontent.com/wcalderipe/dotfiles/master/.shell/setup.sh | /bin/bash
 ```
-
-## Vim
-
-### TypeScript
-
-| Mode   | Command       | Description                                                           |
-|--------|---------------|-----------------------------------------------------------------------|
-| insert | `<C-x> <C-o>` | Show completions                                                      |
-| normal | `<C-]>`       | Navigate to location where the symbol under the cursos is defined     |
-| normal | `<C-t>`       | Navigate the cursor back after `<C-]>`                                |
-| normal | `<C-^>`       | Show list of location where the symbol under the cursos is referenced |
