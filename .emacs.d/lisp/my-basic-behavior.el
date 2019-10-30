@@ -139,3 +139,6 @@
 
 ;; Setup custom settings file.
 (setq custom-file (locate-user-emacs-file "custom.el"))
+
+;; Include current directory as the first option in the ivy list.
+(setq ivy-extra-directories '("./"))
