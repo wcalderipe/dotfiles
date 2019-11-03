@@ -172,4 +172,8 @@
 ;; Thesaurus front-end with pluggable backends.
 (el-get-bundle synosaurus :checkout "bc26f5c")
 
+;; This minor mode sets background color to strings that match color
+;; names
+(el-get-bundle emacsmirror/rainbow-mode :checkout "fb7c982")
+
 (el-get 'sync)
