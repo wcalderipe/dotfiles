@@ -264,6 +264,12 @@ install-java-mvn () {
   fi
 }
 
+# TODO: Install jenv + java 8 and 11
+install-jenv () {
+    which jenv &> /dev/null
+ git clone https://github.com/jenv/jenv.git ~/.jenv
+}
+
 install-fzf () {
   which fzf &> /dev/null
   if [[ $? != 0 ]]; then

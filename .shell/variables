@@ -63,3 +63,8 @@ export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'
   export M2_HOME="$HOME/maven"
   export PATH="${M2_HOME}/bin:${PATH}"
 # }
+
+# jenv {
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+# }
