@@ -1,8 +1,0 @@
-dbaeumer.vscode-eslint
-EditorConfig.EditorConfig
-eg2.tslint
-gerane.Theme-Zenburn
-GrapeCity.gc-excelviewer
-ms-python.python
-PeterJausovec.vscode-docker
-vscodevim.vim

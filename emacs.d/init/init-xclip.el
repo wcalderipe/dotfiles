@@ -1,0 +1,1 @@
+(xclip-mode 1)
