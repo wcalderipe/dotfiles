@@ -31,32 +31,6 @@ setup-gnome-terminal-base16-solarized-profile () {
   source /tmp/base16-gnome-terminal/base16-solarized.dark.sh
 }
 
-clone-dotfiles () {
-  if [[ ! -d "$HOME/dev/dotfiles" ]]; then
-    mkdir -p $HOME/dev
-    git clone git@github.com:wcalderipe/dotfiles.git $HOME/dev/dotfiles
-  else
-    log "dotfiles repository already cloned."
-  fi
-}
-
-create-symlinks-to-dotfiles () {
-  local dotfiles_path=$HOME/dev/dotfiles
-
-  ln -sf $dotfiles_path/vim         $HOME/.vim
-  ln -sf $dotfiles_path/emacs.d     $HOME/.emacs.d
-  ln -sf $dotfiles_path/lein        $HOME/.lein
-  ln -sf $dotfiles_path/shell       $HOME/.shell
-  ln -sf $dotfiles_path/vscode      $HOME/.vscode
-
-  ln -sf $dotfiles_path/.vimrc      $HOME
-  ln -sf $dotfiles_path/.zshrc      $HOME
-  ln -sf $dotfiles_path/.zpreztorc  $HOME
-  ln -sf $dotfiles_path/.gitconfig  $HOME
-  ln -sf $dotfiles_path/.gitignore  $HOME
-  ln -sf $dotfiles_path/.tmux.conf  $HOME
-}
-
 install-basic-dependencies () {
   sudo apt update
   sudo apt install --yes \
