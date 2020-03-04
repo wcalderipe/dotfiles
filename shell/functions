@@ -6,7 +6,7 @@ log () {
 }
 
 my-gnome-setup () {
-  log "Setup gnome preferences"
+  log "setup gnome preferences..."
 
   # Modify capslock to be ctrl. Also, set compose key to print screen in order
   # to write special characters in a US keyboard (requires gnome-tweak-tool)
@@ -27,13 +27,17 @@ my-gnome-setup () {
 }
 
 setup-gnome-terminal-base16-solarized-profile () {
+  log "setup gnome terminal base16 profile..."
+
   git clone https://github.com/chriskempson/base16-gnome-terminal.git /tmp/base16-gnome-terminal
   source /tmp/base16-gnome-terminal/base16-solarized.dark.sh
 }
 
 install-basic-dependencies () {
-  sudo apt update
-  sudo apt install --yes \
+  log "installing basic dependencies..."
+
+  sudo apt-get update
+  sudo apt-get install --yes \
     build-essential \
     git \
     curl \
@@ -59,6 +63,8 @@ install-basic-dependencies () {
 install-docker () {
   which docker &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing docker..."
+
     sudo apt-key adv \
       --keyserver hkp://ha.pool.sks-keyservers.net:80 \
       --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -66,11 +72,11 @@ install-docker () {
     echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" \
       | sudo tee /etc/apt/sources.list.d/docker.list
 
-    sudo apt install --yes \
+    sudo apt-get install --yes \
       linux-image-extra-$(uname -r) linux-image-extra-virtual \
       apt-transport-https ca-certificates
 
-    sudo apt install --yes docker-engine docker-compose
+    sudo apt-get install --yes docker-engine docker-compose
     sudo gpasswd -a ${USER} docker
   else
     log "docker already installed."
@@ -80,6 +86,8 @@ install-docker () {
 install-docker-compose () {
   which docker-compose &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing docker-compose..."
+
     sudo curl \
       -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` \
       -o /usr/local/bin/docker-compose
@@ -93,27 +101,33 @@ install-docker-compose () {
 install-nvm () {
   which nvm &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing node.js version manager (nvm)..."
+
     git clone https://github.com/creationix/nvm.git $HOME/.nvm
   else
-    log "nvm already installed."
+    log "node.js version manager (nvm) already installed."
   fi
 }
 
 install-npm () {
   which npm &> /dev/null
   if [[ $? != 0 ]]; then
-    sudo apt install --yes npm
+    log "installing node.js package manager (npm)..."
+
+    sudo apt-get install --yes npm
   else
-    log "npm already installed."
+    log "node.js package manager (npm) already installed."
   fi
 }
 
 install-yarn () {
   which yarn &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing yarn..."
+
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt update && sudo apt install --yes yarn
+    sudo apt-get update && sudo apt-get install --yes yarn
   else
     log "yarn already installed."
   fi
@@ -122,17 +136,21 @@ install-yarn () {
 install-google-chrome () {
   which google-chrome &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing google chrome..."
+
     wget --output-document /tmp/google-chrome.deb \
       https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
       && sudo dpkg --install /tmp/google-chrome.deb
   else
-    log "google-chrome already installed."
+    log "google chrome already installed."
   fi
 }
 
 install-ripgrep () {
   which rg &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing ripgrep..."
+
     wget --output-document /tmp/ripgrep.deb \
       https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb \
       && sudo dpkg --install /tmp/ripgrep.deb
@@ -142,7 +160,9 @@ install-ripgrep () {
 }
 
 install-gnome-terminal-zenburn-color () {
-  sudo apt install dconf-cli
+  log "installing zenburn terminal color theme..."
+
+  sudo apt-get install dconf-cli
 
   if [[ ! -e "/tmp/gnome-terminal-colors" ]]; then
     git clone https://github.com/gnumoksha/gnome-terminal-colors.git /tmp/gnome-terminal-colors
@@ -159,7 +179,10 @@ install-gnome-terminal-zenburn-color () {
 install-emacs () {
   which emacs &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing emacs..."
+
     local version=emacs-26.1
+
     sudo apt-get install --yes \
       build-essential \
       libdbus-1-dev \
@@ -183,6 +206,8 @@ install-emacs () {
 install-clojure-lein () {
   which lein &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing lein..."
+
     local url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     local lein_path=$HOME/.local/bin/lein
     mkdir -p $HOME/.local/bin
@@ -198,33 +223,21 @@ install-clojure-lein () {
 install-snapcraft () {
   which snap &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing snapcraft..."
+
     sudo add-apt-repository ppa:snappy-dev/tools
-    sudo apt update
-    sudo apt install --yes snapcraft
+    sudo apt-get update
+    sudo apt-get install --yes snapcraft
   else
     log "snapcraft already installed."
-  fi
-}
-
-install-zoom () {
-  which zoom &> /dev/null
-  if [[ $? != 0 ]]; then
-    local package_name=zoom_amd64.deb
-    local url=https://zoom.us/client/latest/$package_name
-    cd /tmp
-    wget $url
-    sudo apt install -y libxcb-xtest0
-    sudo dpkg -i $package_name
-    sudo apt-get -f install
-    rm -f $package_name
-  else
-    log "zoom already installed."
   fi
 }
 
 install-java-mvn () {
   which mvn &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing maven..."
+
     local version=3.3.9
     local filename=apache-maven-${version}
     local output_path=$HOME/$filename.tar.gz
@@ -236,19 +249,23 @@ install-java-mvn () {
     mv $unzip_path $HOME/maven
     rm $output_path
   else
-    log "mvn already installed."
+    log "maven already installed."
   fi
 }
 
 # TODO: Install jenv + java 8 and 11
 install-jenv () {
-    which jenv &> /dev/null
- git clone https://github.com/jenv/jenv.git ~/.jenv
+  log "installing jenv..."
+
+  which jenv &> /dev/null
+  git clone https://github.com/jenv/jenv.git ~/.jenv
 }
 
 install-fzf () {
   which fzf &> /dev/null
   if [[ $? != 0 ]]; then
+    log "installing fzf..."
+
     git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
     $HOME/.fzf/install
   else
@@ -258,14 +275,18 @@ install-fzf () {
 
 install-tmux-tpm () {
   if [[ ! -d "$HOME/.tmux" ]]; then
+    log "installing tmux plugin manager (tpm)..."
+
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   else
-    log "tpm already installed."
+    log "tmux plugin manager (tpm) already installed."
   fi
 }
 
 install-vim-plug () {
   if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+    log "installing vim-plug..."
+
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   else
@@ -275,6 +296,8 @@ install-vim-plug () {
 
 install-zprezto () {
   if [[ ! -d "$HOME/.zprezto" ]]; then
+    log "installing zprezto..."
+
     git clone --recursive https://github.com/sorin-ionescu/prezto.git $HOME/.zprezto
   else
     log "zprezto already installed."
@@ -283,7 +306,9 @@ install-zprezto () {
 
 install-rbenv () {
   if [[ ! -d "$HOME/.rbenv" ]]; then
-    sudo apt install --yes zlib1g-dev
+    log "installing rbenv..."
+
+    sudo apt-get install --yes zlib1g-dev
 
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 
@@ -300,6 +325,8 @@ install-applications () {
   if [[ $? != 0 ]]; then
     log "snapcraft is required."
   else
+    log "installing applications..."
+
     sudo snap install spotify
     sudo snap install slack --classic
     sudo snap install postman
@@ -307,6 +334,8 @@ install-applications () {
 }
 
 install-everything () {
+  log "starting to install everything..."
+
   install-basic-dependencies
   install-tmux-tpm
   install-vim-plug
