@@ -56,7 +56,6 @@ install-basic-dependencies () {
     nodejs \
     gnome-tweak-tool \
     jq \
-    wordnet \ # Required by synosaurus emcas package
 }
 
 # After installation, log out and log in for the group changes to take effect.

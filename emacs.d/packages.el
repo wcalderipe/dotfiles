@@ -133,6 +133,10 @@
 (el-get-bundle cider-hydra        :checkout "5956c39")
 (el-get-bundle clojure-snippets   :checkout "6068dca")
 
+;; Ruby
+;; Kind of an IDE for RRuby development
+(el-get-bundle eschulte/rinari      :checkout    "134438a")
+
 ;; Fast search interface using Ripgrep.
 (el-get-bundle Wilfred/deadgrep :checkout "3f372c1")
 
@@ -168,9 +172,6 @@
 ;; Emacs Lisp
 ;; Show evaluation results in an overlay.
 (el-get-bundle xiongtx/eros :checkout "dd89102")
-
-;; Thesaurus front-end with pluggable backends.
-(el-get-bundle synosaurus :checkout "bc26f5c")
 
 ;; This minor mode sets background color to strings that match color
 ;; names
