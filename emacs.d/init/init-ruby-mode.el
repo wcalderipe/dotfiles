@@ -5,7 +5,12 @@
 (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 
-(add-hook 'ruby-mode-hook 'rinari-minor-mode)
+;; Turn on projectile-rails for buffers which belong to Rails either
+;; an application or engine.
+(projectile-rails-global-mode)
+
+;; Give projectile-rails a bind.
+(define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
 
 ;; Don't insert file enconding comment at the top
 (setq ruby-insert-encoding-magic-comment nil)

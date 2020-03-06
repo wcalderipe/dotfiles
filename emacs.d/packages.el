@@ -113,7 +113,7 @@
 (el-get-bundle counsel-projectile :checkout "fb19569")
 (el-get-bundle Yevgnen/ivy-rich   :checkout "16af798")
 
-;; Javascript/Typescript.
+;; Javascript and friends dependencies.
 (el-get-bundle js2-mode :checkout "ae9fea8")
 (el-get-bundle tide     :checkout "64eb602")
 (el-get-bundle mocha    :checkout "33e1b52")
@@ -124,7 +124,6 @@
 ;; compiled with gnutls. The Emacs configure step (for Linux) requires
 ;; "pkg-config" to be installed in order to correctly detect the gnutls
 ;; version.
-(el-get-bundle remvee/emacs-rails :checkout "45192ac" :load "inflections.el")
 (el-get-bundle edn                :checkout "be9e32d")
 (el-get-bundle emacsmirror/queue  :checkout "3d5746b")
 (el-get-bundle clojure-mode       :checkout "a9cbe6a")
@@ -133,9 +132,8 @@
 (el-get-bundle cider-hydra        :checkout "5956c39")
 (el-get-bundle clojure-snippets   :checkout "6068dca")
 
-;; Ruby
-;; Kind of an IDE for RRuby development
-(el-get-bundle eschulte/rinari      :checkout    "134438a")
+;; Ruby and Rails dependencies.
+(el-get-bundle asok/projectile-rails :checkout "0398d94")
 
 ;; Fast search interface using Ripgrep.
 (el-get-bundle Wilfred/deadgrep :checkout "3f372c1")
