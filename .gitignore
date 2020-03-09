@@ -9,6 +9,7 @@ emacs.d/elpa/
 emacs.d/eshell/
 emacs.d/places
 emacs.d/projectile-bookmarks.eld
+emacs.d/rake.cache
 emacs.d/recentf
 emacs.d/tramp
 emacs.d/transient/
@@ -16,4 +17,5 @@ emacs.d/transient/
 vim/.netrwhist
 vim/autoload
 vim/plugged
+
 vscode/extensions/

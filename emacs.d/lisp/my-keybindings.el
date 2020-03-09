@@ -1,9 +1,5 @@
 (evil-leader/set-leader "SPC")
 
-(evil-leader/set-key-for-mode 'rust-mode
-  "d" 'racer-describe
-  "f" 'rust-format-buffer)
-
 (evil-leader/set-key-for-mode 'clojure-mode
   "d"  'cider-doc
   "e"  'cider-eval-defun-at-point
@@ -17,6 +13,13 @@
   "tf" 'cider-test-run-ns-tests
   "tl" 'cider-test-rerun-test
   "tt" 'cider-test-run-test)
+
+(evil-leader/set-key-for-mode 'ruby-mode
+  "r"  'projectile-rails-rake
+  "ta" 'rspec-verify-all
+  "tf" 'rspec-verify
+  "tl" 'rspec-rerun
+  "tt" 'rspec-verify-single)
 
 ;; Use the same eval keybindings used for the clojure-mode.
 (evil-leader/set-key-for-mode 'emacs-lisp-mode

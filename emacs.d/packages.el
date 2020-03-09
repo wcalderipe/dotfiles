@@ -134,6 +134,8 @@
 
 ;; Ruby and Rails dependencies.
 (el-get-bundle asok/projectile-rails :checkout "0398d94")
+(el-get-bundle dgutov/robe           :checkout "8190cb7")
+(el-get-bundle pezra/rspec-mode      :checkout "9a2a9d2")
 
 ;; Fast search interface using Ripgrep.
 (el-get-bundle Wilfred/deadgrep :checkout "3f372c1")
