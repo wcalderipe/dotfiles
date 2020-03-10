@@ -15,7 +15,7 @@
 
 (defun my/load-lisp-init-files ()
   (let* ((this-dir (f-dirname (f-this-file)))
-         (init-files (f-glob "init-*.el" (f-join this-dir "lisp"))))
+          (init-files (f-glob "init-*.el" (f-join this-dir "lisp"))))
     (mapcar 'load init-files)))
 
 (defun my/init-emacs ()
@@ -23,14 +23,20 @@
     (setq user-emacs-directory (file-name-directory load-file-name)))
 
   ;; First load basic configurations that don't depend on extra packages.
+  (message "[init] Loading basic behavior...")
   (load (locate-user-emacs-file "lisp/my-basic-behavior.el"))
+  (message "[init] Loading custom functions...")
   (load (locate-user-emacs-file "lisp/my-functions.el"))
 
+  (message "[init] Installing el-get package manager...")
   (my/auto-install-package-manager)
+  (message "[init] Installing packages...")
   (my/install-packages)
 
-  ;; Load other customizations and lastly the keybindings.
+  (message "[init] Loading init files...")
   (my/load-lisp-init-files)
+
+  (message "[init] Loading custom keybindings...")
   (load (locate-user-emacs-file "lisp/my-keybindings.el"))
 
   (when (file-exists-p custom-file)

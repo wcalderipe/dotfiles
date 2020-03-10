@@ -37,8 +37,6 @@
      nil
      nil))
 
-;; Install rspec snippets
-;; See emacs.d/el-get/rspec-mode/snippets/rspec-mode directory.
 (eval-after-load 'rspec-mode '(rspec-install-snippets))
 
 ;; Don't insert file enconding comment at the top

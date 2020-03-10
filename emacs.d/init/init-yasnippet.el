@@ -1,1 +1,1 @@
-(yas-global-mode)
+(yas-global-mode 1)
