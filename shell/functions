@@ -52,7 +52,7 @@ install-basic-dependencies () {
     zsh \
     vim-gnome \
     tmux \
-    gopass \
+    pass \
     nodejs \
     gnome-tweak-tool \
     jq \
