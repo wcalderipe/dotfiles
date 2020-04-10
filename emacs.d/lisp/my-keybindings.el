@@ -15,11 +15,16 @@
   "tt" 'cider-test-run-test)
 
 (evil-leader/set-key-for-mode 'ruby-mode
-  "r"  'projectile-rails-rake
+  "r"  'projectile-rails-command-map
+  "e"  'ruby-send-block
+  "E"  'ruby-send-region
   "ta" 'rspec-verify-all
   "tf" 'rspec-verify
   "tl" 'rspec-rerun
   "tt" 'rspec-verify-single)
+
+(evil-leader/set-key-for-mode 'rjsx-mode
+  "r" 'rjsx-rename-tag-at-point)
 
 ;; Use the same eval keybindings used for the clojure-mode.
 (evil-leader/set-key-for-mode 'emacs-lisp-mode

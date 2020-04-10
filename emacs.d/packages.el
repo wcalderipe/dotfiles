@@ -74,20 +74,21 @@
 (el-get-bundle magit           :checkout "b9c5ed1")
 
 ;; Basic file type modes
-(el-get-bundle davazp/graphql-mode :checkout "74ee772")
-(el-get-bundle markdown-mode       :checkout "115f77d")
-(el-get-bundle json-mode           :checkout "0e819e5")
-(el-get-bundle dockerfile-mode     :checkout "ed73e82")
-(el-get-bundle yaml-mode           :checkout "40067a1")
+(el-get-bundle davazp/graphql-mode  :checkout "74ee772")
+(el-get-bundle markdown-mode        :checkout "115f77d")
+(el-get-bundle json-mode            :checkout "0e819e5")
+(el-get-bundle dockerfile-mode      :checkout "ed73e82")
+(el-get-bundle yaml-mode            :checkout "40067a1")
+(el-get-bundle emacsmirror/csv-mode :checkout "0207304")
 
 ;; Evil emulates the main features of Vim.
 (el-get-bundle evil :checkout "297b8f3"
   ;; Variables that must be set before evil is required.
   ;; https://stackoverflow.com/questions/14302171/ctrlu-in-emacs-when-using-evil-key-bindings
   :before (setq evil-want-C-u-scroll t
-                ;; Do not load evil keybindings, because we'll use
-                ;; from the evil-collection package.
-                evil-want-keybinding nil))
+            ;; Do not load evil keybindings, because we'll use
+            ;; from the evil-collection package.
+            evil-want-keybinding nil))
 
 ;; Extra evil.
 (el-get-bundle evil-magit                 :checkout "e2fec58" :load ("evil-magit.el"))

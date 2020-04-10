@@ -172,32 +172,19 @@
   "Jump to source as if using ctags."
   (interactive)
   (cond ;; Clojure mode.
-   ((eq major-mode 'clojure-mode)
-    (cider-find-var))
+    ((eq major-mode 'clojure-mode)
+      (cider-find-var))
 
-   ;; Javascript mode (requires xref-js2 package to work) or Elisp
-   ;; mode.
-   ((or (eq major-mode 'js2-mode)
-        (eq major-mode 'emacs-lisp-mode))
-    (xref-find-definitions (symbol-name (symbol-at-point))))
+    ;; Javascript mode (requires xref-js2 package to work) or Elisp
+    ;; mode.
+    ((or (eq major-mode 'js2-mode)
+       (eq major-mode 'emacs-lisp-mode))
+      (xref-find-definitions (symbol-name (symbol-at-point))))
 
-   ;; TypeScript mode.
-   ;; TODO: tsx files are using web-mode
-   ((eq major-mode 'typescript-mode)
-    (tide-jump-to-definition))
+    ;; TypeScript mode.
+    ;; TODO: tsx files are using web-mode
+    ((eq major-mode 'typescript-mode)
+      (tide-jump-to-definition))
 
-   ;; Default jump to source strategy.
-   (t (evil-jump-to-tag))))
-
-(defun my/set-local-indent (n)
-  (message (format "Set local indent to \"%s\"" n))
-  (setq-local c-basic-offset n)
-  (setq-local js-indent-level n)
-  ;; js2-mode: in latest js2-mode, this is an alias of js-indent-level
-  (setq-local js2-basic-offset n)
-  ;; HTML tags in HTML and TSX files
-  (setq-local web-mode-markup-indent-offset n)
-  ;; CSS in HTML and TSX files
-  (setq-local web-mode-css-indent-offset n)
-  ;; JavaScript in HTML and TSX files
-  (setq-local web-mode-code-indent-offset n))
+    ;; Default jump to source strategy.
+    (t (evil-jump-to-tag))))
