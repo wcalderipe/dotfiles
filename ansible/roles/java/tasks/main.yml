@@ -1,0 +1,19 @@
+- name: Install Java LTS versions 8 and 11
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      - openjdk-8-jdk
+      - openjdk-11-jdk
+
+- name: Clone jEnv
+  git:
+    repo: https://github.com/jenv/jenv.git
+    dest: "{{ lookup('env', 'HOME') }}/.jenv"
+
+- name: Install jEnv
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    block: |
+      export PATH="$HOME/.jenv/bin:$PATH"
+      eval "$(jenv init -)"

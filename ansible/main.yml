@@ -5,10 +5,6 @@
       tags:
         - common
 
-    - role: javascript
-      tags:
-        - javascript
-
     - role: terminal
       tags:
         - terminal
@@ -22,11 +18,19 @@
       tags:
         - emacs
 
-    # TODO: Needs to be tested outside a docker container.
-    # - role: gnome
-    #   tags:
-    #     - gnome
+    - role: javascript
+      tags:
+        - javascript
+
+    - role: java
+      tags:
+        - java
 
     - role: apps
       tags:
         - apps
+
+    # TODO: Needs to be tested outside a docker container.
+    # - role: gnome
+    #   tags:
+    #     - gnome
