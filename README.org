@@ -127,3 +127,15 @@ docker run -it dotfiles
 * emacs
 
 ** TODO base16 might have introduced a bug with the highlight color
+
+** DONE tide server not found is blowing up el-get sync
+   CLOSED: [2020-07-18 sam. 11:19]
+
+#+BEGIN_SRC
+Couldn't locate project root folder with a tsconfig.json or jsconfig.json file. Using '~/dev/dotfiles/' as project root.
+Error running timer `tide--hl-identifiers-function': (error "Server does not exist. Run M-x tide-restart-server to start it again")
+Quit
+Error running timer `tide--hl-identifiers-function': (error "Server does not exist. Run M-x tide-restart-server to start it again") [3 times$
+#+END_SRC
+
+tide requires tsserver to be running in the background.

@@ -79,7 +79,3 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
     state: link
     force: yes
-
-#
-# gnome-terminal
-#
