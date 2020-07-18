@@ -5,6 +5,10 @@
       tags:
         - common
 
+    - role: javascript
+      tags:
+        - javascript
+
     - role: terminal
       tags:
         - terminal
