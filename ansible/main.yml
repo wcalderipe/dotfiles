@@ -26,6 +26,10 @@
       tags:
         - java
 
+    - role: clojure
+      tags:
+        - clojure
+
     - role: apps
       tags:
         - apps
