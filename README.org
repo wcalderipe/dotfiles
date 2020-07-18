@@ -124,3 +124,6 @@ docker build --tag dotfiles .
 
 docker run -it dotfiles
  #+END_SRC
+* emacs
+
+** TODO base16 might have introduced a bug with the highlight color

@@ -3,6 +3,7 @@
   become_user: root
   apt:
     pkg:
+      - build-essential
       - curl
       - xclip
       - htop

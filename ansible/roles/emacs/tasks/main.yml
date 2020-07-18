@@ -1,3 +1,20 @@
+- name: Install emacs packages' system dependencies
+  become: yes
+  become_user: root
+  tags:
+    - deps
+  apt:
+    pkg:
+      # Some packages depends on build-essential tools such as `make`
+      # to build from source.
+      - build-essential
+      # Install makeinfo for the same reason above.
+      - texinfo
+
+      # Electronic lexical database of English language.
+      # Required by: wordnut
+      - wordnet
+
 - name: Install emacs
   become: yes
   become_user: root
@@ -11,17 +28,6 @@
     dest: "{{ lookup('env', 'HOME') }}/.emacs.d"
     state: link
     force: yes
-
-- name: Install emacs packages' system dependencies
-  become: yes
-  become_user: root
-  tags:
-    - deps
-  apt:
-    pkg:
-      # Electronic lexical database of English language.
-      # Required by: wordnut
-      - wordnet
 
 - name: Add emacsclient shorthand alias
   lineinfile:
