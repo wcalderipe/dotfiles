@@ -30,6 +30,10 @@
       tags:
         - clojure
 
+    - role: ruby
+      tags:
+        - ruby
+
     - role: apps
       tags:
         - apps
