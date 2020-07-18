@@ -16,3 +16,9 @@
   become_user: root
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+- name: Install lastpass-cli
+  become: yes
+  become_user: root
+  apt:
+    name: lastpass-cli
