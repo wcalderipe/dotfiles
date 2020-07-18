@@ -14,5 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Does it have docker?
-        uses: docker --version
+      - name: Build image
+        run: docker build --tag dotfiles .
+
+      - name: Test install playbook
+        run: docker run dotfiles ansible-playbook -i ./ansible/hosts --skip-tags "apps" ./ansible/main.yml
