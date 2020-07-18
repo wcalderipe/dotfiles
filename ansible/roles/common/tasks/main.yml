@@ -26,8 +26,17 @@
 # configurations create dynamically during Ansible tasks. Therefore,
 # it shouldn't be versioned.
 #
-# This file is sourced in the .zshrc.
+# This file is sourced in the `.zshrc`.
 - name: Create ~/.composed-variables file
   file:
     path: "{{ lookup('env', 'HOME') }}/.composed-variables"
     state: touch
+
+- name: Clone fzf
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    depth: 1
+    dest: "{{ lookup('env', 'HOME') }}/.fzf"
+
+- name: Install fzf
+  command: "{{ lookup('env', 'HOME') }}/.fzf/install"

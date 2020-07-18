@@ -22,7 +22,7 @@
   tags:
     - zsh
   git:
-    repo: "https://github.com/chriskempson/base16-shell.git"
+    repo: https://github.com/chriskempson/base16-shell.git
     dest: "{{ lookup('env', 'HOME') }}/.config/base16-shell"
 
 - name: Create .zshrc link
@@ -70,7 +70,7 @@
 
 - name: install tpm
   git:
-    repo: "https://github.com/tmux-plugins/tpm.git"
+    repo: https://github.com/tmux-plugins/tpm.git
     dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
 
 - name: Create .tmux.conf link

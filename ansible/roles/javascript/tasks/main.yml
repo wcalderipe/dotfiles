@@ -16,7 +16,7 @@
 
 - name: Install nvm
   git:
-    repo: "https://github.com/creationix/nvm.git"
+    repo: https://github.com/creationix/nvm.git
     dest: "{{ lookup('env', 'HOME') }}/.nvm"
 
 - name: Add nvm load script in ~/.composed-variables
