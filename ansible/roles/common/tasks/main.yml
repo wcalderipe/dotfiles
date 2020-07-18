@@ -4,6 +4,7 @@
   apt:
     pkg:
       - build-essential
+      - git
       - curl
       - xclip
       - htop
