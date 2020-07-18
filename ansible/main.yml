@@ -13,6 +13,10 @@
       tags:
         - terminal
 
+    - role: docker
+      tags:
+        - docker
+
     # TODO: Needs to be tested outside a docker container.
     - role: emacs
       tags:

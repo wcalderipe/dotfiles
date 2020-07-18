@@ -30,22 +30,19 @@
 # yarn
 #
 
-- name: Download yarn repository public key
-  get_url:
-    url: https://dl.yarnpkg.com/debian/pubkey.gpg
-    dest: /tmp/yarn-pubkey.gpg
-
 - name: Add yarn repository public key
   become: yes
   become_user: root
-  command: apt-key add /tmp/yarn-pubkey.gpg
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
 
 - name: Add yarn package to sources.list
   become: yes
   become_user: root
-  shell: |
-    echo 'deb https://dl.yarnpkg.com/debian/ stable main'
-    tee /etc/apt/sources.list.d/yarn.list
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
 
 - name: Update cache and install yarn
   become: yes
