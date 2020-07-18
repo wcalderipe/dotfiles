@@ -98,10 +98,6 @@
 (el-get-bundle luxbock/evil-cleverparens  :checkout "8c45879")
 (el-get-bundle emacs-evil/evil-collection :checkout "4ed8cea")
 
-;; A global minor mode with support for Vim/Tmux tabs (with certain
-;; things missing, like automatic renumbering).
-(el-get-bundle wasamasa/eyebrowse :checkout "52e1609")
-
 (el-get-bundle paren-face         :checkout "a45d111")
 (el-get-bundle paredit            :checkout "acbe10f")
 (el-get-bundle smartparens        :checkout "0849801")
