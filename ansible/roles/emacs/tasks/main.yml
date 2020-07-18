@@ -1,0 +1,30 @@
+- name: Install emacs
+  become: yes
+  become_user: root
+  apt:
+    name: emacs
+    state: present
+
+- name: Create .emacs.d link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/emacs.d"
+    dest: "{{ lookup('env', 'HOME') }}/.emacs.d"
+    state: link
+    force: yes
+
+- name: Install emacs packages' system dependencies
+  become: yes
+  become_user: root
+  tags:
+    - deps
+  apt:
+    pkg:
+      # Electronic lexical database of English language.
+      # Required by: wordnut
+      - wordnet
+
+- name: Add emacsclient shorthand alias
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: '^alias e='
+    line: "alias e='emacsclient --tty'"

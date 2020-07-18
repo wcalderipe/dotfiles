@@ -1,0 +1,31 @@
+- name: Install system packages
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      - curl
+      - xclip
+      - htop
+      - exuberant-ctags
+      - libreadline-dev
+      - libssl-dev
+      - silversearcher-ag
+      - tig
+      - jq
+
+- name: Create shell/aliases link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/aliases"
+    dest: "{{ lookup('env', 'HOME') }}/aliases"
+    state: link
+    force: yes
+
+# The .composed-variables purpose is store variables and
+# configurations create dynamically during Ansible tasks. Therefore,
+# it shouldn't be versioned.
+#
+# This file is sourced in the .zshrc.
+- name: Create ~/.composed-variables file
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    state: touch

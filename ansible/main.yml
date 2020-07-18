@@ -1,0 +1,20 @@
+- name: Set up local workstation
+  hosts: local
+  roles:
+    - role: common
+      tags:
+        - common
+
+    - role: terminal
+      tags:
+        - terminal
+
+    # TODO: Needs to be tested outside a docker container.
+    - role: emacs
+      tags:
+        - emacs
+
+    # TODO: Needs to be tested outside a docker container.
+    # - role: gnome
+    #   tags:
+    #     - gnome
