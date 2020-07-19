@@ -12,13 +12,11 @@ fi
 
 dotfiles_path=$HOME/dev/dotfiles
 
-ln -sf $dotfiles_path/vim         $HOME/.vim
 ln -sf $dotfiles_path/emacs.d     $HOME/.emacs.d
 ln -sf $dotfiles_path/lein        $HOME/.lein
 ln -sf $dotfiles_path/shell       $HOME/.shell
 ln -sf $dotfiles_path/vscode      $HOME/.vscode
 
-ln -sf $dotfiles_path/.vimrc      $HOME
 ln -sf $dotfiles_path/.zshrc      $HOME
 ln -sf $dotfiles_path/.zpreztorc  $HOME
 ln -sf $dotfiles_path/.gitconfig  $HOME
@@ -32,4 +30,3 @@ install-everything
 my-gnome-setup
 
 setup-gnome-terminal-base16-solarized-profile
-
