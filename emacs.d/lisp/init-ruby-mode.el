@@ -30,26 +30,15 @@
 ;; will be used enough to justify the time I'm spending on this. I'll
 ;; reevaluate the need of it in the future.
 (add-to-list 'hs-special-modes-alist
-  '(ruby-mode
-     "\\(def\\|class\\|module\\|do\\|if\\|else\\|unless\\|{\\)"
-     "\\(end\\|}\\)"
-     "#"
-     nil
-     nil))
+             '(ruby-mode "\\(def\\|class\\|module\\|do\\|if\\|else\\|unless\\|{\\)"
+                         "\\(end\\|}\\)"
+                         "#"
+                         nil
+                         nil))
 
-;; Remove the snippets for now due to an annoying bug in the fn
-;; `yas-next-field-or-maybe-expand` which jumps my cursor around.
-;; (eval-after-load 'rspec-mode '(rspec-install-snippets))
 
 ;; Don't insert file enconding comment at the top
 (setq ruby-insert-encoding-magic-comment nil)
 
 ;; Don't indent a function args aligned with the opening bracket
 (setq ruby-deep-indent-paren nil)
-
-
-
-;; Trying to disable yas
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-
-(yas/global-mode 0)

@@ -29,11 +29,6 @@
 ;; A light that follows my cursor around so I don't lose it!
 (el-get-bundle beacon :checkout "bde7818")
 
-;; YASnippet is a template system for Emacs. It allows you to type an
-;; abbreviation and automatically expand it into function templates.
-;; The snippet syntax is inspired from TextMate's syntax.
-(el-get-bundle yasnippet :checkout "e45e3de")
-
 ;; Gives Ivy the ability to show recently used M-x commands.
 (el-get-bundle DarwinAwardWinner/amx :checkout "b46e77d")
 
@@ -127,7 +122,6 @@
 (el-get-bundle cider              :checkout "62134b4")
 (el-get-bundle clj-refactor       :checkout "3edc678")
 (el-get-bundle cider-hydra        :checkout "5956c39")
-(el-get-bundle clojure-snippets   :checkout "6068dca")
 
 ;; Ruby and Rails dependencies.
 (el-get-bundle asok/projectile-rails :checkout "0398d94")
