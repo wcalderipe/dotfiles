@@ -12,6 +12,7 @@ ADD . /home/tester/dev/dotfiles
 RUN chown --recursive tester:tester /home/tester
 
 USER tester
+ENV USER tester
 ENV HOME /home/tester
 ENV DOTFILES_DIR /home/tester/dev/dotfiles
 WORKDIR /home/tester/dev/dotfiles
