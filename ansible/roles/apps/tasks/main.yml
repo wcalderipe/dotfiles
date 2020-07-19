@@ -17,6 +17,12 @@
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
+- name: Set BROWSER to google-chrome
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: "^export BROWSER="
+    line: "export BROWSER=google-chrome"
+
 - name: Install lastpass-cli
   become: yes
   become_user: root

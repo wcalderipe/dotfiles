@@ -37,6 +37,10 @@
     path: "{{ lookup('env', 'HOME') }}/.local/bin"
     state: directory
 
+#
+# fzf
+#
+
 - name: Clone fzf
   git:
     repo: https://github.com/junegunn/fzf.git
@@ -45,3 +49,9 @@
 
 - name: Install fzf
   command: "{{ lookup('env', 'HOME') }}/.fzf/install"
+
+- name: Set FZF_DEFAULT_OPTS
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: '^export FZF_DEFAULT_OPTS='
+    line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"

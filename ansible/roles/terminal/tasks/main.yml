@@ -34,6 +34,17 @@
     state: link
     force: yes
 
+# Fix hide cursor bug when moving back along.
+#
+# Reference:
+# - https://github.com/zsh-users/zsh-syntax-highlighting/issues/171
+# - https://github.com/howardcochran/hcc-dotfiles/commit/23a1b97ba7fffe0013ecde497f3f2cc1f3910795
+- name: Set ZSH_HIGHLIGHT_HIGHLIGHTERS to fix hide cursor bug
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: '^export ZSH_HIGHLIGHT_HIGHLIGHTERS='
+    line: "export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)"
+
 #
 # zprezto
 #

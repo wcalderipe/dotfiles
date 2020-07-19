@@ -39,8 +39,22 @@
     state: link
     force: yes
 
-- name: Add emacsclient shorthand alias
+- name: Create emacsclient --tty shorthand alias
   lineinfile:
     path: "{{ lookup('env', 'HOME') }}/.composed-variables"
     regexp: '^alias e='
     line: "alias e='emacsclient --tty'"
+
+- name: Set EDITOR to emacsclient with --tty option
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: '^export EDITOR='
+    line: "export EDITOR='emacsclient --tty'"
+
+# Editor to fallback to if the server is not running If EDITOR is the
+# empty string, start Emacs in daemon mode and try connecting again.
+- name: Set ALTERNATE_EDITOR to empty string
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    regexp: "^export ALTERNATE_EDITOR="
+    line: "export ALTERNATE_EDITOR=''"
