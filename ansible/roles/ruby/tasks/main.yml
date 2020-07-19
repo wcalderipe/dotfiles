@@ -26,11 +26,6 @@
     create: yes
     line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
 
-- name: Debug ~/.composed-variables content
-  debug: var=item
-  with_file:
-    - "{{ lookup('env', 'HOME') }}/.composed-variables"
-
 - name: Install Ruby 2.6.5
   # Source the .composed-variables file to load rbenv in the current session.
   # See https://stackoverflow.com/a/27541856
