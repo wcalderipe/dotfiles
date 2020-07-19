@@ -120,7 +120,6 @@
 (el-get-bundle emacsmirror/queue  :checkout "3d5746b")
 (el-get-bundle clojure-mode       :checkout "a9cbe6a")
 (el-get-bundle cider              :checkout "62134b4")
-(el-get-bundle clj-refactor       :checkout "3edc678")
 (el-get-bundle cider-hydra        :checkout "5956c39")
 
 ;; Ruby and Rails dependencies.

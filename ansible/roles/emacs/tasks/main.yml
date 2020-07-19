@@ -15,6 +15,9 @@
       # Required by: wordnut
       - wordnet
 
+      # Required by: emacsmirror/xclip
+      - xclip
+
 # Faster recursive search using a regex patter.
 # Required by: Wilfred/deadgrep
 - name: Install ripgrep
