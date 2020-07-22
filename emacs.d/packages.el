@@ -26,9 +26,6 @@
 ;; A minimal and modern mode-line.
 (el-get-bundle doom-modeline :checkout "1c5520d")
 
-;; A light that follows my cursor around so I don't lose it!
-(el-get-bundle beacon :checkout "bde7818")
-
 ;; Gives Ivy the ability to show recently used M-x commands.
 (el-get-bundle DarwinAwardWinner/amx :checkout "b46e77d")
 
