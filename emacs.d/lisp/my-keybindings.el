@@ -116,3 +116,9 @@
 
 ;; Kill the current buffer by default.
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+;; Replace evil's aggressive move buffer style with buffer-move.
+(define-key evil-normal-state-map (kbd "C-w K") 'buf-move-up)
+(define-key evil-normal-state-map (kbd "C-w L") 'buf-move-right)
+(define-key evil-normal-state-map (kbd "C-w J") 'buf-move-down)
+(define-key evil-normal-state-map (kbd "C-w H") 'buf-move-left)
