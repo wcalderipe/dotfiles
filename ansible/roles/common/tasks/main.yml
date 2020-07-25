@@ -55,3 +55,14 @@
     path: "{{ lookup('env', 'HOME') }}/.composed-variables"
     regexp: '^export FZF_DEFAULT_OPTS='
     line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"
+
+#
+# Git
+#
+
+- name: Create .gitconfig link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.gitconfig"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    state: link
+    force: yes
