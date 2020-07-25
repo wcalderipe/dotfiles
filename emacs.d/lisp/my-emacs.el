@@ -1,3 +1,6 @@
+;; Always disable top menubar.
+(menu-bar-mode -1)
+
 ;; Never save backup files
 (setq make-backup-files nil)
 
