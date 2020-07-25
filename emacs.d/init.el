@@ -53,4 +53,5 @@
 
 (my/install-package-manager)
 (require 'my-packages-core)
+(require 'my-editor)
 (require 'my-packages-languages)
