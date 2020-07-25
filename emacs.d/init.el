@@ -52,3 +52,4 @@
 
 (my/install-package-manager)
 (require 'my-packages-core)
+(require 'my-packages-languages)
