@@ -1,4 +1,64 @@
 ;; Never save backup files
 (setq make-backup-files nil)
 
+;; UTF-8 as the default coding system.
+(set-charset-priority 'unicode)
+(prefer-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8
+      selection-coding-system 'utf-8)
+
+;; Do not automatically save changes.
+(setq auto-save-default nil
+      auto-save-list-file-name (concat my/cache-dir "autosave"))
+
+;; Enable folding by indentation, just like Vim when using Evil.
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+;; No cursor blinking.
+(blink-cursor-mode 0)
+
+;; Don't stretch the cursor to fit wide characters, it is disorienting,
+;; especially for tabs.
+(setq x-stretch-cursor nil)
+
+;; Full path in title bar.
+;; %b -- print buffer name.
+;; %f -- print visited file name.
+(setq-default frame-title-format "%b (%f)")
+
+;; No bell.
+(setq ring-bell-function 'ignore)
+
+;; Highlights matching parenthesis.
+(add-hook 'prog-mode-hook #'show-paren-mode)
+
+;; Don't highlight trailing whitespaces
+(setq-default show-trailing-whitespace nil)
+
+;; Remove trailing whitespace before saving.
+(add-hook 'before-save-hook #'whitespace-cleanup)
+
+;; Enable mouse in terminal Emacs.
+(add-hook 'tty-setup-hook #'xterm-mouse-mode)
+
+;; Remove hscroll-margin in shells, otherwise it causes jumpiness.
+(dolist (mode '(eshell-mode-hook term-mode-hook vterm-mode-hook))
+  (add-hook mode #'my/remove-horizontal-scroll-margin-in-shells))
+
+;; Always avoid GUI.
+(setq use-dialog-box nil)
+
+;; Split ediff windows side-by-side (similar to vimdiff).
+(setq ediff-split-window-function #'split-window-horizontally)
+
+;; Follow symlinks without asking. 
+(setq vc-follow-symlinks t
+      find-file-visit-truename t)
+
+;; Disables VC altogether because I'm only using git and `magit'.
+(setq vc-handled-backends nil)
+
+;; Save custom settings in the cache directory.
+(setq custom-file (concat my/cache-dir "custom.el"))
+
 (provide 'my-emacs)
