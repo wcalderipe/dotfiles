@@ -22,6 +22,14 @@
     state: link
     force: yes
 
+- name: Create shell/vars link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/vars"
+    dest: "{{ lookup('env', 'HOME') }}/vars"
+    state: link
+    force: yes
+
+
 # The .composed-variables purpose is store variables and
 # configurations create dynamically during Ansible tasks. Therefore,
 # it shouldn't be versioned.
