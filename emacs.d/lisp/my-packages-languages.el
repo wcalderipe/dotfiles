@@ -52,7 +52,9 @@
 ;; parentheses, brackets, quotes, XML tags, and more.
 (use-package evil-surround
   :straight t
+
   :after (evil)
+
   :defer t
 
   :init
@@ -61,5 +63,18 @@
   :config
   (add-to-list 'evil-surround-operator-alist '(evil-cp-change . change))
   (add-to-list 'evil-surround-operator-alist '(evil-cp-delete . delete)))
+
+;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim.
+(use-package evil-nerd-commenter
+  :straight t
+
+  :after (evil)
+
+  :commands (evilnc-comment-or-uncomment-lines)
+
+  :init
+  ;; Improved toggle comment/uncomment lines.
+  (general-define-key
+   "M-;" #'evilnc-comment-or-uncomment-lines))
 
 (provide 'my-packages-languages)
