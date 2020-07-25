@@ -1,4 +1,3 @@
-# NOTE: It require to run ansible-playbook with sudo
 - name: Install packages
   become: yes
   become_user: root
@@ -8,6 +7,7 @@
       - gnome-tweaks
 
       # Graphical system load indicator for resources.
+      # Indicator template: CPU $(percent(cpu.inuse)) Mem $(size(mem.user)) Net ↓$(speed(net.down))↑$(speed(net.up))
       - indicator-multiload
 
 - name: Setup gnome preferences
