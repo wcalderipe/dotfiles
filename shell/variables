@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+export DOTFILES_DIR="$HOME/dev/dotfiles"
+
 export LANG=en_US.UTF-8
 
 # Fix hide cursor bug when moving back along.
