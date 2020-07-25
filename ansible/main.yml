@@ -42,3 +42,7 @@
     # - role: gnome
     #   tags:
     #     - gnome
+
+    - role: keyboard
+      tags:
+        - keyboard
