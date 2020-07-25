@@ -203,4 +203,12 @@
   :init
   (setq evil-magit-state 'normal))
 
+;; Allows Emacs to copy and to paste from the system clipboard.
+(use-package xclip
+  :straight t
+
+  :defer t
+
+  :init (xclip-mode t))
+
 (provide 'my-packages-core)
