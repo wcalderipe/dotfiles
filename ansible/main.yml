@@ -39,9 +39,9 @@
         - apps
 
     # TODO: Needs to be tested outside a docker container.
-    # - role: gnome
-    #   tags:
-    #     - gnome
+    - role: gnome
+      tags:
+        - gnome
 
     - role: keyboard
       tags:

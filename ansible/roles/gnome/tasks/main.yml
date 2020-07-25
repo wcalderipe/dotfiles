@@ -1,3 +1,4 @@
+# NOTE: It require to run ansible-playbook with sudo
 - name: Install packages
   become: yes
   become_user: root
@@ -10,20 +11,25 @@
       - indicator-multiload
 
 - name: Setup gnome preferences
+  tags:
+    - preferences
   shell: |
-    # Modify capslock to be CTRL and set compose key to right-ALT.
-    # order to write special characters in a US keyboard.
+    # Modify CAPS to CTRL and set R-ALT as compose key.
     gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:ralt']"
 
     gsettings set org.gnome.desktop.peripherals.keyboard delay 200
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
 
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+    gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
     gsettings set org.gnome.desktop.interface show-battery-percentage true
     gsettings set org.gnome.desktop.interface clock-format 12h
     gsettings set org.gnome.desktop.interface clock-show-weekday true
     gsettings set org.gnome.desktop.interface clock-show-date true
 
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
     gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
     gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
     gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+
+    # Remove helper buttons from gnome-terminal title bar.
+    gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
