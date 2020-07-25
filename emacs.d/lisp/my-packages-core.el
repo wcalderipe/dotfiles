@@ -99,6 +99,7 @@
 
   (evil-mode 1))
 
+;; Add evil bindings beyond the default like calendar and help-mode.
 (use-package evil-collection
   :straight t
 
@@ -164,5 +165,42 @@
    [remap dired] #'counsel-dired
    "C-x C-j" #'dired-jump
    "C-x 4 j" #'dired-jump-other-window))
+
+;; Magit is an interface to Git.
+(use-package magit
+  :straight t
+
+  :commands (magit)
+
+  :init
+  ;; If a buffer's major-mode derives from magit-diff-mode or magit-process-mode,
+  ;; display it in another window. Display all other buffers in the selected
+  ;; window.
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+
+  ;; File used to save history of transients and their infixes.
+  (setq transient-history-file (concat my/cache-dir "transient/history.el"))
+
+  ;; Enable spell check automatically.
+  (add-hook 'git-commit-mode-hook #'flyspell-mode)
+
+  ;; Improve diff performance.
+  ;; (setq magit-diff-paint-whitespace nil
+  ;;       magit-diff-adjust-tab-width nil
+  ;;       magit-diff-hide-trailing-cr-characters nil)
+
+  ;; Show fine differences for the current diff hunk only.
+  (setq magit-diff-refine-hunk t))
+
+;; Evil keybindings for Magit.
+(use-package evil-magit
+  :straight t
+
+  :defer t
+
+  :hook (magit-mode . evil-magit-init)
+
+  :init
+  (setq evil-magit-state 'normal))
 
 (provide 'my-packages-core)
