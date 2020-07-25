@@ -48,4 +48,18 @@
    "tf" #'my/elisp-run-file-tests
    "tp" #'my/elisp-run-project-tests))
 
+;; Emulates Surround.vim for Evil. Everything about "surroundings":
+;; parentheses, brackets, quotes, XML tags, and more.
+(use-package evil-surround
+  :straight t
+  :after (evil)
+  :defer t
+
+  :init
+  (add-hook 'prog-mode-hook #'global-evil-surround-mode)
+
+  :config
+  (add-to-list 'evil-surround-operator-alist '(evil-cp-change . change))
+  (add-to-list 'evil-surround-operator-alist '(evil-cp-delete . delete)))
+
 (provide 'my-packages-languages)
