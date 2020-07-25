@@ -49,6 +49,7 @@
 
 (require 'my-vars)
 (require 'my-lib)
+(require 'my-emacs)
 
 (my/install-package-manager)
 (require 'my-packages-core)
