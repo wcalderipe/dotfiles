@@ -16,7 +16,7 @@
     - zsh
   become: yes
   become_user: root
-  command: chsh -s /bin/zsh {{ lookup('env', 'USER') }}
+  command: "chsh -s /bin/zsh {{ lookup('env', 'USER') }}"
 
 - name: Install Base16 shell
   tags:
