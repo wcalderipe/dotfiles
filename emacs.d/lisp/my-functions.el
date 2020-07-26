@@ -19,18 +19,18 @@
   "Execute string COMMAND asynchronously without opening buffer."
   (interactive "sAsync shell command: ")
   (let* ((buffer-name "*Async Shell Command*")
-         (output-buffer (get-buffer-create buffer-name))
-         (process (let ((display-buffer-alist (list (list buffer-name #'display-buffer-no-window))))
-                    (async-shell-command command output-buffer)
-                    (get-buffer-process output-buffer)))
-         (sentinel `(lambda (process signal)
-                      (when (memq (process-status process) '(exit signal))
-                        (shell-command-sentinel process signal)
-                        ;; Here you could run arbitrary code when the
-                        ;; command is successful.
-                        ;; (when (zerop (process-exit-status process))
-                        ;;   (message "%s" ,cmd))
-                        ))))
+	 (output-buffer (get-buffer-create buffer-name))
+	 (process (let ((display-buffer-alist (list (list buffer-name #'display-buffer-no-window))))
+		    (async-shell-command command output-buffer)
+		    (get-buffer-process output-buffer)))
+	 (sentinel `(lambda (process signal)
+		      (when (memq (process-status process) '(exit signal))
+			(shell-command-sentinel process signal)
+			;; Here you could run arbitrary code when the
+			;; command is successful.
+			;; (when (zerop (process-exit-status process))
+			;;   (message "%s" ,cmd))
+			))))
     (when (process-live-p process)
       (set-process-sentinel process sentinel))))
 
@@ -39,7 +39,7 @@
   (interactive)
   (if (use-region-p)
       (let ((regionp (buffer-substring (region-beginning) (region-end))))
-        (my/async-shell-command-no-window regionp))))
+	(my/async-shell-command-no-window regionp))))
 
 (defun my/projectile-run-async-shell-command-no-window-in-root ()
   "Invoke `my/async-shell-command-no-window' in the project's root."
@@ -56,10 +56,10 @@
   (let ((default-directory (el-get-package-directory package)))
     (when (file-directory-p ".git")
       (let ((origin-url (s-chomp (shell-command-to-string "git config --get remote.origin.url"))))
-        (-> "git ls-remote %s HEAD | awk '{ print $1 }'"
-            (format origin-url)
-            (shell-command-to-string)
-            (s-chomp))))))
+	(-> "git ls-remote %s HEAD | awk '{ print $1 }'"
+	    (format origin-url)
+	    (shell-command-to-string)
+	    (s-chomp))))))
 
 (defun my/el-get-installed-packages ()
   "Return all installed package names."
@@ -79,27 +79,27 @@
   (->> packages
        (-filter 'my/el-get-is-git-package)
        (-map (lambda (pkg)
-               (let ((default-directory (el-get-package-directory pkg)))
-                 (let* ((local-commit (s-chomp (shell-command-to-string "git rev-parse HEAD")))
-                        (remote-commit (my/el-get-git-most-recent-commit pkg)))
-                   (when (and remote-commit (not (string-equal local-commit remote-commit)))
-                     `(,pkg . ,remote-commit))))))
+	       (let ((default-directory (el-get-package-directory pkg)))
+		 (let* ((local-commit (s-chomp (shell-command-to-string "git rev-parse HEAD")))
+			(remote-commit (my/el-get-git-most-recent-commit pkg)))
+		   (when (and remote-commit (not (string-equal local-commit remote-commit)))
+		     `(,pkg . ,remote-commit))))))
        (-filter (-not 'null))))
 
 (defun my/el-get-git-all-outdated-packages ()
   (my/el-get-git-outdated-packages (my/el-get-installed-packages)))
 
 (defun my/dired-dotfiles-toggle ()
-  "Show/hide dot-files"
+  "Show/hide dotfiles"
   (interactive)
   (when (equal major-mode 'dired-mode)
     (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
-        (progn
-          (set (make-local-variable 'dired-dotfiles-show-p) nil)
-          (dired-mark-files-regexp "^\\\.")
-          (dired-do-kill-lines))
+	(progn
+	  (set (make-local-variable 'dired-dotfiles-show-p) nil)
+	  (dired-mark-files-regexp "^\\\.")
+	  (dired-do-kill-lines))
       (progn (revert-buffer) ; otherwise just revert to re-show
-             (set (make-local-variable 'dired-dotfiles-show-p) t)))))
+	     (set (make-local-variable 'dired-dotfiles-show-p) t)))))
 
 (defun my/use-read-only-mode-in-shell-command-buffers ()
   "I usually use shell command buffers to read text, but not change
@@ -113,18 +113,18 @@
   "Use local eslint from node_modules before global.
   http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable"
   (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                             root))))
+		(or (buffer-file-name) default-directory)
+		"node_modules"))
+	 (eslint (and root (expand-file-name "node_modules/eslint/bin/eslint.js"
+					     root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
 
 (defun my/counsel-projectile-switch-project-action-dired (project)
   "Open dired when switching projects with counsel-projectile."
   (let ((projectile-switch-project-action
-         (lambda ()
-           (projectile-dired))))
+	 (lambda ()
+	   (projectile-dired))))
     (counsel-projectile-switch-project-by-name project)))
 
 (defun my/counsel-projectile-switch-project-dotfiles ()
@@ -147,8 +147,8 @@
   "Kill all other buffers."
   (interactive)
   (mapc 'kill-buffer
-        (delq (current-buffer)
-              (remove-if-not 'buffer-file-name (buffer-list)))))
+	(delq (current-buffer)
+	      (remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun my/create-scratch-buffer nil
   (interactive)
