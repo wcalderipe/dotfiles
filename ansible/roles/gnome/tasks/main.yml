@@ -34,3 +34,8 @@
     # Remove helper buttons from gnome-terminal title bar.
     gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
     gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+- name: Set wallpaper
+  tags:
+    - preferences
+  command: "gsettings set org.gnome.desktop.background picture-uri file:////{{ lookup('env', 'DOTFILES_DIR') }}/resources/wallpaper.jpg"
