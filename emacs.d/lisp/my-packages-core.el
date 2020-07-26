@@ -366,6 +366,7 @@
     ;; Update jump list before leaving the deadgrep buffer.
     (evil-add-command-properties #'deadgrep-visit-result :jump t)))
 
+
 (use-package hydra
   :straight t
   :defer t
@@ -566,6 +567,5 @@ _l_ →       _L_ →     _d_ →
   (general-define-key
    :keymaps 'dired-mode-map
    "C-c d" #'hydra-dired/body))
-
 
 (provide 'my-packages-core)
