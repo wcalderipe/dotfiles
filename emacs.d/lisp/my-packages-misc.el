@@ -1,8 +1,4 @@
-;;
-;; Discoverability.
-;;
-
-;; Displays available keybindings.
+;; Displays available keybindings (discoverability).
 (use-package which-key
   :straight t
 
@@ -13,7 +9,7 @@
   (which-key-mode))
 
 
-;; More friendly interface for ivy.
+;; More friendly interface for ivy (discoverability).
 (use-package ivy-rich
   :straight t
 
@@ -57,5 +53,19 @@
 
   :init
   (ivy-rich-mode))
+
+
+;; Helpful package to quick share fragments of code with your
+;; teammates.
+(use-package git-link
+  :straight t
+
+  :defer t
+
+  :config
+  ;; This might create a reference in the wrong lines if you're using
+  ;; branches for development and your current version is too far
+  ;; ahead from origin.
+  (setq git-link-default-branch "master"))
 
 (provide 'my-packages-misc)
