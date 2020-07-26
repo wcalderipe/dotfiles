@@ -163,6 +163,43 @@
   (add-hook 'org-mode-hook 'evil-org-mode))
 
 
+(use-package web-mode
+  :straight t
+  :mode "\\.\\(?:\\(?:h\\(?:bs\\|tml\\)\\|liquid\\|tmpl\\)\\)\\'"
+  :init
+  (setq web-mode-markup-indent-offset 2)
+
+  :config
+  (general-define-key
+   :keymaps 'evil-normal-state-map
+   [remap evil-toggle-fold] #'web-mode-fold-or-unfold))
+
+
+(use-package tide
+  :straight t
+  :hook (typescript-mode . tide-setup)
+  :mode ("\\.\\(ts\\|tsx\\)\\'" . typescript-mode)
+  :config
+  (add-to-list 'company-backends '(company-tide company-files)))
+
+
+(use-package js2-mode
+  :straight t
+  :mode "\\.js\\'"
+  :init
+  (setq js-indent-level 2
+	js2-bounce-indent-p nil)
+
+  ;; Disable all parse errors and warnings by default,
+  ;; leaving room for flycheck to handle them.
+  (setq js2-mode-show-parse-errors nil
+	js2-mode-show-strict-warnings nil
+	js2-strict-missing-semi-warning nil)
+
+  ;; Adds highlighting of many Ecma built-in functions.
+  (setq js2-highlight-level 3))
+
+
 ;; Emulates Surround.vim for Evil. Everything about "surroundings":
 ;; parentheses, brackets, quotes, XML tags, and more.
 (use-package evil-surround
