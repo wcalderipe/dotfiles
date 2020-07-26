@@ -1,5 +1,8 @@
-;; Always disable top menubar.
+;; Remove top menubar.
 (menu-bar-mode -1)
+
+;; Remove top tool bar (only respected in GUI Emacs).
+(tool-bar-mode -1)
 
 ;; Never save backup files
 (setq make-backup-files nil)
@@ -67,7 +70,7 @@
 ;; Split ediff windows side-by-side (similar to vimdiff).
 (setq ediff-split-window-function #'split-window-horizontally)
 
-;; Follow symlinks without asking. 
+;; Follow symlinks without asking.
 (setq vc-follow-symlinks t
       find-file-visit-truename t)
 

@@ -29,7 +29,51 @@
     (load-theme 'zenburn t nil))
 
   :config
+  ;; Determines the style used by `doom-modeline-buffer-file-name'.
+  ;;
+  ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
+  ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
+  ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
+  ;;   truncate-with-project => emacs/l/comint.el
+  ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
+  ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
+  ;;   truncate-all => ~/P/F/e/l/comint.el
+  ;;   relative-from-project => emacs/lisp/comint.el
+  ;;   relative-to-project => lisp/comint.el
+  ;;   file-name => comint.el
+  ;;   buffer-name => comint.el<2> (uniquify buffer name)
+  ;;
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+
+  ;; Whether show `all-the-icons' or not (when nil nothing will be
+  ;; showed).
+  (setq doom-modeline-icon nil)
+
+  ;; How tall the mode-line should be (only respected in GUI Emacs).
+  (setq doom-modeline-height 25)
+
+  ;; How wide the mode-line bar should be (only respected in GUI
+  ;; Emacs).
+  (setq doom-modeline-bar-width 1)
+
+  ;; Whether display minor modes or not. Non-nil to display in
+  ;; mode-line.
+  (setq doom-modeline-minor-modes nil)
+
+  ;; If non-nil, the mode-line is displayed with the `variable-pitch'
+  ;; face.
+  (setq doom-modeline-enable-variable-pitch nil)
+
   (doom-modeline-mode 1))
 
+;; An alternative to the built-in Emacs help that provides much more
+;; contextual information.
+(use-package helpful
+  :straight t
+  :commands (helpful--read-symbol)
+  :init
+  (general-define-key
+   [remap describe-key] #'helpful-key
+   "C-h ." #'helpful-at-point))
 
 (provide 'my-editor)
