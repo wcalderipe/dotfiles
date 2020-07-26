@@ -4,6 +4,9 @@
 ;; Remove top tool bar (only respected in GUI Emacs).
 (tool-bar-mode -1)
 
+;; Remove scroll bar (only respected in GUI Emacs).
+(toggle-scroll-bar -1)
+
 ;; Never save backup files
 (setq make-backup-files nil)
 
