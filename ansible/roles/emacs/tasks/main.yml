@@ -18,6 +18,9 @@
       # Required by: emacsmirror/xclip
       - xclip
 
+      # Required by: projectile
+      - fd-find
+
 # Faster recursive search using a regex patter.
 # Required by: Wilfred/deadgrep
 - name: Install ripgrep

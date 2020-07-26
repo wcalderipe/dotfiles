@@ -203,6 +203,12 @@
   (setq counsel-describe-function-function #'helpful-callable
 	counsel-describe-variable-function #'helpful-variable)
 
+  ;; Use custom configurations, but most importantly, pipe the filtering
+  ;; from the "fdfind" output. See the `dotfiles/shell/vars' file for
+  ;; more details.
+  (setq counsel-fzf-cmd
+	(concat (getenv "FZF_CTRL_T_COMMAND") " | " "fzf -f \"%s\""))
+
   (general-define-key
    [remap bookmark-jump] #'counsel-bookmark
    [remap describe-variable] #'counsel-describe-variable
@@ -282,5 +288,67 @@
    :states 'normal
    :keymaps 'override
    "/" #'swiper))
+
+
+;; Projectile is a project interaction library for Emacs. Its goal is
+;; to provide a nice set of features operating on a project level
+;; without introducing external dependencies (when feasible).
+;; NOTE: It require https://github.com/sharkdp/fd
+(use-package projectile
+  :straight t
+
+  ;; Defer because it'll be loaded by counsel-projectile.
+  :defer t
+
+  :init
+  (setq projectile-cache-file (concat my/cache-dir "projectile.cache")
+	projectile-enable-caching nil
+	projectile-ignored-projects '("~/" "/tmp")
+	projectile-known-projects-file (concat my/cache-dir "projectile-bookmarks.eld")
+	;; Enable Projectile in every directory (even without the presence
+	;; of project file). This works well with fd, given how much faster
+	;; it is compared to find.
+	projectile-require-project-root t
+	projectile-completion-system 'ivy)
+
+  (global-set-key [remap evil-jump-to-tag] #'projectile-find-tag)
+  (global-set-key [remap find-tag]         #'projectile-find-tag)
+
+  ;; It's recommended to use fd as a replacement for both git ls-files
+  ;; and find.
+  (setq projectile-generic-command "fdfind . --color=never --type f -0 -H -E .git"
+	projectile-git-command projectile-generic-command)
+
+  ;; Skip warnings about unsafe variables in .dir-locals.el
+  (put 'projectile-project-type 'safe-local-variable #'symbolp)
+
+  ;; Always open the top-level project directory after switching projects.
+  (setq projectile-switch-project-action #'projectile-dired)
+
+  :config
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'prog-mode-map
+   "jA" #'projectile-find-implementation-or-test-other-window
+   "ja" #'projectile-toggle-between-implementation-and-test))
+
+
+;; Ivy UI for Projectile.
+(use-package counsel-projectile
+  :straight t
+
+  :defer 0
+
+  :config
+  ;; Counsel-Projectile mode turns on Projectile mode, thus enabling all
+  ;; projectile key bindings, and adds the counsel-projectile key bindings on
+  ;; top of them.
+  (counsel-projectile-mode +1)
+
+  ;; Always open the top-level project directory after switching projects.
+  (counsel-projectile-modify-action
+   'counsel-projectile-switch-project-action
+   '((default counsel-projectile-switch-project-action-dired))))
 
 (provide 'my-packages-core)
