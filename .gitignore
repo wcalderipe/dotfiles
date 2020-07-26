@@ -6,7 +6,7 @@ emacs.d/*.data
 emacs.d/amx-items
 emacs.d/auto-save-list/
 emacs.d/places
-emacs.d/recentf
+emacs.d/recentf*
 
 vim/.netrwhist
 vim/autoload
