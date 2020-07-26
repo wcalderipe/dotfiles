@@ -14,6 +14,8 @@
   ;; IMPORTANT: if placeholders are being displayed instead of icons
   ;; see https://github.com/domtronn/all-the-icons.el#troubleshooting
 
+  (setq all-the-icons-ivy-rich-icon-size 1.0)
+
   ;; Icons by file name.
   (add-to-list 'all-the-icons-icon-alist '("\\.conf$" all-the-icons-octicon "settings" :height 1.0 :v-adjust 0.0 :face all-the-icons-dyellow))
   (add-to-list 'all-the-icons-icon-alist '("\\.service$" all-the-icons-octicon "settings" :height 1.0 :v-adjust 0.0 :face all-the-icons-dyellow))
@@ -30,6 +32,13 @@
   :straight t
   :commands (all-the-icons-ivy-buffer-transformer
 	     all-the-icons-ivy-file-transformer))
+
+
+;; Displays icons for all buffers in Ivy.
+(use-package all-the-icons-ivy-rich
+  :when my/gui?
+  :straight t
+  :init (all-the-icons-ivy-rich-mode 1))
 
 
 ;; Adds dired support to all-the-icons.
