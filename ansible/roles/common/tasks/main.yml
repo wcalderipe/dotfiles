@@ -75,3 +75,19 @@
     dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
     state: link
     force: yes
+
+#
+# PlantUML
+#
+
+- name: Install PlantUML
+  become: yes
+  become_user: root
+  apt:
+    name: plantuml
+
+- name: Link plantuml to ~/.local/bin
+  file:
+    src: "/usr/bin/plantuml"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/plantuml"
+    state: link
