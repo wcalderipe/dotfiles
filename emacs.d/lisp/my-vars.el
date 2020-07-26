@@ -18,4 +18,6 @@
 (defconst my/color-cyan "#93E0E3")
 (defconst my/color-gray "#5F5F5F")
 
+(defconst my/gui? (display-graphic-p))
+
 (provide 'my-vars)

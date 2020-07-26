@@ -8,4 +8,5 @@
 (require 'my-packages-core)
 (require 'my-packages-languages)
 (require 'my-packages-misc)
+(require 'my-packages-gui)
 (require 'my-editor)
