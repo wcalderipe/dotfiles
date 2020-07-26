@@ -77,7 +77,6 @@
 ;; Provides some convenience functions for dealing with RSpec.
 (use-package rspec-mode
   :straight t
-
   :config
   (general-define-key
    :prefix my/leader
@@ -87,6 +86,45 @@
    "tf" 'rspec-verify
    "tl" 'rspec-rerun
    "tt" 'rspec-verify-single))
+
+
+(use-package dockerfile-mode
+  :straight t
+  ;; Any file starting with "Dockerfile" should enable this mode.
+  :mode (("^Dockerfile" . dockerfile-mode)))
+
+
+(use-package yaml-mode
+  :straight t
+  :mode "\\.ya?ml\\'")
+
+
+(use-package csv-mode
+  :straight t
+  :defer t)
+
+
+(use-package json-mode
+  :straight t
+  :defer t)
+
+
+(use-package graphql-mode
+  :straight t
+  :defer t)
+
+
+(use-package markdown-mode
+  :straight t
+  :mode (("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode)))
+
+
+(use-package plantuml-mode
+  :straight t
+  :mode ("\\.puml\\'" . plantuml-mode)
+  :init
+  (setq plantuml-jar-path "~/.local/bin/plantuml.jar"))
 
 
 ;; (use-package org

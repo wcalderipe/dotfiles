@@ -78,7 +78,7 @@
 (use-package highlight-symbol
   :straight t
   :defer t
-  :hook ((emacs-lisp-mode clojure-mode ruby-mode) . highlight-symbol-mode)
+  :hook ((emacs-lisp-mode ruby-mode) . highlight-symbol-mode)
   :init
   ;; Reduce default idle delay of 1.5s.
   (setq highlight-symbol-idle-delay 0.5))
