@@ -48,33 +48,59 @@
    "tf" #'my/elisp-run-file-tests
    "tp" #'my/elisp-run-project-tests))
 
+
+;; (use-package org
+;;   :straight t
+
+;;   :commands (org-mode)
+
+;;   :config
+;;   ;; Record a timestamp when a todo item is DONE.
+;;   (setq org-log-done 'time))
+
+
+;; Supplemental evil-mode key-bindings to org-mode.
+;; (use-package evil-org
+;;   :straight t
+
+;;   :after
+;;   (org evil)
+
+;;   :commands
+;;   (evil-org evil-org-agenda)
+
+;;   :init
+;;   (add-hook 'org-mode-hook 'evil-org-mode))
+
+
 ;; Emulates Surround.vim for Evil. Everything about "surroundings":
 ;; parentheses, brackets, quotes, XML tags, and more.
-(use-package evil-surround
-  :straight t
+;; (use-package evil-surround
+;;   :straight t
 
-  :after (evil)
+;;   :after (evil)
 
-  :defer t
+;;   :defer t
 
-  :init
-  (add-hook 'prog-mode-hook #'global-evil-surround-mode)
+;;   :init
+;;   (add-hook 'prog-mode-hook #'global-evil-surround-mode)
 
-  :config
-  (add-to-list 'evil-surround-operator-alist '(evil-cp-change . change))
-  (add-to-list 'evil-surround-operator-alist '(evil-cp-delete . delete)))
+;;   :config
+;;   (add-to-list 'evil-surround-operator-alist '(evil-cp-change . change))
+;;   (add-to-list 'evil-surround-operator-alist '(evil-cp-delete . delete)))
+
 
 ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim.
-(use-package evil-nerd-commenter
-  :straight t
+;; (use-package evil-nerd-commenter
+;;   :straight t
 
-  :after (evil)
+;;   :after (evil)
 
-  :commands (evilnc-comment-or-uncomment-lines)
+;;   :commands (evilnc-comment-or-uncomment-lines)
 
-  :init
-  ;; Improved toggle comment/uncomment lines.
-  (general-define-key
-   "M-;" #'evilnc-comment-or-uncomment-lines))
+;;   :init
+;;   ;; Improved toggle comment/uncomment lines.
+;;   (general-define-key
+;;    "M-;" #'evilnc-comment-or-uncomment-lines))
 
 (provide 'my-packages-languages)

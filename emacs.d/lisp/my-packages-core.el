@@ -9,30 +9,8 @@
    ;; Kill the current buffer by default.
    "C-x k" #'kill-this-buffer))
 
-(use-package org
-  :straight t
-
-  :commands (org-mode)
-
-  :config
-  ;; Record a timestamp when a todo item is DONE.
-  (setq org-log-done 'time))
-
-;; Supplemental evil-mode key-bindings to org-mode.
-(use-package evil-org
-  :straight t
-
-  :after
-  (org evil)
-
-  :commands
-  (evil-org evil-org-agenda)
-
-  :init
-  (add-hook 'org-mode-hook 'evil-org-mode))
-
 ;; Let's be honest here, there's nothing more productive than vi
-;; key-bindings in the right hands.
+;; key bindings in the right hands.
 (use-package evil
   :straight t
 
@@ -86,10 +64,6 @@
   (evil-ex-define-cmd "vsplit" #'my/evil-vim-vsplit)
 
   (general-define-key
-   :keymaps 'evil-motion-state-map
-   [remap evil-beginning-of-line] #'my/smart-beginning-of-line)
-
-  (general-define-key
    :keymaps 'evil-normal-state-map
    "C-]" #'evil-goto-definition
    ;; Remove bindings conflicting with default Emacs behavior.
@@ -99,14 +73,17 @@
 
   (evil-mode 1))
 
+
 ;; Add evil bindings beyond the default like calendar and help-mode.
 (use-package evil-collection
   :straight t
 
-  :defer t
+  :after
+  (evil)
 
-  :hook
-  (evil-mode . evil-collection-init))
+  :config
+  (evil-collection-init))
+
 
 ;; Better file navigation with dired.
 (use-package dired
@@ -116,40 +93,40 @@
     (interactive)
     (when (equal major-mode 'dired-mode)
       (if (or (not (boundp 'my/dired-hidden-show-p))
-              my/dired-hidden-show-p)
-          ;; If currently showing.
-          (progn
-            (setq-local my/dired-hidden-show-p nil)
-            (dired-mark-files-regexp "^\\\.")
-            (dired-do-kill-lines))
-        ;; Otherwise just revert to re-show.
-        (progn (revert-buffer)
-               (setq-local my/dired-hidden-show-p t)))))
+	      my/dired-hidden-show-p)
+	  ;; If currently showing.
+	  (progn
+	    (setq-local my/dired-hidden-show-p nil)
+	    (dired-mark-files-regexp "^\\\.")
+	    (dired-do-kill-lines))
+	;; Otherwise just revert to re-show.
+	(progn (revert-buffer)
+	       (setq-local my/dired-hidden-show-p t)))))
 
   (setq dired-listing-switches
-        (string-join '("-l"
-                       "--almost-all"
-                       "--classify"
-                       "--dired"
-                       "--group-directories-first"
-                       "--human-readable")
-                     " "))
+	(string-join '("-l"
+		       "--almost-all"
+		       "--classify"
+		       "--dired"
+		       "--group-directories-first"
+		       "--human-readable")
+		     " "))
 
   ;; Always copy/delete recursively.
   (setq dired-recursive-copies  'always
-        dired-recursive-deletes 'top)
+	dired-recursive-deletes 'top)
 
   ;; Where to store image caches.
   (setq image-dired-dir (concat my/cache-dir "image-dired/")
-        image-dired-db-file (concat image-dired-dir "db.el")
-        image-dired-gallery-dir (concat image-dired-dir "gallery/")
-        image-dired-temp-image-file (concat image-dired-dir "temp-image")
-        image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
+	image-dired-db-file (concat image-dired-dir "db.el")
+	image-dired-gallery-dir (concat image-dired-dir "gallery/")
+	image-dired-temp-image-file (concat image-dired-dir "temp-image")
+	image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
 
   (setq dired-auto-revert-buffer t
 	;; Suggest a target for moving/copying intelligently
-        dired-dwim-target t 
-        dired-hide-details-hide-symlink-targets nil)
+	dired-dwim-target t
+	dired-hide-details-hide-symlink-targets nil)
 
   ;; Disable the prompt about whether I want to kill the Dired buffer for a
   ;; deleted directory.
@@ -165,6 +142,7 @@
    [remap dired] #'counsel-dired
    "C-x C-j" #'dired-jump
    "C-x 4 j" #'dired-jump-other-window))
+
 
 ;; Magit is an interface to Git.
 (use-package magit
@@ -184,13 +162,15 @@
   ;; Enable spell check automatically.
   (add-hook 'git-commit-mode-hook #'flyspell-mode)
 
-  ;; Improve diff performance.
-  ;; (setq magit-diff-paint-whitespace nil
-  ;;       magit-diff-adjust-tab-width nil
-  ;;       magit-diff-hide-trailing-cr-characters nil)
-
   ;; Show fine differences for the current diff hunk only.
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk t)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix my/leader
+   "gs" #'magit-status))
+
 
 ;; Evil keybindings for Magit.
 (use-package evil-magit
@@ -203,6 +183,7 @@
   :init
   (setq evil-magit-state 'normal))
 
+
 ;; Allows Emacs to copy and to paste from the system clipboard.
 (use-package xclip
   :straight t
@@ -210,5 +191,96 @@
   :defer t
 
   :init (xclip-mode t))
+
+
+;; Various completion functions.
+(use-package counsel
+  :straight t
+
+  :defer t
+
+  :init
+  (setq counsel-describe-function-function #'helpful-callable
+	counsel-describe-variable-function #'helpful-variable)
+
+  (general-define-key
+   [remap bookmark-jump] #'counsel-bookmark
+   [remap describe-variable] #'counsel-describe-variable
+   [remap describe-function] #'counsel-describe-function
+   [remap find-file] #'counsel-find-file
+   [remap org-set-tags-command] #'counsel-org-tag
+   [remap execute-extended-command] #'counsel-M-x)
+
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'override
+   "f" #'counsel-projectile-find-file))
+
+
+;; Ivy - a generic completion frontend for Emacs.
+(use-package ivy
+  :straight t
+
+  :defer t
+
+  :hook (emacs-startup . ivy-mode)
+
+  :init
+  ;; Avoid using fuzzy searches everywhere. For example, counsel-rg
+  ;; with fuzzy enabled brings a lot of useless results.
+  ;; Remember you can switch modes in the ivy minibuffer with <C-o S-m>.
+  (setq ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy)
+				(t . ivy--regex-plus)))
+
+  ;; Do not display the total number of candidates.
+  (setq ivy-count-format "")
+
+  ;; Only show the current directory.
+  (setq ivy-extra-directories '("./"))
+
+  ;; Do not close the minibuffer when there's no text left to delete.
+  (setq ivy-on-del-error-function #'ignore)
+
+  (general-define-key
+   [remap switch-to-buffer] #'ivy-switch-buffer
+   [remap list-buffers] #'ivy-switch-buffer
+   [remap switch-to-buffer-other-window] #'ivy-switch-buffer-other-window))
+
+
+;; Gives Ivy the ability to show recently used M-x commands.
+(use-package amx
+  :straight t
+
+  :init
+
+  (setq amx-save-file (concat my/cache-dir "amx")
+	amx-history-length 10))
+
+
+;; Gives an overview of the current regex search candidates.
+(use-package swiper
+  :straight t
+
+  :defer t
+
+  :init
+  (setq swiper-action-recenter t)
+
+  (general-define-key
+   [remap switch-to-buffer] #'ivy-switch-buffer
+   [remap list-buffers] #'ivy-switch-buffer
+   [remap switch-to-buffer-other-window] #'ivy-switch-buffer-other-window
+   [remap bookmark-jump] #'counsel-bookmark
+   [remap describe-variable] #'counsel-describe-variable
+   [remap describe-function] #'counsel-describe-function
+   [remap find-file] #'counsel-find-file
+   [remap execute-extended-command] #'counsel-M-x)
+
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'override
+   "/" #'swiper))
 
 (provide 'my-packages-core)

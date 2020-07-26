@@ -10,6 +10,19 @@
 (setq locale-coding-system 'utf-8
       selection-coding-system 'utf-8)
 
+;; Smooth scrolling
+(setq scroll-margin 2
+      scroll-conservatively 9999
+      scroll-step 1)
+
+;; Do not use lockfiles to avoid editing collisions.
+(setq create-lockfiles nil)
+
+;; When you visit a file, point goes to the last place where it
+;; was when you previously visited the same file.
+;; Keep track of saved places in ~/.emacs.d/places
+(save-place-mode 1)
+
 ;; Do not automatically save changes.
 (setq auto-save-default nil
       auto-save-list-file-name (concat my/cache-dir "autosave"))
