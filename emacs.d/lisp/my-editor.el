@@ -1,16 +1,12 @@
 (use-package zenburn-theme
   :straight t
-
   :defer t)
 
 ;; A minimal and modern mode-line.
 (use-package doom-modeline
   :straight t
-
   :defer t
-
   :hook (after-init . my/init-load-theme)
-
   :preface
   ;; I'm not happy on where custom-set-faces are being set inside of
   ;; doom-modeline.
@@ -28,7 +24,7 @@
     (doom-modeline-mode +1)
     (load-theme 'zenburn t nil))
 
-  :config
+  :init
   ;; Determines the style used by `doom-modeline-buffer-file-name'.
   ;;
   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
@@ -64,6 +60,7 @@
   ;; face.
   (setq doom-modeline-enable-variable-pitch nil)
 
+  :config
   (doom-modeline-mode 1))
 
 ;; An alternative to the built-in Emacs help that provides much more
@@ -75,5 +72,15 @@
   (general-define-key
    [remap describe-key] #'helpful-key
    "C-h ." #'helpful-at-point))
+
+
+;; Toggle highlighting of the symbol at point.
+(use-package highlight-symbol
+  :straight t
+  :defer t
+  :hook ((emacs-lisp-mode clojure-mode ruby-mode) . highlight-symbol-mode)
+  :init
+  ;; Reduce default idle delay of 1.5s.
+  (setq highlight-symbol-idle-delay 0.5))
 
 (provide 'my-editor)
