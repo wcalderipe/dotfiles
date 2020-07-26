@@ -127,28 +127,40 @@
   (setq plantuml-jar-path "~/.local/bin/plantuml.jar"))
 
 
-;; (use-package org
-;;   :straight t
+(use-package org
+  :straight t
 
-;;   :commands (org-mode)
+  :commands (org-mode)
 
-;;   :config
-;;   ;; Record a timestamp when a todo item is DONE.
-;;   (setq org-log-done 'time))
+  :preface
+  ;; Store ID locations in the cache directory.
+  (setq org-id-locations-file (concat my/cache-dir "org-id-locations"))
+
+  ;; Open org files with all headlines visible.
+  (setq org-startup-folded 'showall)
+
+  ;; Record a timestamp when a todo item is DONE.
+  (setq org-log-done 'time)
+
+  (setq org-todo-keywords
+	'((sequence
+	   "TODO"
+	   "DOING"
+	   "DONE"))))
 
 
 ;; Supplemental evil-mode key-bindings to org-mode.
-;; (use-package evil-org
-;;   :straight t
+(use-package evil-org
+  :straight t
 
-;;   :after
-;;   (org evil)
+  :after
+  (org evil)
 
-;;   :commands
-;;   (evil-org evil-org-agenda)
+  :commands
+  (evil-org evil-org-agenda)
 
-;;   :init
-;;   (add-hook 'org-mode-hook 'evil-org-mode))
+  :init
+  (add-hook 'org-mode-hook 'evil-org-mode))
 
 
 ;; Emulates Surround.vim for Evil. Everything about "surroundings":
