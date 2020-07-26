@@ -53,6 +53,13 @@
   (ivy-rich-mode))
 
 
+;; Editorconfig plugin for Emacs.
+(use-package editorconfig
+  :straight t
+  :defer t
+  :hook (prog-mode . editorconfig-mode))
+
+
 ;; Helpful package to quick share fragments of code with your
 ;; teammates.
 (use-package git-link
