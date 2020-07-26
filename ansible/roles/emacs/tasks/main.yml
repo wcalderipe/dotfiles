@@ -21,6 +21,11 @@
       # Required by: projectile
       - fd-find
 
+      # Convert bin/plantuml output into a suitable image format to be
+      # rendered in the Emacs GUI.
+      # Required by: plantuml-mode
+      - imagemagick
+
 # Faster recursive search using a regex patter.
 # Required by: Wilfred/deadgrep
 - name: Install ripgrep

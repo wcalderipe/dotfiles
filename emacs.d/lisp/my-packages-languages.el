@@ -124,7 +124,8 @@
   :straight t
   :mode ("\\.puml\\'" . plantuml-mode)
   :init
-  (setq plantuml-jar-path "~/.local/bin/plantuml.jar"))
+  (setq plantuml-executable-path "~/.local/bin/plantuml")
+  (setq plantuml-default-exec-mode 'executable))
 
 
 (use-package org
