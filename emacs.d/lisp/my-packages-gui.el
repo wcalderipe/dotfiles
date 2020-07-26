@@ -30,8 +30,12 @@
 (use-package all-the-icons-ivy
   :when my/gui?
   :straight t
-  :commands (all-the-icons-ivy-buffer-transformer
-	     all-the-icons-ivy-file-transformer))
+  :after (ivy counsel-projectile)
+  :config
+  ;; Adds icons to counsel-projectile-find-file as well.
+  (setq all-the-icons-ivy-file-commands '(counsel-projectile-find-file))
+
+  (all-the-icons-ivy-setup))
 
 
 ;; Displays icons for all buffers in Ivy.
