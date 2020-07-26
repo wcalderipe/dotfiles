@@ -2,8 +2,6 @@
 (use-package which-key
   :straight t
 
-  :defer t
-
   :config
   (which-key-setup-minibuffer)
   (which-key-mode))
