@@ -2,6 +2,7 @@
   :straight t
   :defer t)
 
+
 ;; A minimal and modern mode-line.
 (use-package doom-modeline
   :straight t
@@ -62,6 +63,7 @@
 
   :config
   (doom-modeline-mode 1))
+
 
 ;; An alternative to the built-in Emacs help that provides much more
 ;; contextual information.

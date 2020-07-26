@@ -36,6 +36,12 @@
 ;; No cursor blinking.
 (blink-cursor-mode 0)
 
+;; No word-wrap.
+(set-default 'truncate-lines t)
+
+;; Enable winner mode so that I can undo/redo window changes.
+(winner-mode 1)
+
 ;; Don't stretch the cursor to fit wide characters, it is disorienting,
 ;; especially for tabs.
 (setq x-stretch-cursor nil)
