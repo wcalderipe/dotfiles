@@ -248,6 +248,8 @@
   ;; Do not close the minibuffer when there's no text left to delete.
   (setq ivy-on-del-error-function #'ignore)
 
+  (setq ivy-initial-inputs-alist nil)
+
   (general-define-key
    [remap switch-to-buffer] #'ivy-switch-buffer
    [remap list-buffers] #'ivy-switch-buffer

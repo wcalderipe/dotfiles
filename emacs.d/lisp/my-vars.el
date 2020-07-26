@@ -15,4 +15,7 @@
 (defconst my/leader "SPC"
   "Global prefix used in `general' keybindings.")
 
+(defconst my/color-cyan "#93E0E3")
+(defconst my/color-gray "#5F5F5F")
+
 (provide 'my-vars)
