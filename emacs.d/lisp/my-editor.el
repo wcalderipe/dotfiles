@@ -12,6 +12,9 @@
   ;; I'm not happy on where custom-set-faces are being set inside of
   ;; doom-modeline.
   (defun my/init-load-theme ()
+    (doom-modeline-mode +1)
+    (load-theme 'zenburn t nil)
+
     (custom-set-faces
      `(ivy-current-match              ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
      `(ivy-highlight-face             ((t :background nil :foreground nil :underline unspecified :weight unspecified)))
@@ -22,8 +25,11 @@
      `(ivy-minibuffer-match-highlight ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
      `(ivy-subdir                     ((t :background nil :underline unspecified :weight unspecified))))
 
-    (doom-modeline-mode +1)
-    (load-theme 'zenburn t nil))
+    (custom-theme-set-faces
+     'zenburn
+     ;; Removes the annoying secondary color in the buffer divider --
+     ;; called fringe.
+     `(fringe ((t (:background "#3F3F3F"))))))
 
   :init
   ;; Determines the style used by `doom-modeline-buffer-file-name'.
