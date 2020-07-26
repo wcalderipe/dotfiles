@@ -1,3 +1,12 @@
+;; Modular completion framework.
+(use-package company
+  :straight t
+  :hook (after-init . global-company-mode)
+  :commands (company-complete-common
+	     company-manual-begin
+	     company-grab-line))
+
+
 (use-package emacs-lisp-mode
   :no-require t
 
@@ -47,6 +56,37 @@
    "P" #'pp-eval-last-sexp
    "tf" #'my/elisp-run-file-tests
    "tp" #'my/elisp-run-project-tests))
+
+
+(use-package ruby-mode
+  :config
+  ;; Don't insert file enconding comment at the top.
+  (setq ruby-insert-encoding-magic-comment nil)
+
+  ;; Don't indent a function args aligned with the opening bracket.
+  (setq ruby-deep-indent-paren nil)
+
+  (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode)))
+
+
+;; Provides some convenience functions for dealing with RSpec.
+(use-package rspec-mode
+  :straight t
+
+  :config
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'ruby-mode-map
+   "ta" 'rspec-verify-all
+   "tf" 'rspec-verify
+   "tl" 'rspec-rerun
+   "tt" 'rspec-verify-single))
 
 
 ;; (use-package org
