@@ -57,6 +57,9 @@
 ;; No bell.
 (setq ring-bell-function 'ignore)
 
+;; Changes all yes/no questions to y/n type.
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; Highlights matching parenthesis.
 (add-hook 'prog-mode-hook #'show-paren-mode)
 

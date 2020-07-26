@@ -30,8 +30,7 @@
      ;; Removes the annoying secondary color in the buffer divider --
      ;; called fringe.
      `(fringe ((t (:background "#3F3F3F"))))))
-
-  :init
+:init
   ;; Determines the style used by `doom-modeline-buffer-file-name'.
   ;;
   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
