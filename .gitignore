@@ -1,12 +1,14 @@
-emacs.d/straight/
-emacs.d/.local/
-emacs.d/elpa/
 emacs.d/**/*.elc
 emacs.d/*.data
+emacs.d/.local/
 emacs.d/amx-items
 emacs.d/auto-save-list/
+emacs.d/elpa/
+emacs.d/eshell/
 emacs.d/places
 emacs.d/recentf*
+emacs.d/straight/
+emacs.d/url/
 
 vim/.netrwhist
 vim/autoload
