@@ -26,6 +26,12 @@
     create: yes
     line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
 
+- name: Add rbenv init eval
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    create: yes
+    line: 'eval "$(rbenv init -)"'
+
 - name: Install Ruby 2.6.5
   # Source the .composed-variables file to load rbenv in the current session.
   # See https://stackoverflow.com/a/27541856
