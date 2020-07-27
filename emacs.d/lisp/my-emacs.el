@@ -92,4 +92,10 @@
 ;; Save custom settings in the cache directory.
 (setq custom-file (concat my/cache-dir "custom.el"))
 
+;; Indentation.
+(setq-default tab-width 4
+	      tab-always-indent t
+	      indent-tabs-mode nil
+	      fill-column 80)
+
 (provide 'my-emacs)
