@@ -1,5 +1,7 @@
 * dotfiles
 
+[[https://github.com/wcalderipe/dotfiles/workflows/CI/badge.svg]]
+
 [[resources/screenshot-emacs.png]]
 
 ** Major rewrite goals
