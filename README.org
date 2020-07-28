@@ -6,94 +6,77 @@
 
 ** Major rewrite goals
 
-*** TODO Everything must have a purpose
+*** DONE Everything must have a purpose
+    CLOSED: [2020-07-28 mar. 20:30]
 
-If I don't know why it's there it will be removed. I normally tend to
-forget things in the long run, so documentation here will be the key.
+    If I don't know why it's there it will be removed. I normally tend to
+    forget things in the long run, so documentation here will be the key.
 
 *** TODO Isolation
 
-Sometimes Ansible roles have internal dependencies, for instance,
-emacs task also install packages system dependencies. These tasks are
-tagged with =deps= and you can skip them with the following command:
+    Sometimes Ansible roles have internal dependencies, for instance,
+    emacs task also install packages system dependencies. These tasks are
+    tagged with =deps= and you can skip them with the following command:
 
-#+BEGIN_SRC shell
-  $ ansible-playbook \
-    --inventory ./ansible/hosts \
-    --tags "emacs" \
-    --skip-tags "deps" \
-    ./ansible/main.yml
-#+END_SRC
+    #+BEGIN_SRC shell
+      $ ansible-playbook \
+        --inventory ./ansible/hosts \
+        --tags "emacs" \
+        --skip-tags "deps" \
+        ./ansible/main.yml
+    #+END_SRC
 
-It's not only about dependencies, but it's also a matter of keep
-everything needed to make something to work as near as possible from
-each other. For example, I don't want to track scattered
-configurations to make a software work -- I want them grouped by
-purpose. Once achieved, I'll be able to add new software and delete
-existing ones without fear of breaking something or left overs in my
-system -- experimenting is the ultimate goal.
+    It's not only about dependencies, but it's also a matter of keep
+    everything needed to make something to work as near as possible from
+    each other. For example, I don't want to track scattered
+    configurations to make a software work -- I want them grouped by
+    purpose. Once achieved, I'll be able to add new software and delete
+    existing ones without fear of breaking something or left overs in my
+    system -- experimenting is the ultimate goal.
 
-*** TODO Testability
+*** DONE Testability
+    CLOSED: [2020-07-28 mar. 20:32]
 
-I'd like to run my dotfiles in a docker container from time to time so
-I can do some manual test and therefore have a minimal level of
-confidence that I won't fuck everything on my local environment.
+    I'd like to run my dotfiles in a docker container from time to time so
+    I can do some manual test and therefore have a minimal level of
+    confidence that I won't fuck everything on my local environment.
 
-The driver that justify this effort is continuous improvement on my
-workflow.
+    The driver that justify this effort is continuous improvement on my
+    workflow.
 
-#+BEGIN_SRC shell
-  docker build --tag dotfiles .
+    #+BEGIN_SRC shell
+      docker build --tag dotfiles .
 
-  docker run -it \
-	 --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
-	 dotfiles
-#+END_SRC
+      docker run -it \
+             --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
+             dotfiles
+    #+END_SRC
 
-*** TODO Increase the automation level
+*** DONE Increase the automation level
+    CLOSED: [2020-07-28 mar. 20:32]
 
-After push the button, it must have zero human interaction until
-everything is done.
+    After push the button, it must have zero human interaction until
+    everything is done.
 
-* Tasks
+** Tasks
 
 ** TODO take a look at [[https://feh.finalrewind.org/][feh console image viewer]]
 
-It would be great to use alongside PlantUML mode.
-** TODO fix invisible cursor in org-mode bullets
+   It would be great to use alongside PlantUML mode.
 
-For some reason, the cursor becomes invisible on hover the first
-character of a bullet.
-** TODO docker test
-
-+ [ ] Extract repository cloning from the setup script
-+ [ ] Explore the idea of splitting system and GUI setup to different
-  files so they can be tested separately
-
-** TODO test emacs setup outside a docker container
-
-I want to be sure the emacs setup works in a container and outside of it.
-
-** TODO test gnome setup configuration
-
-- [ ] Is gnome-tweaks installed?
-- [ ] indicator-multiload
-  - Was it installed?
-  - Does it have the right settings?
-
-** TODO load my indicator-multiload custom configuration
 ** TODO look at spacemacs js and ts config
 
-https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
+   https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
 
-See [[https://askubuntu.com/questions/705251/location-of-the-setting-file-of-indicator-multiload][how do dump and load indicator-multiload config]]
+** TODO look at eyebrowse as emacs tab manager
 
-* Ansible
+   https://github.com/ilmotta/dotfiles/blob/78ce494f9c2397b9f5fba68f94ad8729672aa3b3/emacs.d/lisp/my-packages-misc.el#L382
+
+** Ansible
 
   IMPORTANT: Use --ask-become-pass option for common role
 
   Playbook: A file that defines several tasks to be executed in a target
-
   machine.
 
   Role: Organizes multiple, related tasks with the data needed to run
@@ -105,14 +88,14 @@ See [[https://askubuntu.com/questions/705251/location-of-the-setting-file-of-ind
   ansible-playbook -i ./ansible/hosts --tags "zsh" ./ansible/main.yml
 
   #+BEGIN_SRC shell
-  ansible-playbook -i ./ansible/hosts ./ansible/main.yml
+    ansible-playbook -i ./ansible/hosts ./ansible/main.yml
   #+END_SRC
 
 ** Debug in a task
 
    #+BEGIN_SRC yaml
-- name: FOO
-  debug: "msg={{ lookup('env', 'HOME') }}"
+       - name: FOO
+         debug: "msg={{ lookup('env', 'HOME') }}"
    #+END_SRC
 
 ** Terminal
@@ -121,30 +104,15 @@ See [[https://askubuntu.com/questions/705251/location-of-the-setting-file-of-ind
 
    #+BEGIN_SRC shell
    ansible-playbook -i ./ansible/hosts \
-   --tags="terminal" \
-   --skip-tags="zprezto,tmux" \
-   ./ansible/main.yml
+     --tags="terminal" \
+     --skip-tags="zprezto,tmux" \
+     ./ansible/main.yml
    #+END_SR
 
-* Docker
+** Docker
 
-#+BEGIN_SRC shell
-docker build --tag dotfiles .
+   #+BEGIN_SRC shell
+     docker build --tag dotfiles .
 
-docker run -it dotfiles
- #+END_SRC
-* emacs
-
-** TODO base16 might have introduced a bug with the highlight color
-
-** DONE tide server not found is blowing up el-get sync
-   CLOSED: [2020-07-18 sam. 11:19]
-
-#+BEGIN_SRC
-Couldn't locate project root folder with a tsconfig.json or jsconfig.json file. Using '~/dev/dotfiles/' as project root.
-Error running timer `tide--hl-identifiers-function': (error "Server does not exist. Run M-x tide-restart-server to start it again")
-Quit
-Error running timer `tide--hl-identifiers-function': (error "Server does not exist. Run M-x tide-restart-server to start it again") [3 times$
-#+END_SRC
-
-tide requires tsserver to be running in the background.
+     docker run -it dotfiles
+   #+END_SRC
