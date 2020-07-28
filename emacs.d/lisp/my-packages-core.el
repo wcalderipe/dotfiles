@@ -93,40 +93,40 @@
     (interactive)
     (when (equal major-mode 'dired-mode)
       (if (or (not (boundp 'my/dired-hidden-show-p))
-	      my/dired-hidden-show-p)
-	  ;; If currently showing.
-	  (progn
-	    (setq-local my/dired-hidden-show-p nil)
-	    (dired-mark-files-regexp "^\\\.")
-	    (dired-do-kill-lines))
-	;; Otherwise just revert to re-show.
-	(progn (revert-buffer)
-	       (setq-local my/dired-hidden-show-p t)))))
+              my/dired-hidden-show-p)
+          ;; If currently showing.
+          (progn
+            (setq-local my/dired-hidden-show-p nil)
+            (dired-mark-files-regexp "^\\\.")
+            (dired-do-kill-lines))
+        ;; Otherwise just revert to re-show.
+        (progn (revert-buffer)
+               (setq-local my/dired-hidden-show-p t)))))
 
   (setq dired-listing-switches
-	(string-join '("-l"
-		       "--almost-all"
-		       "--classify"
-		       "--dired"
-		       "--group-directories-first"
-		       "--human-readable")
-		     " "))
+        (string-join '("-l"
+                       "--almost-all"
+                       "--classify"
+                       "--dired"
+                       "--group-directories-first"
+                       "--human-readable")
+                     " "))
 
   ;; Always copy/delete recursively.
   (setq dired-recursive-copies  'always
-	dired-recursive-deletes 'top)
+        dired-recursive-deletes 'top)
 
   ;; Where to store image caches.
   (setq image-dired-dir (concat my/cache-dir "image-dired/")
-	image-dired-db-file (concat image-dired-dir "db.el")
-	image-dired-gallery-dir (concat image-dired-dir "gallery/")
-	image-dired-temp-image-file (concat image-dired-dir "temp-image")
-	image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
+        image-dired-db-file (concat image-dired-dir "db.el")
+        image-dired-gallery-dir (concat image-dired-dir "gallery/")
+        image-dired-temp-image-file (concat image-dired-dir "temp-image")
+        image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image"))
 
   (setq dired-auto-revert-buffer t
-	;; Suggest a target for moving/copying intelligently
-	dired-dwim-target t
-	dired-hide-details-hide-symlink-targets nil)
+        ;; Suggest a target for moving/copying intelligently
+        dired-dwim-target t
+        dired-hide-details-hide-symlink-targets nil)
 
   ;; Disable the prompt about whether I want to kill the Dired buffer for a
   ;; deleted directory.
@@ -201,13 +201,13 @@
 
   :init
   (setq counsel-describe-function-function #'helpful-callable
-	counsel-describe-variable-function #'helpful-variable)
+        counsel-describe-variable-function #'helpful-variable)
 
   ;; Use custom configurations, but most importantly, pipe the filtering
   ;; from the "fdfind" output. See the `dotfiles/shell/vars' file for
   ;; more details.
   (setq counsel-fzf-cmd
-	(concat (getenv "FZF_CTRL_T_COMMAND") " | " "fzf -f \"%s\""))
+        (concat (getenv "FZF_CTRL_T_COMMAND") " | " "fzf -f \"%s\""))
 
   (general-define-key
    [remap bookmark-jump] #'counsel-bookmark
@@ -237,7 +237,7 @@
   ;; with fuzzy enabled brings a lot of useless results.
   ;; Remember you can switch modes in the ivy minibuffer with <C-o S-m>.
   (setq ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy)
-				(t . ivy--regex-plus)))
+                                (t . ivy--regex-plus)))
 
   ;; Do not display the total number of candidates.
   (setq ivy-count-format "")
@@ -247,6 +247,9 @@
 
   ;; Do not close the minibuffer when there's no text left to delete.
   (setq ivy-on-del-error-function #'ignore)
+
+  ;; Enable bookmarks and recentf.
+  (setq ivy-use-virtual-buffers t)
 
   (setq ivy-initial-inputs-alist nil)
 
@@ -263,7 +266,7 @@
   :init
 
   (setq amx-save-file (concat my/cache-dir "amx")
-	amx-history-length 10))
+        amx-history-length 10))
 
 
 ;; Gives an overview of the current regex search candidates.
@@ -304,14 +307,14 @@
 
   :init
   (setq projectile-cache-file (concat my/cache-dir "projectile.cache")
-	projectile-enable-caching nil
-	projectile-ignored-projects '("~/" "/tmp")
-	projectile-known-projects-file (concat my/cache-dir "projectile-bookmarks.eld")
-	;; Enable Projectile in every directory (even without the presence
-	;; of project file). This works well with fd, given how much faster
-	;; it is compared to find.
-	projectile-require-project-root t
-	projectile-completion-system 'ivy)
+        projectile-enable-caching nil
+        projectile-ignored-projects '("~/" "/tmp")
+        projectile-known-projects-file (concat my/cache-dir "projectile-bookmarks.eld")
+        ;; Enable Projectile in every directory (even without the presence
+        ;; of project file). This works well with fd, given how much faster
+        ;; it is compared to find.
+        projectile-require-project-root t
+        projectile-completion-system 'ivy)
 
   (global-set-key [remap evil-jump-to-tag] #'projectile-find-tag)
   (global-set-key [remap find-tag]         #'projectile-find-tag)
@@ -319,7 +322,7 @@
   ;; It's recommended to use fd as a replacement for both git ls-files
   ;; and find.
   (setq projectile-generic-command "fdfind . --color=never --type f -0 -H -E .git"
-	projectile-git-command projectile-generic-command)
+        projectile-git-command projectile-generic-command)
 
   ;; Skip warnings about unsafe variables in .dir-locals.el
   (put 'projectile-project-type 'safe-local-variable #'symbolp)
@@ -377,8 +380,8 @@
   (defun my/counsel-projectile-switch-project-action-dired (project)
     "Open dired when switching projects with counsel-projectile."
     (let ((projectile-switch-project-action
-	   (lambda ()
-	     (projectile-dired))))
+           (lambda ()
+             (projectile-dired))))
       (counsel-projectile-switch-project-by-name project)))
 
   (defun my/counsel-projectile-switch-project-dotfiles ()
@@ -392,32 +395,32 @@
     (when (equal major-mode 'dired-mode)
       ;; If currently showing
       (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p)
-	  (progn
-	    (set (make-local-variable 'dired-dotfiles-show-p) nil)
-	    (dired-mark-files-regexp "^\\\.")
-	    (dired-do-kill-lines))
-	;; Otherwise just revert to re-show
-	(progn (revert-buffer)
-	       (set (make-local-variable 'dired-dotfiles-show-p) t)))))
+          (progn
+            (set (make-local-variable 'dired-dotfiles-show-p) nil)
+            (dired-mark-files-regexp "^\\\.")
+            (dired-do-kill-lines))
+        ;; Otherwise just revert to re-show
+        (progn (revert-buffer)
+               (set (make-local-variable 'dired-dotfiles-show-p) t)))))
 
   (defun my/async-shell-command-no-window (command)
     "Execute string COMMAND asynchronously without opening buffer."
     (interactive "sAsync shell command: ")
     (let* ((buffer-name "*Async Shell Command*")
-	   (output-buffer (get-buffer-create buffer-name))
-	   (process (let ((display-buffer-alist (list (list buffer-name #'display-buffer-no-window))))
-		      (async-shell-command command output-buffer)
-		      (get-buffer-process output-buffer)))
-	   (sentinel `(lambda (process signal)
-			(when (memq (process-status process) '(exit signal))
-			  (shell-command-sentinel process signal)
-			  ;; Here you could run arbitrary code when the
-			  ;; command is successful.
-			  ;; (when (zerop (process-exit-status process))
-			  ;;   (message "%s" ,cmd))
-			  ))))
+           (output-buffer (get-buffer-create buffer-name))
+           (process (let ((display-buffer-alist (list (list buffer-name #'display-buffer-no-window))))
+                      (async-shell-command command output-buffer)
+                      (get-buffer-process output-buffer)))
+           (sentinel `(lambda (process signal)
+                        (when (memq (process-status process) '(exit signal))
+                          (shell-command-sentinel process signal)
+                          ;; Here you could run arbitrary code when the
+                          ;; command is successful.
+                          ;; (when (zerop (process-exit-status process))
+                          ;;   (message "%s" ,cmd))
+                          ))))
       (when (process-live-p process)
-	(set-process-sentinel process sentinel))))
+        (set-process-sentinel process sentinel))))
 
   (defun my/projectile-run-async-shell-command-no-window-in-root ()
     "Invoke `my/async-shell-command-no-window' in the project's root."
@@ -533,32 +536,32 @@ _l_ →       _L_ →     _d_ →
     ("r" winner-redo)
 
     ("a" (lambda (arg)
-	   (interactive "p")
-	   (if (let ((windmove-wrap-around))
-		 (windmove-find-other-window 'right))
-	       (shrink-window-horizontally arg)
-	     (enlarge-window-horizontally arg))))
+           (interactive "p")
+           (if (let ((windmove-wrap-around))
+                 (windmove-find-other-window 'right))
+               (shrink-window-horizontally arg)
+             (enlarge-window-horizontally arg))))
 
     ("s" (lambda (arg)
-	   (interactive "p")
-	   (if (let ((windmove-wrap-around))
-		 (windmove-find-other-window 'up))
-	       (shrink-window arg)
-	     (enlarge-window arg))))
+           (interactive "p")
+           (if (let ((windmove-wrap-around))
+                 (windmove-find-other-window 'up))
+               (shrink-window arg)
+             (enlarge-window arg))))
 
     ("w" (lambda (arg)
-	   (interactive "p")
-	   (if (let ((windmove-wrap-around))
-		 (windmove-find-other-window 'up))
-	       (enlarge-window arg)
-	     (shrink-window arg))))
+           (interactive "p")
+           (if (let ((windmove-wrap-around))
+                 (windmove-find-other-window 'up))
+               (enlarge-window arg)
+             (shrink-window arg))))
 
     ("d" (lambda (arg)
-	   (interactive "p")
-	   (if (let ((windmove-wrap-around))
-		 (windmove-find-other-window 'right))
-	       (enlarge-window-horizontally arg)
-	     (shrink-window-horizontally arg)))))
+           (interactive "p")
+           (if (let ((windmove-wrap-around))
+                 (windmove-find-other-window 'right))
+               (enlarge-window-horizontally arg)
+             (shrink-window-horizontally arg)))))
 
   (general-define-key
    :prefix "C-c"
