@@ -11,6 +11,10 @@
   snap:
     name: insomnia
 
+- name: Install Zoom
+  snap:
+    name: zoom-client
+
 - name: Install Google Chrome
   become: yes
   become_user: root
