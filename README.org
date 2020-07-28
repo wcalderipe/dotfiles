@@ -107,7 +107,7 @@
      --tags="terminal" \
      --skip-tags="zprezto,tmux" \
      ./ansible/main.yml
-   #+END_SR
+   #+END_SRC
 
 ** Docker
 
