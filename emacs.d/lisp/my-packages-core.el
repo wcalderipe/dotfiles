@@ -1,13 +1,13 @@
 ;; More convenient key definitions.
 (use-package general
   :straight t
-
   :demand t
 
   :config
   (general-define-key
    ;; Kill the current buffer by default.
    "C-x k" #'kill-this-buffer))
+
 
 ;; Let's be honest here, there's nothing more productive than vi
 ;; key bindings in the right hands.
@@ -147,7 +147,6 @@
 ;; Magit is an interface to Git.
 (use-package magit
   :straight t
-
   :commands (magit)
 
   :init
@@ -175,7 +174,6 @@
 ;; Evil keybindings for Magit.
 (use-package evil-magit
   :straight t
-
   :defer t
 
   :hook (magit-mode . evil-magit-init)
@@ -187,7 +185,6 @@
 ;; Allows Emacs to copy and to paste from the system clipboard.
 (use-package xclip
   :straight t
-
   :defer t
 
   :init (xclip-mode t))
@@ -196,7 +193,6 @@
 ;; Various completion functions.
 (use-package counsel
   :straight t
-
   :defer t
 
   :init
@@ -227,9 +223,7 @@
 ;; Ivy - a generic completion frontend for Emacs.
 (use-package ivy
   :straight t
-
   :defer t
-
   :hook (emacs-startup . ivy-mode)
 
   :init
@@ -262,7 +256,6 @@
 ;; Gives Ivy the ability to show recently used M-x commands.
 (use-package amx
   :straight t
-
   :init
 
   (setq amx-save-file (concat my/cache-dir "amx")
@@ -361,6 +354,21 @@
   :straight t
   :defer t)
 
+
+;; A simple-minded way of managing window configs.
+(use-package eyebrowse
+  :straight t
+  :defer t
+
+  :init
+  ;; Use the scratch buffer when creating new tabs.
+  (setq eyebrowse-new-workspace t)
+
+  ;; Cycle through tabs.
+  (setq eyebrowse-wrap-around t)
+
+  :config
+  (eyebrowse-mode t))
 
 ;; Fast search interface using Ripgrep.
 (use-package deadgrep
@@ -563,11 +571,19 @@ _l_ →       _L_ →     _d_ →
                (enlarge-window-horizontally arg)
              (shrink-window-horizontally arg)))))
 
+  (defhydra hydra-tab (:hint nil :exit nil)
+    ("+" eyebrowse-create-window-config "create")
+    ("-" eyebrowse-close-window-config "remove")
+    ("l" eyebrowse-next-window-config "next")
+    ("h" eyebrowse-prev-window-config "previous")
+    ("q" nil "quit"))
+
   (general-define-key
    :prefix "C-c"
    "z" #'hydra-zoom/body
    "w" #'hydra-window/body
-   "p" #'hydra-projectile/body)
+   "p" #'hydra-projectile/body
+   "t" #'hydra-tab/body)
 
   (general-define-key
    :keymaps 'dired-mode-map

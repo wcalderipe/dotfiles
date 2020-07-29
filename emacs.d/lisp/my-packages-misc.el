@@ -10,7 +10,6 @@
 ;; More friendly interface for ivy (discoverability).
 (use-package ivy-rich
   :straight t
-
   :defer t
 
   :config
@@ -64,7 +63,6 @@
 ;; teammates.
 (use-package git-link
   :straight t
-
   :defer t
 
   :config
