@@ -59,18 +59,21 @@
   :hook (prog-mode . editorconfig-mode))
 
 
-;; Helpful package to quick share fragments of code with your
-;; teammates.
+;; Helpful package to quick share fragments of code with your teammates.
 (use-package git-link
   :straight t
   :defer t
 
   :config
-  ;; This might create a reference in the wrong lines if you're using
-  ;; branches for development and your current version is too far
-  ;; ahead from origin.
+  ;; This might create a reference in the wrong lines if you're using branches
+  ;; for development and your current version is too far ahead from origin.
   (setq git-link-default-branch "master"))
 
+;; A simple command that takes a URL from the clipboard and inserts an org-mode
+;; link with a title already.
+(use-package org-cliplink
+  :straight t
+  :defer t)
 
 ;; A minor mode that builds a list of recently opened files.
 (use-package recentf
