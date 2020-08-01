@@ -134,7 +134,6 @@
 
 (use-package org
   :straight t
-
   :commands (org-mode)
 
   :preface
@@ -148,11 +147,9 @@
   (setq org-log-done 'time)
 
   (setq org-todo-keywords
-	'((sequence
-	   "TODO"
-	   "DOING"
-	   "DONE"))))
-
+  '((sequence
+     "TODO"
+     "DONE"))))
 
 ;; Supplemental evil-mode key-bindings to org-mode.
 (use-package evil-org
