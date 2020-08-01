@@ -26,6 +26,10 @@
       # Required by: plantuml-mode
       - imagemagick
 
+      # Markdown text to HTML used to live preview while editing `.md` files.
+      # Required by: markdown-mode
+      - markdown
+
 # Faster recursive search using a regex patter.
 # Required by: Wilfred/deadgrep
 - name: Install ripgrep

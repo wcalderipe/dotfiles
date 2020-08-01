@@ -117,7 +117,11 @@
 (use-package markdown-mode
   :straight t
   :mode (("\\.md\\'" . markdown-mode)
-	 ("\\.markdown\\'" . markdown-mode)))
+          ("\\.markdown\\'" . markdown-mode))
+
+  :init
+  ;; Sets the command which will open and preview files.
+  (setq markdown-command "markdown"))
 
 
 (use-package plantuml-mode
