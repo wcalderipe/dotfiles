@@ -356,10 +356,9 @@
 
 
 ;; A simple-minded way of managing window configs.
+;; IMPORTANT: if defered, eyebrowse won't work hydra.
 (use-package eyebrowse
   :straight t
-  :defer t
-
   :init
   ;; Use the scratch buffer when creating new tabs.
   (setq eyebrowse-new-workspace t)
