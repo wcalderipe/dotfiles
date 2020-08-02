@@ -86,8 +86,10 @@
 
 ** PlantUML
 
-   Before export, creates a PNG file of the diagram and swaps the PlantUML code
+   Before export, creates a PNG or SVG file of the diagram and swaps the PlantUML code
    snippet for created image.
+
+   PNG:
 
    #+begin_src plantuml :file demo-diagram.png
      title Authentication Sequence
@@ -96,3 +98,16 @@
      note right of Bob: Bob thinks about it
      Bob->Alice: Authentication Response
    #+end_src
+
+   #+CAPTION: You can also add a caption to a file result.
+   #+RESULTS:
+   [[file:demo-diagram.png]]
+
+   SVG:
+
+   #+begin_src plantuml :file demo-diagram.svg
+     Bob -> Alice : hello
+   #+end_src
+
+   #+RESULTS:
+   [[file:demo-diagram]]
