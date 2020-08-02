@@ -1,18 +1,19 @@
+#+OPTIONS: html-style:nil html-postamble:nil num:nil broken-links:t
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="resources/org.css"/>
+
 * dotfiles
 
 [[https://github.com/wcalderipe/dotfiles/workflows/CI/badge.svg]]
 
 [[resources/screenshot-emacs.png]]
 
-** Major rewrite goals
-
-*** DONE Everything must have a purpose
+** DONE Everything must have a purpose
     CLOSED: [2020-07-28 mar. 20:30]
 
     If I don't know why it's there it will be removed. I normally tend to
     forget things in the long run, so documentation here will be the key.
 
-*** TODO Isolation
+** TODO Isolation
 
     Sometimes Ansible roles have internal dependencies, for instance,
     emacs task also install packages system dependencies. These tasks are
@@ -34,7 +35,7 @@
     existing ones without fear of breaking something or left overs in my
     system -- experimenting is the ultimate goal.
 
-*** DONE Testability
+** DONE Testability
     CLOSED: [2020-07-28 mar. 20:32]
 
     I'd like to run my dotfiles in a docker container from time to time so
@@ -52,67 +53,53 @@
              dotfiles
     #+END_SRC
 
-*** DONE Increase the automation level
+** DONE Increase the automation level
     CLOSED: [2020-07-28 mar. 20:32]
 
     After push the button, it must have zero human interaction until
     everything is done.
 
+** Emacs Tabs
+
+   I normally have multiple projects open at the same time in Emacs and I like
+   to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
+   with [[https://github.com/abo-abo/hydra][hydra]].
+
+   Hit @@html:<kbd>C-c</kbd> + <kbd>t</kbd>@@ to see the menu.
+
+** Org
+
+*** Styled HTML exports
+
+    I often share thoughts and ideas with other people in my daily basis. For
+    that I like to export my Org notes to HTML and then PDF. Thus, I created a
+    minimal stylesheet that mimics GitHub's Markdown styles for the features I
+    use most in Org. See [[resources/org.css][org.css]].
+
+    Add the snippet below to include the styles in a Org file.
+
+    #+begin_src org
+      ,#+OPTIONS: html-style:nil html-postamble:nil num:nil
+      ,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="__REPLACE_ME_WITH REAL_LINK__"/>
+    #+end_src
+
+**** TODO Find a proper place to host the org.css file
+
+     GitHub pages might be a good candidate.
+
 ** Tasks
 
-** TODO take a look at [[https://feh.finalrewind.org/][feh console image viewer]]
+*** TODO look at spacemacs js and ts config
 
-   It would be great to use alongside PlantUML mode.
+    https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
 
-** TODO look at spacemacs js and ts config
+*** TODO move recent functions to the top on M-x                      :emacs:
+*** TODO unable to resolve links in org-mode dispatch export          :emacs:
 
-   https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
+    See https://github.com/syl20bnr/spacemacs/issues/8054#issuecomment-271158526
 
-** TODO look at eyebrowse as emacs tab manager
-
-   https://github.com/ilmotta/dotfiles/blob/78ce494f9c2397b9f5fba68f94ad8729672aa3b3/emacs.d/lisp/my-packages-misc.el#L382
-
-** Ansible
-
-  IMPORTANT: Use --ask-become-pass option for common role
-
-  Playbook: A file that defines several tasks to be executed in a target
-  machine.
-
-  Role: Organizes multiple, related tasks with the data needed to run
-  those tasks (variables, files, templates).
-
-  Tags are useful to run just set of tasks and/or roles.
-  https://docs.ansible.com/ansible/latest/user_guide/playbooks_tags.html
-
-  ansible-playbook -i ./ansible/hosts --tags "zsh" ./ansible/main.yml
-
-  #+BEGIN_SRC shell
-    ansible-playbook -i ./ansible/hosts ./ansible/main.yml
-  #+END_SRC
-
-** Debug in a task
-
-   #+BEGIN_SRC yaml
-       - name: FOO
-         debug: "msg={{ lookup('env', 'HOME') }}"
-   #+END_SRC
-
-** Terminal
-
-   Tags: zsh, zprezto, tmux
-
-   #+BEGIN_SRC shell
-   ansible-playbook -i ./ansible/hosts \
-     --tags="terminal" \
-     --skip-tags="zprezto,tmux" \
-     ./ansible/main.yml
-   #+END_SRC
-
-** Docker
-
-   #+BEGIN_SRC shell
-     docker build --tag dotfiles .
-
-     docker run -it dotfiles
-   #+END_SRC
+*** TODO fix invalid face attribute :family nil                       :emacs:
+*** TODO add locked straight packages in the version control          :emacs:
+*** TODO fix hydra zoom                                               :emacs:
+*** TODO investigate why indicator-multiload is failing to start      :gnome:
+*** TODO open file in another window when on magit screen             :emacs:
