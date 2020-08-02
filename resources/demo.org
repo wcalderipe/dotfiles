@@ -1,0 +1,98 @@
+#+OPTIONS: html-style:nil html-postamble:nil num:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="org.css"/>
+
+* Title
+
+  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+  praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+  excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+  officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem
+  rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis
+  est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere
+  possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus
+  autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
+  ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum
+  rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores
+  alias consequatur aut perferendis doloribus asperiores repellat.
+
+** Heading 2
+
+*** Heading 3
+
+** Tables
+
+| Country   | ISO |
+|-----------+-----|
+| France    | FR  |
+| Brazil    | BR  |
+| Australia | AU  |
+| Chile     | CH  |
+
+** To Do
+
+*** TODO Finish this task
+
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+    praesentium voluptatum deleniti atque =corrupti= quos dolores et quas molestias
+    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+    officia deserunt mollitia animi, id est laborum et dolorum fuga.
+
+*** DONE A tagged task                                                  :foo:
+    CLOSED: [2020-08-02 dim. 11:38]
+
+** Links
+
+   [[https://www.gnu.org/software/emacs/manual/html_node/org/CSS-support.html][CSS support - The Org Manual]]
+
+** Image
+
+   #+CAPTION: Screenshot of my work station.
+   [[https://github.com/wcalderipe/dotfiles/raw/take-it-to-another-level/resources/screenshot-emacs.png]]
+
+
+** Pre & Code
+
+   Here's a =code= formated word.
+
+   #+begin_src ruby
+     module ClassMethods
+       def method_missing(method, *args)
+         if self.try(:instance).respond_to?(method)
+           self.instance.send(method, *args)
+         else
+           super
+         end
+       end
+     end
+   #+end_src
+
+** List
+
+   - Item 1
+   - Item 2
+     - Item 3 is nested
+       - Nested 4
+         - Nested 5
+           - Nested 6
+
+   - [ ] Task item
+   - [X] Done task item
+
+** Quote
+
+   #+begin_quote
+   At vero eos et accusamus et iusto odio dignissimos ducimus qui
+   #+end_quote
+
+** PlantUML
+
+   Before export, creates a PNG file of the diagram and swaps the PlantUML code
+   snippet for created image.
+
+   #+begin_src plantuml :file demo-diagram.png
+     title Authentication Sequence
+
+     Alice->Bob: Authentication Request
+     note right of Bob: Bob thinks about it
+     Bob->Alice: Authentication Response
+   #+end_src
