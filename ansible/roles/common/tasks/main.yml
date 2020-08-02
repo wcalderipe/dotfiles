@@ -15,6 +15,7 @@
       - tig
       - jq
       - fd-find
+      - tree
 
 - name: Create shell/aliases link
   file:
