@@ -435,6 +435,34 @@
     (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
       (call-interactively 'my/async-shell-command-no-window)))
 
+  (defun my/window-resize-right (arg)
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'right))
+      (enlarge-window-horizontally arg)
+      (shrink-window-horizontally arg)))
+
+  (defun my/window-resize-left (arg)
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'right))
+      (shrink-window-horizontally arg)
+      (enlarge-window-horizontally arg)))
+
+  (defun my/window-resize-up (arg)
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'up))
+      (enlarge-window arg)
+      (shrink-window arg)))
+
+  (defun my/window-resize-down (arg)
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'up))
+      (shrink-window arg)
+      (enlarge-window arg)))
+
   :config
   ;; For more hydra examples, have a look at:
   ;; https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
@@ -514,55 +542,14 @@ _O_: chown        _Z_: zip/unzip
     ("q" nil                    "quit"))
 
   (defhydra hydra-window (:hint nil :exit nil)
-    "
-^Switch^    ^Swap^    ^Resize^    ^Layout^
-^^^^^^^^-------------------------------------
-_h_ ←       _H_ ←     _a_ ←       _u_ undo
-_j_ ↓       _J_ ↓     _s_ ↓       _r_ restore
-_k_ ↑       _K_ ↑     _w_ ↑       _=_ balance
-_l_ →       _L_ →     _d_ →
-"
-    ("h" windmove-left)
-    ("j" windmove-down)
-    ("k" windmove-up)
-    ("l" windmove-right)
-
-    ("H" buf-move-left)
-    ("J" buf-move-down)
-    ("K" buf-move-up)
-    ("L" buf-move-right)
-
-    ("=" balance-windows)
-    ("u" winner-undo)
-    ("r" winner-redo)
-
-    ("a" (lambda (arg)
-           (interactive "p")
-           (if (let ((windmove-wrap-around))
-                 (windmove-find-other-window 'right))
-               (shrink-window-horizontally arg)
-             (enlarge-window-horizontally arg))))
-
-    ("s" (lambda (arg)
-           (interactive "p")
-           (if (let ((windmove-wrap-around))
-                 (windmove-find-other-window 'up))
-               (shrink-window arg)
-             (enlarge-window arg))))
-
-    ("w" (lambda (arg)
-           (interactive "p")
-           (if (let ((windmove-wrap-around))
-                 (windmove-find-other-window 'up))
-               (enlarge-window arg)
-             (shrink-window arg))))
-
-    ("d" (lambda (arg)
-           (interactive "p")
-           (if (let ((windmove-wrap-around))
-                 (windmove-find-other-window 'right))
-               (enlarge-window-horizontally arg)
-             (shrink-window-horizontally arg)))))
+    ("=" balance-windows "balance windows")
+    ("h" buf-move-left "swap left")
+    ("j" buf-move-down "swap down")
+    ("k" buf-move-up "swap up")
+    ("l" buf-move-right "swap right")
+    ("u" winner-undo "undo")
+    ("r" winner-redo "redo")
+    ("q" nil "quit"))
 
   (defhydra hydra-tab (:hint nil :exit nil)
     ("+" eyebrowse-create-window-config "create")
