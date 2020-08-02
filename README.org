@@ -65,7 +65,7 @@
    to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
    with [[https://github.com/abo-abo/hydra][hydra]].
 
-   Hit @@html:<kbd>C-c</kbd> + <kbd>t</kbd>@@ to see the menu.
+   Hit =C-c + t= to see the menu.
 
 ** Org
 
@@ -108,6 +108,5 @@
 
 *** TODO fix invalid face attribute :family nil                       :emacs:
 *** TODO add locked straight packages in the version control          :emacs:
-*** TODO fix hydra zoom                                               :emacs:
 *** TODO investigate why indicator-multiload is failing to start      :gnome:
 *** TODO open file in another window when on magit screen             :emacs:
