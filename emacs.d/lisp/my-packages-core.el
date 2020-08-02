@@ -513,12 +513,6 @@ _O_: chown        _Z_: zip/unzip
     ("R" dired-do-rename        "rename")
     ("q" nil                    "quit"))
 
-  (defhydra hydra-zoom (:hint nil :exit nil)
-    ("+" default-text-scale-increase "increase")
-    ("-" default-text-scale-decrease "decrease")
-    ("0" default-text-scale-reset "reset")
-    ("q" nil "quit"))
-
   (defhydra hydra-window (:hint nil :exit nil)
     "
 ^Switch^    ^Swap^    ^Resize^    ^Layout^
@@ -579,7 +573,6 @@ _l_ →       _L_ →     _d_ →
 
   (general-define-key
    :prefix "C-c"
-   "z" #'hydra-zoom/body
    "w" #'hydra-window/body
    "p" #'hydra-projectile/body
    "t" #'hydra-tab/body)

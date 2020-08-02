@@ -2,11 +2,11 @@
   :when my/gui?
   :straight t
   :commands (all-the-icons-octicon
-	     all-the-icons-faicon
-	     all-the-icons-fileicon
-	     all-the-icons-wicon
-	     all-the-icons-material
-	     all-the-icons-alltheicon)
+             all-the-icons-faicon
+             all-the-icons-fileicon
+             all-the-icons-wicon
+             all-the-icons-material
+             all-the-icons-alltheicon)
 
   :config
   ;; IMPORTANT: changing the variables below may require restarting
@@ -51,5 +51,16 @@
   :straight t
   :defer t
   :hook (dired-mode . all-the-icons-dired-mode))
+
+;; Easily adjust the font size in all Emacs frames.
+(use-package default-text-scale
+  :when my/gui?
+  :straight t
+  :defer t
+  :init
+  (general-define-key
+   "M-=" #'default-text-scale-increase
+   "M--" #'default-text-scale-decrease
+   "M-0" #'default-text-scale-reset))
 
 (provide 'my-packages-gui)
