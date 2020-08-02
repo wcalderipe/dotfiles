@@ -137,13 +137,16 @@
   :commands (org-mode)
 
   :preface
-  ;; Store ID locations in the cache directory.
+  ;; Stores ID locations in the cache directory.
   (setq org-id-locations-file (concat my/cache-dir "org-id-locations"))
 
-  ;; Open org files with all headlines visible.
+  ;; Removes footnote HTML validation link.
+  (setq org-html-validation-link nil)
+
+  ;; Opens org files with all headlines visible.
   (setq org-startup-folded 'showall)
 
-  ;; Record a timestamp when a todo item is DONE.
+  ;; Records a timestamp when a todo item is DONE.
   (setq org-log-done 'time)
 
   (setq org-todo-keywords
