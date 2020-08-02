@@ -87,6 +87,14 @@
 
      GitHub pages might be a good candidate.
 
+** PDF Operations
+
+   To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
+
+   #+begin_src shell
+     wkhtmltopdf SOURCE.html TARGET.pdf
+   #+end_src
+
 ** Tasks
 
 *** TODO look at spacemacs js and ts config

@@ -14,8 +14,11 @@
       - silversearcher-ag
       - tig
       - jq
+      # Faster alternative to `find`.
       - fd-find
       - tree
+      # Useful PDF converter
+      - wkhtmltopdf
 
 - name: Create shell/aliases link
   file:
