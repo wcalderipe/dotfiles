@@ -13,3 +13,11 @@ trim_trailing_whitespace = false
 
 [*.org]
 trim_trailing_whitespace = false
+
+[*.el]
+indent_style = unset
+indent_size = unset
+end_of_line = unset
+charset = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
