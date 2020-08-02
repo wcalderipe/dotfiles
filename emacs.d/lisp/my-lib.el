@@ -14,6 +14,10 @@
   ;; Auto-install `use-package'.
   (straight-use-package 'use-package))
 
+(defun my/remove-horizontal-scroll-margin-in-shells ()
+  "Remove scroll margin to prevent jumpiness in shell(s) mode."
+  (setq-local hscroll-margin 0))
+
 (defun my/copy-file-name-to-clipboard ()
   "Copy the current buffer absolute file name to the clipboard."
   (interactive)
