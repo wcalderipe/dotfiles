@@ -434,6 +434,12 @@
       (when (process-live-p process)
         (set-process-sentinel process sentinel))))
 
+  (defun my/async-shell-region-no-window (begin end)
+    "Execute the REGION as a COMMAND asynchronously without opening buffer."
+    (interactive "r")
+    (my/async-shell-command-no-window
+     (buffer-substring-no-properties begin end)))
+
   (defun my/projectile-run-async-shell-command-no-window-in-root ()
     "Invoke `my/async-shell-command-no-window' in the project's root."
     (interactive)
