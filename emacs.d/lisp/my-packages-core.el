@@ -299,6 +299,11 @@
   :defer t
 
   :init
+  (defun my/copy-file-relative-name-to-clipboard ()
+    "Copy current buffer relative file name to the clipboard."
+    (interactive)
+    (kill-new (file-relative-name buffer-file-name (projectile-project-root))))
+
   (setq projectile-cache-file (concat my/cache-dir "projectile.cache")
         projectile-enable-caching nil
         projectile-ignored-projects '("~/" "/tmp")
