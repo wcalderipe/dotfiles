@@ -1,7 +1,6 @@
 ;; Displays available keybindings (discoverability).
 (use-package which-key
   :straight t
-
   :config
   (which-key-setup-minibuffer)
   (which-key-mode))
@@ -11,7 +10,6 @@
 (use-package ivy-rich
   :straight t
   :defer t
-
   :config
   ;; These configurations were adapted from the README:
   ;; https://github.com/Yevgnen/ivy-rich
@@ -63,11 +61,11 @@
 (use-package git-link
   :straight t
   :defer t
-
   :config
   ;; This might create a reference in the wrong lines if you're using branches
   ;; for development and your current version is too far ahead from origin.
   (setq git-link-default-branch "master"))
+
 
 ;; A simple command that takes a URL from the clipboard and inserts an org-mode
 ;; link with a title already.
@@ -75,11 +73,11 @@
   :straight t
   :defer t)
 
+
 ;; A minor mode that builds a list of recently opened files.
 (use-package recentf
   :no-require t
   :hook (kill-emacs . recentf-cleanup)
-
   :init
   (setq recentf-save-file (concat my/cache-dir "recentf")
         recentf-auto-cleanup 'never
@@ -96,5 +94,19 @@
   (add-hook 'dired-mode-hook #'my/recentf-add-dired-directory)
 
   (recentf-mode +1))
+
+
+;; Utility package for jumping to visible text across windows and frames.
+(use-package avy
+  :straight t
+  :defer t
+  :init
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix my/leader
+   "aw" #'avy-goto-word-0
+   "ac" #'avy-goto-char
+   "al" #'avy-goto-line))
 
 (provide 'my-packages-misc)
