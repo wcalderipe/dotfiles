@@ -76,9 +76,16 @@
   (setq org-log-done 'time)
 
   (setq org-todo-keywords
-    '((sequence
-        "TODO"
-        "DONE"))))
+        '((sequence
+           "TODO"
+           "DONE")))
+
+  :config
+  ;; Disables auto indentation in BEGIN blocks. Let me handle it.
+  (add-hook 'org-mode-hook (lambda () (electric-indent-mode -1)))
+
+  ;; Languages which can be evaluated in Org buffers.
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
 
 ;; Supplemental evil-mode key-bindings to org-mode.
 (use-package evil-org
@@ -163,16 +170,12 @@
 (use-package plantuml-mode
   :straight t
   :mode ("\\.puml\\'" . plantuml-mode)
-  :commands (org-babel-do-load-languages)
   :init
   (setq plantuml-executable-path "~/.local/bin/plantuml")
   (setq plantuml-default-exec-mode 'executable)
 
   ;; org-babel uses the jar path instead of the executable.
-  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"))
 
 
 (use-package web-mode
