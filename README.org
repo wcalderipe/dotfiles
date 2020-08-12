@@ -101,12 +101,11 @@
 
     https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
 
-*** TODO move recent functions to the top on M-x                      :emacs:
-*** TODO unable to resolve links in org-mode dispatch export          :emacs:
+*** TODO move recent functions to the top on M-x :emacs:
+*** TODO unable to resolve links in org-mode dispatch export :emacs:
 
     See https://github.com/syl20bnr/spacemacs/issues/8054#issuecomment-271158526
 
-*** TODO fix invalid face attribute :family nil                       :emacs:
-*** TODO add locked straight packages in the version control          :emacs:
-*** TODO investigate why indicator-multiload is failing to start      :gnome:
-*** TODO open file in another window when on magit screen             :emacs:
+*** TODO fix invalid face attribute :family nil :emacs:
+*** TODO add locked straight packages in the version control :emacs:
+*** TODO open file in another window when on magit screen :emacs:

@@ -75,6 +75,9 @@
   ;; Records a timestamp when a todo item is DONE.
   (setq org-log-done 'time)
 
+  ;; Place tags directly after headline text, with only one space in between.
+  (setq org-tags-column 0)
+
   (setq org-todo-keywords
         '((sequence
            "TODO"
