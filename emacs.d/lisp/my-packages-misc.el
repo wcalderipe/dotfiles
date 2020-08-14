@@ -109,4 +109,21 @@
    "ac" #'avy-goto-char
    "al" #'avy-goto-line))
 
+
+;; "jump to definition" package for 40+ languages.
+(use-package dumb-jump
+  :straight t
+  :commands (dumb-jump-result-follow)
+  :init
+  ;; Use ivy instead of the default popup for multiple options.
+  (setq dumb-jump-selector 'ivy)
+
+  ;; When set to rg it will still use git-grep if it's a git project (because
+  ;; it's the fastest), but will you use whatever you set here in any
+  ;; other situation.
+  (setq dumb-jump-prefer-searcher 'rg)
+
+  ;; Adds dumb-jump to xref backend so I can use it with `M-.'.
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
 (provide 'my-packages-misc)
