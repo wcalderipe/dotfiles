@@ -13,7 +13,6 @@
       tags:
         - docker
 
-    # TODO: Needs to be tested outside a docker container.
     - role: emacs
       tags:
         - emacs
@@ -38,7 +37,6 @@
       tags:
         - apps
 
-    # TODO: Needs to be tested outside a docker container.
     - role: gnome
       tags:
         - gnome
@@ -46,3 +44,7 @@
     - role: keyboard
       tags:
         - keyboard
+
+    - role: kubernetes
+      tags:
+        - kubernetes
