@@ -113,7 +113,6 @@
 ;; "jump to definition" package for 40+ languages.
 (use-package dumb-jump
   :straight t
-  :commands (dumb-jump-result-follow)
   :init
   ;; Use ivy instead of the default popup for multiple options.
   (setq dumb-jump-selector 'ivy)
