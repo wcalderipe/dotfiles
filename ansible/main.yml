@@ -41,10 +41,11 @@
       tags:
         - gnome
 
-    - role: keyboard
-      tags:
-        - keyboard
-
     - role: kubernetes
       tags:
         - kubernetes
+
+    # Keychron K2 Ubuntu settings
+    - role: keyboard
+      tags:
+        - keyboard

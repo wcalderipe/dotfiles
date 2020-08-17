@@ -10,10 +10,10 @@ A continouos working in progress of my workstation personal configurations.
 [[resources/screenshot-emacs.png]]
 
 ** DONE Everything must have a purpose
-    CLOSED: [2020-07-28 mar. 20:30]
+   CLOSED: [2020-07-28 mar. 20:30]
 
-    If I don't know why it's there it will be removed. I normally tend to
-    forget things in the long run, so documentation here will be the key.
+   If I don't know why it's there it will be removed. I normally tend to
+   forget things in the long run, so documentation here will be the key.
 
 ** DONE Isolation
    CLOSED: [2020-08-17 lun. 08:36]
@@ -23,45 +23,58 @@ A continouos working in progress of my workstation personal configurations.
    scattered files and scripts in the codebase.
 
 ** DONE Testability
-    CLOSED: [2020-07-28 mar. 20:32]
+   CLOSED: [2020-07-28 mar. 20:32]
 
-    I like to run my dotfiles in an isolate docker container from time-to-time so I
-    can safely test new configurations outside of my daily workstation. This
-    practice gives me a minimal level of confidence that I won't blew my whole
-    local environment in a Monday morning because I was willing to test a new
-    software in my stack.
+   I like to run my dotfiles in an isolate docker container from time-to-time so I
+   can safely test new configurations outside of my daily workstation. This
+   practice gives me a minimal level of confidence that I won't blew my whole
+   local environment in a Monday morning because I was willing to test a new
+   software in my stack.
 
-    The driver that justify this effort is continuous improvement on my workflow.
+   The driver that justify this effort is continuous improvement on my workflow.
 
-    #+BEGIN_SRC shell
-      docker build --tag dotfiles .
+   #+BEGIN_SRC shell
+     docker build --tag dotfiles .
 
-      docker run -it \
-             --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
-             dotfiles
-    #+END_SRC
+     docker run -it \
+            --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
+            dotfiles
+   #+END_SRC
 
-    Unfortunately a container have some limitations. For instance, obviously
-    everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
-    GUI). I also have some custom configurations for my peripherals such as
-    keyboard, that isn't covered as well.
+   Unfortunately a container have some limitations. For instance, obviously
+   everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
+   GUI). I also have some custom configurations for my peripherals such as
+   keyboard, that isn't covered as well.
 
 ** DONE Automation
-    CLOSED: [2020-07-28 mar. 20:32]
+   CLOSED: [2020-07-28 mar. 20:32]
 
-    After push a button, it must have zero human interaction until
-    everything is done.
+   After push a button, it must have zero human interaction until
+   everything is done.
 
-    I'm using Ansible to manage system dependencies and configuration
-    orchestration.
+** Installation
 
-    #+BEGIN_SRC shell
-      ansible-playbook \
-          --inventory ./ansible/hosts \
-          --tags "emacs" \
-          --skip-tags "deps" \
-          ./ansible/main.yml
-    #+END_SRC
+   I'm using Ansible to manage system dependencies and configuration
+   orchestration.
+
+   #+BEGIN_SRC shell
+     # Before start, install the minimal dependencies.
+     sudo apt-get install git ansible --quiet --yes
+
+     # To install everything from scratch.
+     ansible-playbook \
+         --inventory ./ansible/hosts \
+         ./ansible/main.yml
+
+     # You can also filter or skip by tags
+     ansible-playbook \
+         --inventory ./ansible/hosts \
+         --tags "emacs" \
+         --skip-tags "deps" \
+         ./ansible/main.yml
+   #+END_SRC
+
+   See [[ansible/main.yml]] for the full list tags.
 
 ** Emacs Tabs
 
