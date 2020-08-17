@@ -35,14 +35,15 @@
     force: yes
 
 
-# The .composed-variables purpose is store variables and
-# configurations create dynamically during Ansible tasks. Therefore,
-# it shouldn't be versioned.
+# Different from .zshrc, the .zshenv is read every time a session is started and
+# a command is issued.
 #
-# This file is sourced in the `.zshrc`.
-- name: Create ~/.composed-variables file
+# The .zshenv fix the Emacs GUI issue of not found commands when they're ran
+# from within Emacs. It happens because commands are often issued with `$SHELL
+# -c`, thus ignoring the system's PATH.
+- name: Create .zshenv file
   file:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     state: touch
 
 - name: Create ~/.local/bin directory
@@ -65,7 +66,7 @@
 
 - name: Set FZF_DEFAULT_OPTS
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     regexp: '^export FZF_DEFAULT_OPTS='
     line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"
 

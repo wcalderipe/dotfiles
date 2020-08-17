@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Required variables for third-party softwares (e.g. rbenv, jenv, etc...) are
+# dynamically added to .zshenv via Ansible roles.
+
 [[ -f ~/.zprezto/init.zsh ]] && source ~/.zprezto/init.zsh
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
@@ -15,12 +18,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 [[ -f "$BASE16_SHELL/profile_helper.sh" ]] && base16_zenburn
-
-
-# Dependencies required variables (e.g. rbenv, jenv, yarn).
-# This file is created during the Ansible playbook and edited by
-# tasks, therefore it shouldn't be versioned.
-[[ -f ~/.composed-variables ]] && source ~/.composed-variables
 
 [[ -f ~/vars ]] && source ~/vars
 [[ -f ~/aliases ]] && source ~/aliases

@@ -20,11 +20,11 @@
     tagged with =deps= and you can skip them with the following command:
 
     #+BEGIN_SRC shell
-      $ ansible-playbook \
-        --inventory ./ansible/hosts \
-        --tags "emacs" \
-        --skip-tags "deps" \
-        ./ansible/main.yml
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --tags "emacs" \
+          --skip-tags "deps" \
+          ./ansible/main.yml
     #+END_SRC
 
     It's not only about dependencies, but it's also a matter of keep

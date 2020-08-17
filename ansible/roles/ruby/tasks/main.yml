@@ -22,17 +22,17 @@
 
 - name: Add ~/.rbenv/bin to PATH
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     create: yes
     line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
 
 - name: Add rbenv init eval
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     create: yes
     line: 'eval "$(rbenv init -)"'
 
 - name: Install Ruby 2.6.5
-  # Source the .composed-variables file to load rbenv in the current session.
+  # Source the .zshenv file before execute the rbenv in the current session.
   # See https://stackoverflow.com/a/27541856
-  shell: ". {{ lookup('env', 'HOME') }}/.composed-variables && rbenv install 2.6.5"
+  shell: ". {{ zshenv }} && rbenv install 2.6.5"

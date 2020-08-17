@@ -13,7 +13,7 @@
 
 - name: Install jEnv
   blockinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     block: |
       export PATH="$HOME/.jenv/bin:$PATH"
       eval "$(jenv init -)"

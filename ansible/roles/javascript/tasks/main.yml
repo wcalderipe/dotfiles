@@ -19,9 +19,9 @@
     repo: https://github.com/creationix/nvm.git
     dest: "{{ lookup('env', 'HOME') }}/.nvm"
 
-- name: Add nvm load script in ~/.composed-variables
+- name: Add nvm load script in .zshenv
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     create: yes
     regexp: 'nvm.sh$'
     line: "[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh"

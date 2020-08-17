@@ -56,13 +56,13 @@
 
 - name: Create emacsclient --tty shorthand alias
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     regexp: '^alias e='
     line: "alias e='emacsclient --tty'"
 
 - name: Set EDITOR to emacsclient with --tty option
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     regexp: '^export EDITOR='
     line: "export EDITOR='emacsclient --tty'"
 
@@ -70,6 +70,6 @@
 # empty string, start Emacs in daemon mode and try connecting again.
 - name: Set ALTERNATE_EDITOR to empty string
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     regexp: "^export ALTERNATE_EDITOR="
     line: "export ALTERNATE_EDITOR=''"

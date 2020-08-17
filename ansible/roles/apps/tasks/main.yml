@@ -23,7 +23,7 @@
 
 - name: Set BROWSER to google-chrome
   lineinfile:
-    path: "{{ lookup('env', 'HOME') }}/.composed-variables"
+    path: "{{ zshenv }}"
     regexp: "^export BROWSER="
     line: "export BROWSER=google-chrome"
 
