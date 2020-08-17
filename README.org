@@ -112,6 +112,19 @@ A continouos working in progress of my workstation personal configurations.
      wkhtmltopdf SOURCE.html TARGET.pdf
    #+end_src
 
+** VSCode
+
+   I use VSCode as backup text editor.
+
+   Install the dependencies listed in [[vscode/extensions.txt]].
+
+   #+begin_src shell
+     cat ~/dev/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
+
+     # To list the installed extensions.
+     code --list-extensions
+   #+end_src
+
 ** Tasks
 
 *** TODO look at spacemacs js and ts config
