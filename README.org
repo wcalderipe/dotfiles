@@ -5,6 +5,8 @@
 
 [[https://github.com/wcalderipe/dotfiles/workflows/CI/badge.svg]]
 
+A continouos working in progress of my workstation personal configurations.
+
 [[resources/screenshot-emacs.png]]
 
 ** DONE Everything must have a purpose
@@ -13,37 +15,23 @@
     If I don't know why it's there it will be removed. I normally tend to
     forget things in the long run, so documentation here will be the key.
 
-** TODO Isolation
+** DONE Isolation
+   CLOSED: [2020-08-17 lun. 08:36]
 
-    Sometimes Ansible roles have internal dependencies, for instance,
-    emacs task also install packages system dependencies. These tasks are
-    tagged with =deps= and you can skip them with the following command:
-
-    #+BEGIN_SRC shell
-      ansible-playbook \
-          --inventory ./ansible/hosts \
-          --tags "emacs" \
-          --skip-tags "deps" \
-          ./ansible/main.yml
-    #+END_SRC
-
-    It's not only about dependencies, but it's also a matter of keep
-    everything needed to make something to work as near as possible from
-    each other. For example, I don't want to track scattered
-    configurations to make a software work -- I want them grouped by
-    purpose. Once achieved, I'll be able to add new software and delete
-    existing ones without fear of breaking something or left overs in my
-    system -- experimenting is the ultimate goal.
+   Everything must be self contained. I want to be able to add and remove
+   configurations or softwares without a hassle - like the headache of hunting
+   scattered files and scripts in the codebase.
 
 ** DONE Testability
     CLOSED: [2020-07-28 mar. 20:32]
 
-    I'd like to run my dotfiles in a docker container from time to time so
-    I can do some manual test and therefore have a minimal level of
-    confidence that I won't fuck everything on my local environment.
+    I like to run my dotfiles in an isolate docker container from time-to-time so I
+    can safely test new configurations outside of my daily workstation. This
+    practice gives me a minimal level of confidence that I won't blew my whole
+    local environment in a Monday morning because I was willing to test a new
+    software in my stack.
 
-    The driver that justify this effort is continuous improvement on my
-    workflow.
+    The driver that justify this effort is continuous improvement on my workflow.
 
     #+BEGIN_SRC shell
       docker build --tag dotfiles .
@@ -53,11 +41,27 @@
              dotfiles
     #+END_SRC
 
-** DONE Increase the automation level
+    Unfortunately a container have some limitations. For instance, obviously
+    everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
+    GUI). I also have some custom configurations for my peripherals such as
+    keyboard, that isn't covered as well.
+
+** DONE Automation
     CLOSED: [2020-07-28 mar. 20:32]
 
-    After push the button, it must have zero human interaction until
+    After push a button, it must have zero human interaction until
     everything is done.
+
+    I'm using Ansible to manage system dependencies and configuration
+    orchestration.
+
+    #+BEGIN_SRC shell
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --tags "emacs" \
+          --skip-tags "deps" \
+          ./ansible/main.yml
+    #+END_SRC
 
 ** Emacs Tabs
 
