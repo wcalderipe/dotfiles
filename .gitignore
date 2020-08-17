@@ -10,8 +10,4 @@ emacs.d/recentf*
 emacs.d/straight/
 emacs.d/url/
 
-vim/.netrwhist
-vim/autoload
-vim/plugged
-
 vscode/extensions/
