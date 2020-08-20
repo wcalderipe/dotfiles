@@ -6,7 +6,13 @@
   apt:
     pkg:
       # Required by: rbenv
+      # rbenv requires a C compiler to install any ruby version.
+      - build-essential
+
+      # Required by: rbenv
       - zlib1g-dev
+      - libssl-dev
+      - libreadline-dev
 
 - name: Clone rbenv
   git:
@@ -32,7 +38,32 @@
     create: yes
     line: 'eval "$(rbenv init -)"'
 
-- name: Install Ruby 2.6.5
+- name: "Install Ruby {{ ruby_version }}"
   # Source the .zshenv file before execute the rbenv in the current session.
   # See https://stackoverflow.com/a/27541856
-  shell: ". {{ zshenv }} && rbenv install 2.6.5"
+  shell: ". {{ zshenv }} && rbenv install {{ ruby_version }}"
+
+- name: "Set Ruby {{ ruby_version }} as global"
+  shell: ". {{ zshenv }} && rbenv global {{ ruby_version }}"
+
+- name: Install Bundler gem
+  shell: ". {{ zshenv }} && gem install bundler"
+
+- name: Install Pry gem
+  shell: ". {{ zshenv }} && gem install pry"
+
+- name: Create ~/.irbrc file
+  become: yes
+  become_user: root
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.irbrc"
+    state: touch
+    force: yes
+
+- name: Add Pry.start in the ~/.irbrc
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.irbrc"
+    block: |
+      require 'pry'
+      Pry.start
+      exit
