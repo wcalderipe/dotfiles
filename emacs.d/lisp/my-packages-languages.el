@@ -120,9 +120,43 @@
   (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode)))
 
 
+(use-package inf-ruby
+  :straight t
+  :defer t
+  :hook ((after-init . inf-ruby-switch-setup))
+  :config
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'rspec-compilation-mode-map
+   ;; Switches from rspec-mode to inf-ruby-mode so I can interact with Pry or
+   ;; byebug.
+   "c" 'inf-ruby-switch-from-compilation))
+
+
 ;; Provides some convenience functions for dealing with RSpec.
 (use-package rspec-mode
   :straight t
+  :init
+  (defun my/rspec-toggle-use-docker ()
+    "Toggles `rspec-use-docker-when-possible' value (`nil' or `t')."
+    (interactive)
+    (setq rspec-use-docker-when-possible (not rspec-use-docker-when-possible))
+    (message "Toggle rspec-use-docker-when-possible value to `%s'" rspec-use-docker-when-possible))
+
+  (setq rspec-use-docker-when-possible nil)
+
+  ;; Sets the command to `exec' because the projects I work with the test
+  ;; container is always running in the background.
+  (setq rspec-docker-command "docker-compose exec")
+
+  ;; Sets the container name.
+  (setq rspec-docker-container "test")
+
+  ;; Sets docker cwd to empty because containers workdir are often set to the
+  ;; project root.
+  (setq rspec-docker-cwd "")
+
   :config
   (general-define-key
     :prefix my/leader
