@@ -23,7 +23,8 @@
 
   ;; Icons by directory name.
   (add-to-list 'all-the-icons-dir-icon-alist '("emacs" all-the-icons-fileicon "emacs"))
-  (add-to-list 'all-the-icons-dir-icon-alist '("emacs\\.d" all-the-icons-fileicon "emacs")))
+  (add-to-list 'all-the-icons-dir-icon-alist '("emacs\\.d" all-the-icons-fileicon "emacs"))
+  (add-to-list 'all-the-icons-dir-icon-alist '("spec" all-the-icons-fileicon "test-dir")))
 
 
 ;; Ivy/counsel integration for `all-the-icons'.
