@@ -1,0 +1,98 @@
+- name: Install system packages
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      - build-essential
+      - git
+      - curl
+      - xclip
+      - htop
+      - exuberant-ctags
+      - libreadline-dev
+      - libssl-dev
+      - silversearcher-ag
+      - tig
+      - jq
+      # Faster alternative to `find`.
+      - fd-find
+      - tree
+      # Useful PDF converter
+      - wkhtmltopdf
+
+- name: Create shell/aliases link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/aliases"
+    dest: "{{ lookup('env', 'HOME') }}/aliases"
+    state: link
+    force: yes
+
+- name: Create shell/vars link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/vars"
+    dest: "{{ lookup('env', 'HOME') }}/vars"
+    state: link
+    force: yes
+
+
+# Different from .zshrc, the .zshenv is read every time a session is started and
+# a command is issued.
+#
+# The .zshenv fix the Emacs GUI issue of not found commands when they're ran
+# from within Emacs. It happens because commands are often issued with `$SHELL
+# -c`, thus ignoring the system's PATH.
+- name: Create .zshenv file
+  file:
+    path: "{{ zshenv }}"
+    state: touch
+
+- name: Create ~/.local/bin directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+
+#
+# fzf
+#
+
+- name: Clone fzf
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    depth: 1
+    dest: "{{ lookup('env', 'HOME') }}/.fzf"
+
+- name: Install fzf
+  command: "{{ lookup('env', 'HOME') }}/.fzf/install"
+
+- name: Set FZF_DEFAULT_OPTS
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^export FZF_DEFAULT_OPTS='
+    line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"
+
+#
+# Git
+#
+
+- name: Create .gitconfig link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.gitconfig"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    state: link
+    force: yes
+
+#
+# PlantUML
+#
+
+- name: Install PlantUML
+  become: yes
+  become_user: root
+  apt:
+    name: plantuml
+
+- name: Link plantuml to ~/.local/bin
+  file:
+    src: "/usr/bin/plantuml"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/plantuml"
+    state: link

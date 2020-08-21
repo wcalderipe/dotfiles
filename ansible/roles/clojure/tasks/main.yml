@@ -1,0 +1,19 @@
+- name: Install Java JDK 11
+  become: yes
+  become_user: root
+  apt:
+    name: openjdk-11-jdk
+
+- name: Ensure ~/.local/bin exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+
+- name: Download leiningen
+  get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/lein"
+    mode: "+x"
+
+- name: Install Clojure
+  command: "{{ lookup('env', 'HOME') }}/.local/bin/lein -v"

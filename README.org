@@ -1,0 +1,141 @@
+#+OPTIONS: html-style:nil html-postamble:nil num:nil broken-links:t
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="resources/org.css"/>
+
+* dotfiles
+
+[[https://github.com/wcalderipe/dotfiles/workflows/CI/badge.svg]]
+
+A continouos working in progress of my workstation personal configurations.
+
+[[resources/screenshot-emacs.png]]
+
+** DONE Everything must have a purpose
+   CLOSED: [2020-07-28 mar. 20:30]
+
+   If I don't know why it's there it will be removed. I normally tend to
+   forget things in the long run, so documentation here will be the key.
+
+** DONE Isolation
+   CLOSED: [2020-08-17 lun. 08:36]
+
+   Everything must be self contained. I want to be able to add and remove
+   configurations or softwares without a hassle - like the headache of hunting
+   scattered files and scripts in the codebase.
+
+** DONE Testability
+   CLOSED: [2020-07-28 mar. 20:32]
+
+   I like to run my dotfiles in an isolate docker container from time-to-time so I
+   can safely test new configurations outside of my daily workstation. This
+   practice gives me a minimal level of confidence that I won't blew my whole
+   local environment in a Monday morning because I was willing to test a new
+   software in my stack.
+
+   The driver that justify this effort is continuous improvement on my workflow.
+
+   #+BEGIN_SRC shell
+     docker build --tag dotfiles .
+
+     docker run -it \
+            --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
+            dotfiles
+   #+END_SRC
+
+   Unfortunately a container have some limitations. For instance, obviously
+   everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
+   GUI). I also have some custom configurations for my peripherals such as
+   keyboard, that isn't covered as well.
+
+** DONE Automation
+   CLOSED: [2020-07-28 mar. 20:32]
+
+   After push a button, it must have zero human interaction until
+   everything is done.
+
+** Installation
+
+   I'm using Ansible to manage system dependencies and configuration
+   orchestration.
+
+   #+BEGIN_SRC shell
+     # Before start, install the minimal dependencies.
+     sudo apt-get install git ansible --quiet --yes
+
+     # To install everything from scratch.
+     ansible-playbook \
+         --inventory ./ansible/hosts \
+         ./ansible/main.yml
+
+     # You can also filter or skip by tags
+     ansible-playbook \
+         --inventory ./ansible/hosts \
+         --tags "emacs" \
+         --skip-tags "deps" \
+         ./ansible/main.yml
+   #+END_SRC
+
+   See [[ansible/main.yml]] for the full list tags.
+
+** Emacs Tabs
+
+   I normally have multiple projects open at the same time in Emacs and I like
+   to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
+   with [[https://github.com/abo-abo/hydra][hydra]].
+
+   Hit =C-c + t= to see the menu.
+
+** Org
+
+*** Styled HTML exports
+
+    I often share thoughts and ideas with other people in my daily basis. For
+    that I like to export my Org notes to HTML and then PDF. Thus, I created a
+    minimal stylesheet that mimics GitHub's Markdown styles for the features I
+    use most in Org. See [[resources/org.css][org.css]].
+
+    Add the snippet below to include the styles in a Org file.
+
+    #+begin_src org
+      ,#+OPTIONS: html-style:nil html-postamble:nil num:nil
+      ,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="__REPLACE_ME_WITH REAL_LINK__"/>
+    #+end_src
+
+**** TODO Find a proper place to host the org.css file
+
+     GitHub pages might be a good candidate.
+
+** PDF Operations
+
+   To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
+
+   #+begin_src shell
+     wkhtmltopdf SOURCE.html TARGET.pdf
+   #+end_src
+
+** VSCode
+
+   I use VSCode as backup text editor.
+
+   Install the dependencies listed in [[vscode/extensions.txt]].
+
+   #+begin_src shell
+     cat ~/dev/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
+
+     # To list the installed extensions.
+     code --list-extensions
+   #+end_src
+
+** Tasks
+
+*** TODO look at spacemacs js and ts config
+
+    https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
+
+*** TODO move recent functions to the top on M-x :emacs:
+*** TODO unable to resolve links in org-mode dispatch export :emacs:
+
+    See https://github.com/syl20bnr/spacemacs/issues/8054#issuecomment-271158526
+
+*** TODO fix invalid face attribute :family nil :emacs:
+*** TODO add locked straight packages in the version control :emacs:
+*** TODO open file in another window when on magit screen :emacs:

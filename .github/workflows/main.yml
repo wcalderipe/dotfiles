@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, take-it-to-another-level ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, take-it-to-another-level ]
 
 jobs:
   build:
@@ -13,3 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build --tag dotfiles .
+
+      - name: Test install playbook
+        run: docker run dotfiles ansible-playbook -i ./ansible/hosts --skip-tags "apps,gnome,keyboard" ./ansible/main.yml

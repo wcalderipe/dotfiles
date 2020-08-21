@@ -1,1 +1,0 @@
-(editorconfig-mode 1)

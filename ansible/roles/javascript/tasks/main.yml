@@ -1,0 +1,52 @@
+#
+# node & npm
+#
+
+- name: Install Node.js and npm
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      - nodejs
+      - npm
+
+#
+# nvm
+#
+
+- name: Install nvm
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ lookup('env', 'HOME') }}/.nvm"
+
+- name: Add nvm load script in .zshenv
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    regexp: 'nvm.sh$'
+    line: "[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh"
+
+#
+# yarn
+#
+
+- name: Add yarn repository public key
+  become: yes
+  become_user: root
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+
+- name: Add yarn package to sources.list
+  become: yes
+  become_user: root
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
+
+- name: Update cache and install yarn
+  become: yes
+  become_user: root
+  apt:
+    name: yarn
+    update_cache: yes

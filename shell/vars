@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+
+export DOTFILES_DIR="$HOME/dev/dotfiles"
+
+export LANG=en_US.UTF-8
+
+# Fix hide cursor bug when moving back along.
+#
+# Reference:
+# - https://github.com/zsh-users/zsh-syntax-highlighting/issues/171
+# - https://github.com/howardcochran/hcc-dotfiles/commit/23a1b97ba7fffe0013ecde497f3f2cc1f3910795
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+#
+# Colors
+#
+
+RED="\[\033[0;31m\]"
+PINK="\[\033[1;31m\]"
+YELLOW="\[\033[1;33m\]"
+GREEN="\[\033[0;32m\]"
+LT_GREEN="\[\033[1;32m\]"
+BLUE="\[\033[0;34m\]"
+WHITE="\[\033[1;37m\]"
+PURPLE="\[\033[1;35m\]"
+CYAN="\[\033[1;36m\]"
+BROWN="\[\033[0;33m\]"
+COLOR_NONE="\[\033[0m\]"
+
+export CLICOLOR=1
+
+# Documentation about ls colors:
+# http://linux-sxs.org/housekeeping/lscolors.html
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+export GREP_COLOR='1;31'
+
+export TERM=xterm-256color
+
+#
+# History
+#
+
+# Ignore duplicate entries in history
+export HISTCONTROL=erasedups:ignoreboth
+export HISTFILE=~/.zsh_history
+# Increases size of history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
+
+
+#
+# Fuzzy Finder
+#
+
+# Customize the default Fuzzy Finder command. Use "fd" instead of the default
+# "find" command to traverse the file system while respecting .gitignore. fd is
+# a simple, fast and user-friendly alternative to find. While it does not seek
+# to mirror all of find's powerful functionality, it provides sensible
+# (opinionated) defaults for 80% of the use cases. It's the perfect tool to use
+# with fzf, each with its own strength.
+export FZF_DEFAULT_COMMAND='fdfind --hidden --exclude=.local --exclude=.config --exclude=.rbenv --exclude=.cache --exclude=.git --exclude=node_modules'
+# Default command for finding dirs
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type=d"
+# Default command for finding files
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type=f"
