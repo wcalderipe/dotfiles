@@ -76,6 +76,12 @@ A continouos working in progress of my workstation personal configurations.
 
    See [[ansible/main.yml]] for the full list tags.
 
+** Emacs Key Bindings
+
+   My key bindings are defined using [[https://github.com/noctuid/general.el#about][general.el]] within [[https://github.com/jwiegley/use-package][use-package]] scattered in
+   =lisp/my-*= files. So, if you want to check them all do =M-x
+   general-describe-keybindings=.
+
 ** Emacs Tabs
 
    I normally have multiple projects open at the same time in Emacs and I like
@@ -124,6 +130,17 @@ A continouos working in progress of my workstation personal configurations.
      # To list the installed extensions.
      code --list-extensions
    #+end_src
+
+
+** Kill process by port
+
+   I often have ghost processes started from within Emacs but never properly
+   terminated blocking ports. The command below help me to kill a process by its
+   port number.
+
+    #+begin_src shell
+      kill -9 $(lsof -i tcp:3000 -t)
+    #+end_src
 
 ** Tasks
 
