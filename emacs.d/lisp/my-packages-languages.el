@@ -168,6 +168,23 @@
     "tt" 'rspec-verify-single))
 
 
+;; Simple interface for RuboCop (Ruby linter).
+;; It requires RuboCop gem insalled globally or bundled in a project.
+(use-package rubocop
+  :straight t
+  :defer t
+  :hook (ruby-mode . rubocop-mode)
+  :config
+  (general-define-key
+    :prefix my/leader
+    :states 'normal
+    :keymaps 'rubocop-mode-map
+    "la" 'rubocop-autocorrect-project
+    "lf" 'rubocop-autocorrect-current-file
+    "lca" 'rubocop-check-project
+    "lcf" 'rubocop-check-current-file))
+
+
 (use-package dockerfile-mode
   :straight t
   ;; Any file starting with "Dockerfile" should enable this mode.
