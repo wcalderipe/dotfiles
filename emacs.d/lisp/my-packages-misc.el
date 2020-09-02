@@ -125,4 +125,14 @@
   ;; Adds dumb-jump to xref backend so I can use it with `M-.'.
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+;; A minor mode for dealing with pairs in Emacs.
+(use-package smartparens
+  :straight t
+  :defer t
+  :init
+  ;; Only hooks with Lisp family major modes.
+  (dolist (mode '(emacs-lisp-mode lisp-mode))
+    (let ((hook (intern (concat (symbol-name mode) "-hook"))))
+      (add-hook hook #'smartparens-mode))))
+
 (provide 'my-packages-misc)

@@ -9,7 +9,6 @@
 
 (use-package emacs-lisp-mode
   :no-require t
-
   :config
   (defun my/emacs-lisp-mode-hook ()
     (setq prettify-symbols-alist '(("lambda" . ?λ)))
@@ -61,7 +60,6 @@
 (use-package org
   :straight t
   :commands (org-mode)
-
   :preface
   ;; Stores ID locations in the cache directory.
   (setq org-id-locations-file (concat my/cache-dir "org-id-locations"))
