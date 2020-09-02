@@ -142,6 +142,10 @@ A continouos working in progress of my workstation personal configurations.
       kill -9 $(lsof -i tcp:3000 -t)
     #+end_src
 
+** References
+
+   - [[https://github.com/bbatsov/emacs-lisp-style-guide][bbatsov/emacs-lisp-style-guide: A community-driven Emacs Lisp style]]
+
 ** Tasks
 
 *** TODO look at spacemacs js and ts config

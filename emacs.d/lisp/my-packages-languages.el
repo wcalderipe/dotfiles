@@ -112,12 +112,13 @@
   ;; Don't indent a function args aligned with the opening bracket.
   (setq ruby-deep-indent-paren nil)
 
-  (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode)))
+  (dolist (file-pattern '("\\.rb$"
+                          "\\.rake$"
+                          "Rakefile$"
+                          "\\.gemspec$"
+                          "\\.ru$"
+                          "Gemfile$"))
+    (add-to-list 'auto-mode-alist (cons file-pattern 'ruby-mode))))
 
 
 (use-package inf-ruby
