@@ -164,5 +164,4 @@ A continouos working in progress of my workstation personal configurations.
     See https://github.com/syl20bnr/spacemacs/issues/8054#issuecomment-271158526
 
 *** TODO fix invalid face attribute :family nil :emacs:
-*** TODO add locked straight packages in the version control :emacs:
 *** TODO open file in another window when on magit screen :emacs:

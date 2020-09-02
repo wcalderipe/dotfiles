@@ -11,6 +11,10 @@
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
+  ;; Change to a more obvious file name, instead of
+  ;; straight/versions/default.el. The path is relative to straight/versions/.
+  (setq straight-profiles '((nil . "../../../package-lock.el")))
+
   ;; Auto-install `use-package'.
   (straight-use-package 'use-package))
 
