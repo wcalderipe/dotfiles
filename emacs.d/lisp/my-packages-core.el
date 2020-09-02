@@ -199,6 +199,9 @@
   (setq counsel-describe-function-function #'helpful-callable
         counsel-describe-variable-function #'helpful-variable)
 
+  ;; Remove "^" prefixes of my searches.
+  (setq ivy-initial-inputs-alist nil)
+
   ;; Use custom configurations, but most importantly, pipe the filtering
   ;; from the "fdfind" output. See the `dotfiles/shell/vars' file for
   ;; more details.
