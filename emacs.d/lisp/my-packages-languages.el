@@ -57,6 +57,98 @@
     "tp" #'my/elisp-run-project-tests))
 
 
+;; The Clojure Interactive Development Environment that Rocks.
+(use-package cider
+  :straight t
+  :mode (("\\.clj\\'" . clojure-mode)
+         ("\\.cljs\\'" . clojurescript-mode))
+  :init
+  (setq cider-auto-select-error-buffer nil
+        cider-auto-select-test-report-buffer nil
+        cider-repl-display-help-banner nil
+        cider-repl-history-size 1000
+        cider-repl-wrap-history t
+        cider-show-error-buffer 'except-in-repl)
+
+  ;; Instruct CIDER to use Figwheel (use cider-jack-in-clojurescript).
+  (setq cider-default-cljs-repl "(do (require 'figwheel-sidecar.repl-api)
+                              (figwheel-sidecar.repl-api/start-figwheel!)
+                              (figwheel-sidecar.repl-api/cljs-repl))")
+
+  ;; Prevent 'cider-load-buffer from prompting to save the file
+  ;; corresponding to the buffer being loaded, if it's modified.
+  (setq cider-save-file-on-load t)
+
+  ;; Do not prompt for symbol confirmation (e.g. show docs and jump to
+  ;; definition without asking).
+  (setq cider-prompt-for-symbol nil)
+
+  ;; Do not open CIDER buffer after successfull connection to REPL.
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+
+  ;; Applies syntax high-light to Clojure evaluated code overlay.
+  (setq cider-overlays-use-font-lock t)
+
+  ;; CIDER can colorize usages of functions and variables from any namespace,
+  ;; not only macros and core Clojure functions.
+  (setq cider-font-lock-dynamically '(macro core function var))
+
+  ;; Use Fast Idiomatic Pretty Printer (5-10x faster than clojure.core/pprint).
+  (setq cider-repl-use-pretty-printing t)
+
+  ;; Removes evaluation fringe indicators - it's distracting.
+  (setq cider-use-fringe-indicators nil)
+
+  ;; Subword minor mode is useful for Java/Javascript interop.
+  (add-hook 'cider-repl-mode-hook #'subword-mode)
+  (add-hook 'cider-repl-mode-hook #'smartparens-mode)
+
+  (defun my/cider--reload-user-namespace ()
+    (interactive)
+    (cider-interactive-eval "(require 'user :reload) \"Namespace 'user reloaded.\""))
+
+  (defun my/cider--trailing-whitespace ()
+    (setq show-trailing-whitespace nil))
+
+  ;; Disable annoying trailing whitespace warnings.
+  (add-hook 'cider-repl-mode-hook #'my/cider--trailing-whitespace)
+  (add-hook 'cider-test-report-mode-hook #'my/cider--trailing-whitespace)
+
+  :config
+  ;; Indentation settings
+  (define-clojure-indent
+    (prop/for-all 1))
+
+  (with-eval-after-load 'evil
+    ;; Add to jump list, i.e. record location prior to running commands.
+    (evil-add-command-properties #'cider-test-run-project-tests :jump t))
+
+  (general-define-key
+   :prefix my/leader
+   :states 'normal
+   :keymaps 'clojure-mode-map
+   "d" #'cider-doc
+   "e" #'cider-eval-defun-at-point
+   "E" #'cider-eval-last-sexp
+   "p" #'cider-pprint-eval-defun-at-point
+   "P" #'cider-pprint-eval-last-sexp
+   "r" #'cider-load-all-project-ns
+   "s" #'cider-browse-spec
+   "u" #'my/cider--reload-user-namespace
+   "ta" #'cider-test-run-project-tests
+   "tf" #'cider-test-run-ns-tests
+   "tl" #'cider-test-rerun-test
+   "tt" #'cider-test-run-test))
+
+
+;; Defines several hydras for CIDER.
+(use-package cider-hydra
+  :straight t
+  :after (cider)
+  :defer t
+  :hook ((clojure-mode clojurescript-mode) . cider-hydra-mode))
+
+
 (use-package ruby-mode
   :config
   ;; Don't insert file enconding comment at the top.
