@@ -2,7 +2,6 @@
 (use-package general
   :straight t
   :demand t
-
   :config
   (general-define-key
    ;; Kill the current buffer by default.
@@ -13,7 +12,6 @@
 ;; key bindings in the right hands.
 (use-package evil
   :straight t
-
   :preface
   ;; Do not load evil keybindings, because we'll use
   ;; from the evil-collection package.
@@ -77,12 +75,8 @@
 ;; Add evil bindings beyond the default like calendar and help-mode.
 (use-package evil-collection
   :straight t
-
-  :after
-  (evil)
-
-  :config
-  (evil-collection-init))
+  :after (evil)
+  :config (evil-collection-init))
 
 
 (use-package org
@@ -246,7 +240,6 @@
 (use-package xclip
   :straight t
   :defer t
-
   :init (xclip-mode t))
 
 
@@ -254,7 +247,6 @@
 (use-package counsel
   :straight t
   :defer t
-
   :init
   (setq counsel-describe-function-function #'helpful-callable
         counsel-describe-variable-function #'helpful-variable)
@@ -288,7 +280,6 @@
   :straight t
   :defer t
   :hook (emacs-startup . ivy-mode)
-
   :init
   ;; Avoid using fuzzy searches everywhere. For example, counsel-rg
   ;; with fuzzy enabled brings a lot of useless results.
@@ -320,7 +311,6 @@
 (use-package amx
   :straight t
   :init
-
   (setq amx-save-file (concat my/cache-dir "amx")
         amx-history-length 10))
 
@@ -328,9 +318,7 @@
 ;; Gives an overview of the current regex search candidates.
 (use-package swiper
   :straight t
-
   :defer t
-
   :init
   (setq swiper-action-recenter t)
 
@@ -357,10 +345,8 @@
 ;; NOTE: It require https://github.com/sharkdp/fd
 (use-package projectile
   :straight t
-
-  ;; Defer because it'll be loaded by counsel-projectile.
+  ;; Defer because it will be loaded by counsel-projectile.
   :defer t
-
   :init
   (defun my/copy-file-relative-name-to-clipboard ()
     "Copy current buffer relative file name to the clipboard."
@@ -402,9 +388,7 @@
 ;; Ivy UI for Projectile.
 (use-package counsel-projectile
   :straight t
-
   :defer 0
-
   :config
   ;; Counsel-Projectile mode turns on Projectile mode, thus enabling all
   ;; projectile key bindings, and adds the counsel-projectile key bindings on
@@ -437,6 +421,7 @@
   :config
   (eyebrowse-mode t))
 
+
 ;; Fast search interface using Ripgrep.
 (use-package deadgrep
   :straight t
@@ -450,7 +435,6 @@
 (use-package hydra
   :straight t
   :defer t
-
   :init
   (defun my/counsel-projectile-switch-project-action-dired (project)
     "Open dired when switching projects with counsel-projectile."
