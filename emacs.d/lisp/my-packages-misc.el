@@ -131,7 +131,13 @@
   :defer t
   :init
   ;; Only hooks with Lisp family major modes.
-  (dolist (mode '(emacs-lisp-mode lisp-mode))
+  (dolist (mode '(emacs-lisp-mode
+                  common-lisp-mode
+                  lisp-mode
+                  clojure-mode
+                  clojurec-mode
+                  clojurescript-mode
+                  cider-repl-mode))
     (let ((hook (intern (concat (symbol-name mode) "-hook"))))
       (add-hook hook #'smartparens-mode))))
 
