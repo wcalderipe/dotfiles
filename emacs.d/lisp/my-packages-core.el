@@ -85,6 +85,66 @@
   (evil-collection-init))
 
 
+(use-package org
+  :straight t
+  :commands (org-mode)
+  :preface
+  (setq org-directory my/org-dir
+        ;; Stores notes in the Org directory.
+        org-default-notes-file (concat my/org-dir "/notes.org")
+        ;; Stores ID locations in the cache directory.
+        org-id-locations-file (concat my/cache-dir "org-id-locations"))
+
+  ;; Removes footnote HTML validation link.
+  (setq org-html-validation-link nil)
+
+  ;; Opens org files with all headlines visible.
+  (setq org-startup-folded 'showall)
+
+  ;; Records a timestamp when a todo item is DONE.
+  (setq org-log-done 'time)
+
+  ;; Place tags directly after headline text, with only one space in between.
+  (setq org-tags-column 0)
+
+  (setq org-todo-keywords
+        '((sequence
+           "TODO"
+           "DONE")))
+
+  :config
+  ;; Disables auto indentation in BEGIN blocks. Let me handle it.
+  (add-hook 'org-mode-hook (lambda () (electric-indent-mode -1)))
+
+  ;; Languages which can be evaluated in Org buffers.
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+
+;; Supplemental evil-mode key-bindings to org-mode.
+(use-package evil-org
+  :straight t
+  :after (org evil)
+  :commands (evil-org evil-org-agenda)
+  :init (add-hook 'org-mode-hook 'evil-org-mode))
+
+
+(use-package org-roam
+  :straight t
+  :ensure t
+  :hook (after-init . org-roam-mode)
+  :custom (org-roam-directory my/org-dir)
+  :config
+  (general-define-key
+   :keymaps 'org-roam-mode-map
+   "C-c n l" #'org-roam
+   "C-c n f" #'org-roam-find-file
+   "C-c n g" #'org-roam-graph-show)
+
+  (general-define-key
+   :keymaps 'org-mode-map
+   "C-c n i" #'org-roam-insert
+   "C-c n I" #'org-roam-insert-immediate))
+
+
 ;; Better file navigation with dired.
 (use-package dired
   :init

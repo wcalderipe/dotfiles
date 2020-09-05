@@ -3,6 +3,7 @@ emacs.d/*.data
 emacs.d/.local/
 emacs.d/amx-items
 emacs.d/auto-save-list/
+emacs.d/bookmarks
 emacs.d/elpa/
 emacs.d/eshell/
 emacs.d/places

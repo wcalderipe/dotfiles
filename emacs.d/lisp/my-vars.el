@@ -5,6 +5,10 @@
   (eval-when-compile (file-truename user-emacs-directory))
   "The path to the currently loaded .emacs.d directory. Must end with a slash.")
 
+(defconst my/org-dir
+  "~/org"
+  "Root directory for Org files.")
+
 (defconst my/local-dir
   (concat my/emacs-dir ".local/")
   "Root directory for local storage. Must end with a slash.")

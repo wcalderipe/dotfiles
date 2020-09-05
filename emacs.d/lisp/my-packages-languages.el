@@ -57,51 +57,6 @@
     "tp" #'my/elisp-run-project-tests))
 
 
-(use-package org
-  :straight t
-  :commands (org-mode)
-  :preface
-  ;; Stores ID locations in the cache directory.
-  (setq org-id-locations-file (concat my/cache-dir "org-id-locations"))
-
-  ;; Removes footnote HTML validation link.
-  (setq org-html-validation-link nil)
-
-  ;; Opens org files with all headlines visible.
-  (setq org-startup-folded 'showall)
-
-  ;; Records a timestamp when a todo item is DONE.
-  (setq org-log-done 'time)
-
-  ;; Place tags directly after headline text, with only one space in between.
-  (setq org-tags-column 0)
-
-  (setq org-todo-keywords
-        '((sequence
-           "TODO"
-           "DONE")))
-
-  :config
-  ;; Disables auto indentation in BEGIN blocks. Let me handle it.
-  (add-hook 'org-mode-hook (lambda () (electric-indent-mode -1)))
-
-  ;; Languages which can be evaluated in Org buffers.
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
-
-;; Supplemental evil-mode key-bindings to org-mode.
-(use-package evil-org
-  :straight t
-
-  :after
-  (org evil)
-
-  :commands
-  (evil-org evil-org-agenda)
-
-  :init
-  (add-hook 'org-mode-hook 'evil-org-mode))
-
-
 (use-package ruby-mode
   :config
   ;; Don't insert file enconding comment at the top.

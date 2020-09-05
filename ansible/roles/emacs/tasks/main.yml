@@ -30,6 +30,10 @@
       # Required by: markdown-mode
       - markdown
 
+      # Required by: org-roam
+      - graphviz
+      - sqlite3
+
 # Faster recursive search using a regex patter.
 # Required by: Wilfred/deadgrep
 - name: Install ripgrep
