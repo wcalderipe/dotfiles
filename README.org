@@ -1,5 +1,4 @@
-#+OPTIONS: html-style:nil html-postamble:nil num:nil broken-links:t
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="resources/org.css"/>
+#+setupfile: ~/dev/dotfiles/setup.org
 
 * dotfiles
 
@@ -158,10 +157,16 @@ A continouos working in progress of my workstation personal configurations.
 
     https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
 
-*** TODO move recent functions to the top on M-x :emacs:
-*** TODO unable to resolve links in org-mode dispatch export :emacs:
+*** TODO better ruby interop :emacs:
 
-    See https://github.com/syl20bnr/spacemacs/issues/8054#issuecomment-271158526
+    https://github.com/syl20bnr/spacemacs/issues/6462
 
-*** TODO fix invalid face attribute :family nil :emacs:
-*** TODO open file in another window when on magit screen :emacs:
+    https://github.com/chief/.emacs.d/blob/a1c4546b708b47f95e4130ccf0e8b4b8ae5adddf/packages/init-ruby.el#L66
+
+    https://github.com/alecvn/dotfiles/blob/c5ac92ab50f41ecd656b488b48cf6ca44552914f/config/init-ruby.el
+
+*** TODO how to cancel a rspec compilation buffer while a test is running? :emacs:
+
+*** TODO org-roam and org-protocol to easy open files from the graph view
+
+    https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029

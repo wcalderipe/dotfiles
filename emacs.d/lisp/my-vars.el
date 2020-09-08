@@ -6,7 +6,7 @@
   "The path to the currently loaded .emacs.d directory. Must end with a slash.")
 
 (defconst my/org-dir
-  "~/org"
+  "~/org/"
   "Root directory for Org files.")
 
 (defconst my/local-dir

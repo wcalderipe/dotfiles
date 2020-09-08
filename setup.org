@@ -1,0 +1,2 @@
+#+options: html-style:nil html-postamble:nil num:nil broken-links:t
+#+html_head: <link rel="stylesheet" type="text/css" href=".config/theme.css"/>

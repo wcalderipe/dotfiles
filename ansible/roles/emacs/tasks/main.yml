@@ -30,6 +30,7 @@
       # Required by: markdown-mode
       - markdown
 
+      # Roam replica built on top of Org-mode.
       # Required by: org-roam
       - graphviz
       - sqlite3

@@ -121,11 +121,28 @@
   :init (add-hook 'org-mode-hook 'evil-org-mode))
 
 
+;; Effortless non-hierarchical note-taking with Org-mode.
 (use-package org-roam
   :straight t
   :ensure t
   :hook (after-init . org-roam-mode)
-  :custom (org-roam-directory my/org-dir)
+  :init
+  ;; Custom capture template with my `setup.org' adapted from
+  ;; https://www.orgroam.com/manual/Template-Walkthrough.html#Template-Walkthrough
+  (defun my/org-roam--capture-templates ()
+    "Create the default org-roam capture template with a custom head."
+    '(("d" "default" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :unnarrowed t
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n")))
+
+  (setq org-roam-directory my/org-dir
+        org-roam-db-location (concat my/org-dir ".config/org-roam.db"))
+
+  (setq org-roam-capture-templates (my/org-roam--capture-templates))
+
   :config
   (general-define-key
    :keymaps 'org-roam-mode-map
