@@ -34,3 +34,5 @@
   (kill-new (my/buffer-file-name)))
 
 (provide 'my-lib)
+
+;;; my-lib ends here.

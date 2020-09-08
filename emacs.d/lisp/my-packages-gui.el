@@ -53,6 +53,7 @@
   :defer t
   :hook (dired-mode . all-the-icons-dired-mode))
 
+
 ;; Easily adjust the font size in all Emacs frames.
 (use-package default-text-scale
   :when my/gui?
@@ -65,3 +66,5 @@
    "M-0" #'default-text-scale-reset))
 
 (provide 'my-packages-gui)
+
+;;; my-packages-gui ends here.

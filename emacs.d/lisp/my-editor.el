@@ -91,3 +91,5 @@
   (setq highlight-symbol-idle-delay 0.5))
 
 (provide 'my-editor)
+
+;;; my-editor ends here.

@@ -644,3 +644,5 @@ _O_: chown        _Z_: zip/unzip
    "C-c d" #'hydra-dired/body))
 
 (provide 'my-packages-core)
+
+;;; my-packages-core ends here.

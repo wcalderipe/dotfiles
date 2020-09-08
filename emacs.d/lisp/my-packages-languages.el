@@ -335,14 +335,13 @@
 ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim.
 (use-package evil-nerd-commenter
   :straight t
-
   :after (evil)
-
   :commands (evilnc-comment-or-uncomment-lines)
-
   :init
   ;; Improved toggle comment/uncomment lines.
   (general-define-key
     "M-;" #'evilnc-comment-or-uncomment-lines))
 
 (provide 'my-packages-languages)
+
+;;; my-packages-languages ends here.

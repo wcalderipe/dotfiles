@@ -163,5 +163,6 @@
   ;; Adds to IELM outside the dolist because it doesn't have a mode function.
   (add-hook 'ielm-mode-hook #'enable-paredit-mode))
 
-
 (provide 'my-packages-misc)
+
+;;; my-packages-misc ends here.

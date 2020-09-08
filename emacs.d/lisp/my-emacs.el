@@ -94,8 +94,10 @@
 
 ;; Indentation.
 (setq-default tab-width 4
-	      tab-always-indent t
-	      indent-tabs-mode nil
-	      fill-column 80)
+          tab-always-indent t
+          indent-tabs-mode nil
+          fill-column 80)
 
 (provide 'my-emacs)
+
+;;; my-emacs ends here.

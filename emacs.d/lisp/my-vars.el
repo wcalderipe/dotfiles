@@ -25,3 +25,5 @@
 (defconst my/gui? (display-graphic-p))
 
 (provide 'my-vars)
+
+;;; my-vars ends here.
