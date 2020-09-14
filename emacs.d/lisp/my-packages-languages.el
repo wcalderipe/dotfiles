@@ -260,8 +260,8 @@
 (use-package markdown-mode
   :straight t
   :mode (("\\.md\\'" . markdown-mode)
-          ("\\.markdown\\'" . markdown-mode))
-
+         ("\\.markdown\\'" . markdown-mode))
+  :hook (markdown-mode . flyspell-mode)
   :init
   ;; Sets the command which will open and preview files.
   (setq markdown-command "markdown"))

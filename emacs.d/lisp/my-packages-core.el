@@ -82,6 +82,7 @@
 (use-package org
   :straight t
   :commands (org-mode)
+  :hook (org-mode . flyspell-mode)
   :preface
   (setq org-directory my/org-dir
         ;; Stores notes in the Org directory.
