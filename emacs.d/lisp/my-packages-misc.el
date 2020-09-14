@@ -117,7 +117,7 @@
 (use-package avy
   :straight t
   :defer t
-  :init
+  :config
   (general-define-key
    :states 'normal
    :keymaps 'override
@@ -179,6 +179,19 @@
 
   ;; Adds to IELM outside the dolist because it doesn't have a mode function.
   (add-hook 'ielm-mode-hook #'enable-paredit-mode))
+
+
+;; Folding code blocks based on indentation.
+(use-package yafolding
+  :straight t
+  :defer t
+  :hook (ruby-mode . yafolding-mode)
+  :config
+  (general-define-key
+   :keymaps 'yafolding-mode-map
+   "C-S-RET" #'yafolding-hide-parent-element
+   "C-M-RET" #'yafolding-toggle-all
+   "C-RET" #'yafolding-toggle-element))
 
 (provide 'my-packages-misc)
 
