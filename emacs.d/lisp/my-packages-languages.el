@@ -144,8 +144,8 @@
 ;; Defines several hydras for CIDER.
 (use-package cider-hydra
   :straight t
-  :after (cider)
   :defer t
+  :after (cider)
   :hook ((clojure-mode clojurescript-mode) . cider-hydra-mode))
 
 
@@ -183,12 +183,14 @@
 ;; Provides some convenience functions for dealing with RSpec.
 (use-package rspec-mode
   :straight t
+  :defer t
   :init
   (defun my/rspec-toggle-use-docker ()
     "Toggles `rspec-use-docker-when-possible' value (`nil' or `t')."
     (interactive)
     (setq rspec-use-docker-when-possible (not rspec-use-docker-when-possible))
-    (message "Toggle rspec-use-docker-when-possible value to `%s'" rspec-use-docker-when-possible))
+    (message "Toggle rspec-use-docker-when-possible value to `%s'"
+             rspec-use-docker-when-possible))
 
   (setq rspec-use-docker-when-possible nil)
 
@@ -259,6 +261,7 @@
 
 (use-package markdown-mode
   :straight t
+  :defer t
   :mode (("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :hook (markdown-mode . flyspell-mode)
@@ -269,6 +272,7 @@
 
 (use-package plantuml-mode
   :straight t
+  :defer t
   :mode ("\\.puml\\'" . plantuml-mode)
   :init
   (setq plantuml-executable-path "~/.local/bin/plantuml")
@@ -280,6 +284,7 @@
 
 (use-package web-mode
   :straight t
+  :defer t
   :mode "\\.\\(?:\\(?:h\\(?:bs\\|tml\\)\\|liquid\\|tmpl\\)\\)\\'"
   :init
   (setq web-mode-markup-indent-offset 2)
@@ -290,8 +295,10 @@
     [remap evil-toggle-fold] #'web-mode-fold-or-unfold))
 
 
+;; TypeScript Interactive Development Environment.
 (use-package tide
   :straight t
+  :defer t
   :hook (typescript-mode . tide-setup)
   :mode ("\\.\\(ts\\|tsx\\)\\'" . typescript-mode)
   :config
@@ -300,30 +307,46 @@
 
 (use-package js2-mode
   :straight t
-  :mode "\\.js\\'"
+  :defer t
+  :mode "\\.m?js\\'"
   :init
   (setq js-indent-level 2
-    js2-bounce-indent-p nil)
+        js2-bounce-indent-p nil)
 
   ;; Disable all parse errors and warnings by default,
   ;; leaving room for flycheck to handle them.
   (setq js2-mode-show-parse-errors nil
-    js2-mode-show-strict-warnings nil
-    js2-strict-missing-semi-warning nil)
+        js2-mode-show-strict-warnings nil
+        js2-strict-missing-semi-warning nil)
 
   ;; Adds highlighting of many Ecma built-in functions.
   (setq js2-highlight-level 3))
+
+
+;; A major mode for editing JSX.
+(use-package rjsx-mode
+  :straight t
+  :defer t
+  :mode "components/.+\\.js$"
+  :init
+  (defun my/javascript-jsx-file-p ()
+    "Detect React or preact imports early in the file."
+    (and buffer-file-name
+         (string= (file-name-extension buffer-file-name) "js")
+         (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
+                            magic-mode-regexp-match-limit t)
+         (progn (goto-char (match-beginning 1))
+                (not (sp-point-in-string-or-comment)))))
+
+  (add-to-list 'magic-mode-alist '(my/javascript-jsx-file-p . rjsx-mode)))
 
 
 ;; Emulates Surround.vim for Evil. Everything about "surroundings":
 ;; parentheses, brackets, quotes, XML tags, and more.
 (use-package evil-surround
   :straight t
-
-  :after (evil)
-
   :defer t
-
+  :after (evil)
   :init
   (add-hook 'prog-mode-hook #'global-evil-surround-mode)
 
