@@ -70,11 +70,6 @@
         cider-repl-wrap-history t
         cider-show-error-buffer 'except-in-repl)
 
-  ;; Instruct CIDER to use Figwheel (use cider-jack-in-clojurescript).
-  (setq cider-default-cljs-repl "(do (require 'figwheel-sidecar.repl-api)
-                              (figwheel-sidecar.repl-api/start-figwheel!)
-                              (figwheel-sidecar.repl-api/cljs-repl))")
-
   ;; Prevent 'cider-load-buffer from prompting to save the file
   ;; corresponding to the buffer being loaded, if it's modified.
   (setq cider-save-file-on-load t)
