@@ -10,6 +10,21 @@
       - nodejs
       - npm
 
+# See https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
+- name: Create ~/.local/npm directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/npm"
+    state: directory
+
+- name: Change npm global packages directory
+  shell: "npm config set prefix {{ lookup('env', 'HOME') }}/.local/npm"
+
+- name: Add ~/.local/npm/bin to PATH
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'export PATH="$HOME/.local/npm/bin:$PATH"'
+
 #
 # nvm
 #
