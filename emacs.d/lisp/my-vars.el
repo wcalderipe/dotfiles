@@ -24,6 +24,14 @@
 
 (defconst my/gui? (display-graphic-p))
 
+(defconst my/lisp-modes '(emacs-lisp-mode
+                          common-lisp-mode
+                          lisp-mode
+                          clojure-mode
+                          clojurec-mode
+                          clojurescript-mode
+                          cider-repl-mode))
+
 (provide 'my-vars)
 
 ;;; my-vars ends here.
