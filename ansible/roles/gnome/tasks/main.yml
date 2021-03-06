@@ -26,10 +26,12 @@
     gsettings set org.gnome.desktop.interface clock-show-weekday true
     gsettings set org.gnome.desktop.interface clock-show-date true
 
-    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
     gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
     gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+
+    # Auto hide the dock. Note it will only work if both settings combined.
     gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
 
     # Remove helper buttons from gnome-terminal title bar.
     gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
