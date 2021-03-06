@@ -254,6 +254,13 @@
   :defer t)
 
 
+;; A simple language mode for the Solidity.
+(use-package solidity-mode
+  :straight t
+  :defer t
+  :mode "\\.sol\\'")
+
+
 (use-package markdown-mode
   :straight t
   :defer t
