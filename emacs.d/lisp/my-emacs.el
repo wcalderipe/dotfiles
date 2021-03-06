@@ -94,9 +94,14 @@
 
 ;; Indentation.
 (setq-default tab-width 4
-          tab-always-indent t
-          indent-tabs-mode nil
-          fill-column 80)
+              tab-always-indent t
+              indent-tabs-mode nil
+              fill-column 80)
+
+;; Set default font size (`:height' is 1/10pt).
+;; This configuration is taking into account a 27" screen with a resolution of
+;; 2560x1440 (16:9).
+(set-face-attribute 'default nil :height 103)
 
 (provide 'my-emacs)
 
