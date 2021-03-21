@@ -13,3 +13,11 @@
 - name: Run JavaScript tasks
   include_tasks: javascript.yml
   tags: [ javascript ]
+
+- name: Run Java tasks
+  include_tasks: java.yml
+  tags: [ java ]
+
+- name: Run Clojure tasks
+  include_tasks: clojure.yml
+  tags: [ clojure ]

@@ -14,7 +14,7 @@ bindkey "^R" history-incremental-search-backward
 [[ -f ~/aliases ]] && source ~/aliases
 [[ -f ~/private-variables ]] && source ~/private-variables
 
-if [ "$(uname -s)" == "Linux" ]; then
+if [ "$(uname -s)" != "Darwin" ]; then
   # Base16 shell
   BASE16_SHELL="$HOME/.config/base16-shell/"
 
@@ -23,4 +23,10 @@ if [ "$(uname -s)" == "Linux" ]; then
     eval "$("$BASE16_SHELL/profile_helper.sh")"
 
   [[ -f "$BASE16_SHELL/profile_helper.sh" ]] && base16_zenburn
+fi
+
+# TODO: jEnv initialization in the .zshenv which isn't working on MacOS.
+if [[ -d "$HOME/.jenv" ]]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
 fi
