@@ -25,3 +25,7 @@
 - name: Run Docker tasks
   include_tasks: docker.yml
   tags: [ docker ]
+
+- name: Run applications tasks
+  include_tasks: apps.yml
+  tags: [ apps ]
