@@ -2,5 +2,3 @@
   hosts: local
   roles:
     - role: macos
-      tags:
-        - macos

@@ -1,0 +1,35 @@
+- name: Install Node.js
+  homebrew:
+    name: node@15
+    state: present
+  tags: [ javascript ]
+
+- name: Install npm
+  homebrew:
+    name: npm
+    state: present
+  tags: [ javascript ]
+
+- name: Install yarn
+  homebrew:
+    name: yarn
+    state: present
+  tags: [ javascript ]
+
+#
+# nvm
+#
+
+- name: Install nvm
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ lookup('env', 'HOME') }}/.nvm"
+  tags: [ javascript ]
+
+- name: Add nvm load script in .zshenv
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    regexp: 'nvm.sh$'
+    line: "[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh"
+  tags: [ javascript ]

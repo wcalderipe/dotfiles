@@ -1,3 +1,15 @@
-- include_tasks: common.yml
-- include_tasks: iterm2.yml
-- include_tasks: emacs.yml
+- name: Run common tasks
+  include_tasks: common.yml
+  tags: [ common ]
+
+- name: Run iTerm2 tasks
+  include_tasks: iterm2.yml
+  tags: [ iterm2 ]
+
+- name: Run emacs tasks
+  include_tasks: iterm2.yml
+  tags: [ emacs ]
+
+- name: Run JavaScript tasks
+  include_tasks: javascript.yml
+  tags: [ javascript ]
