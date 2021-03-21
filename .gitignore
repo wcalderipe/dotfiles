@@ -1,3 +1,5 @@
+.DS_Store
+
 emacs.d/**/*.elc
 emacs.d/*.data
 emacs.d/.local/

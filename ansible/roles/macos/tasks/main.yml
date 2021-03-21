@@ -21,3 +21,7 @@
 - name: Run Clojure tasks
   include_tasks: clojure.yml
   tags: [ clojure ]
+
+- name: Run Docker tasks
+  include_tasks: docker.yml
+  tags: [ docker ]
