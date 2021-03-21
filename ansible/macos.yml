@@ -1,0 +1,6 @@
+- name: Set up MacOS local workstation
+  hosts: local
+  roles:
+    - role: macos
+      tags:
+        - macos

@@ -1,0 +1,126 @@
+# Interactive process viewer for the terminal.
+- name: Install htop
+  homebrew:
+    name: htop
+    state: present
+
+# A code searching tool similar to ack, with a focus on speed.
+- name: Install the_silver_searcher
+  homebrew:
+    name: the_silver_searcher
+    state: present
+
+# Language objects index files for quick lookups.
+- name: Install ctags-exuberant
+  homebrew:
+    name: ctags
+    state: present
+
+# Known as libssl-dev and libffi-dev on Linux.
+- name: Install openssl
+  homebrew:
+    name: openssl
+    state: present
+
+# Enhanced git interface for the terminal.
+- name: Install tig
+  homebrew:
+    name: tig
+    state: present
+
+# Lightweight command-line JSON processor.
+- name: Install jq
+  homebrew:
+    name: jq
+    state: present
+
+# Faster and user-friendly alternative to find.
+- name: Install fd
+  homebrew:
+    name: fd
+    state: present
+
+# Display directories as trees.
+- name: Install tree
+  homebrew:
+    name: tree
+    state: present
+
+# Useful comand-line HTML to PDF converter.
+# TODO: Verify if it needs sudo privileges.
+- name: Install wkhtmltopdf
+  homebrew_cask:
+    name: wkhtmltopdf
+    state: present
+
+- name: Create shell/aliases link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/aliases"
+    dest: "{{ lookup('env', 'HOME') }}/aliases"
+    state: link
+    force: yes
+
+- name: Create shell/vars link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/shell/vars"
+    dest: "{{ lookup('env', 'HOME') }}/vars"
+    state: link
+    force: yes
+
+# Different from .zshrc, the .zshenv is read every time a session is started and
+# a command is issued.
+#
+# The .zshenv fix the Emacs GUI issue of not found commands when they're ran
+# from within Emacs. It happens because commands are often issued with `$SHELL
+# -c`, thus ignoring the system's PATH.
+- name: Create .zshenv file
+  file:
+    path: "{{ zshenv }}"
+    state: touch
+
+- name: Create ~/.local/bin directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+
+#
+# fzf, a general-purpose command-line fuzzy finder.
+#
+
+- name: Install fzf
+  homebrew:
+    name: fzf
+    state: present
+
+- name: Set FZF_DEFAULT_OPTS
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^export FZF_DEFAULT_OPTS='
+    line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"
+
+#
+# Git
+#
+
+- name: Create .gitconfig link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.gitconfig"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    state: link
+    force: yes
+
+#
+# PlantUML, a tool to create diagrams from a plain text language.
+#
+
+- name: Install PlantUML
+  homebrew:
+    name: plantuml
+    state: present
+
+- name: Link plantuml to ~/.local/bin
+  file:
+    src: "/usr/bin/plantuml"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/plantuml"
+    state: link
+    force: yes

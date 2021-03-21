@@ -1,0 +1,91 @@
+- name: Install emacs (GUI)
+  homebrew_cask:
+    name: emacs
+    state: present # 27.1
+
+# Electronic lexical database of English language.
+- name: Install wordnet required by wordnut
+  homebrew:
+    name: wordnet
+    state: present
+  tags:
+    - deps
+
+- name: Install xclip required by emacsmirror/xclip
+  homebrew:
+    name: xclip
+    state: present
+  tags:
+    - deps
+
+- name: Install fd required by projectile
+  homebrew:
+    name: fd
+    state: present
+  tags:
+    - deps
+
+# Convert bin/plantuml output into a suitable image format to be rendered in the
+# Emacs GUI.
+- name: Install imagemagick required by plantuml-mode
+  homebrew:
+    name: imagemagick
+    state: present
+  tags:
+    - deps
+
+# Markdown text to HTML used to live preview while editing `.md` files.
+- name: Install markdown required by org-roam
+  homebrew:
+    name: markdown
+    state: present
+  tags:
+    - deps
+
+- name: Install graphviz required by org-roam
+  homebrew:
+    name: graphviz
+    state: present
+  tags:
+    - deps
+
+- name: Install sqlite3 required by org-roam
+  homebrew:
+    name: sqlite3
+    state: present
+  tags:
+    - deps
+
+- name: Install ripgrep required by Wilfred/deadgrep
+  homebrew:
+    name: ripgrep
+    state: present
+  tags:
+    - deps
+
+- name: Create .emacs.d link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/emacs.d"
+    dest: "{{ lookup('env', 'HOME') }}/.emacs.d"
+    state: link
+    force: yes
+
+- name: Create emacsclient --tty shorthand alias
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^alias e='
+    line: "alias e='emacsclient --tty'"
+
+- name: Set EDITOR to emacsclient with --tty option
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^export EDITOR='
+    line: "export EDITOR='emacsclient --tty'"
+
+# Editor to fallback to if the server is not running If EDITOR is the
+# empty string, start Emacs in daemon mode and try connecting again.
+- name: Set ALTERNATE_EDITOR to empty string
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: "^export ALTERNATE_EDITOR="
+    line: "export ALTERNATE_EDITOR=''"
