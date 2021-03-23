@@ -207,6 +207,11 @@
   ;; Screens are larger nowadays, we can afford slightly larger thumbnails
   (setq image-dired-thumb-size 150)
 
+  (when (my/macos?)
+    ;; Fix dired directory listing issue on MacOS by using GNU ls.
+    ;; See https://emacs.stackexchange.com/q/53904
+    (setq insert-directory-program "/opt/homebrew/opt/coreutils/bin/gls"))
+
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
   :config
