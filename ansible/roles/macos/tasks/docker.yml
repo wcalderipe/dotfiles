@@ -1,11 +1,9 @@
 - name: Install Docker
   homebrew:
     name: docker
-    state: present
   tags: [ docker ]
 
 - name: Install docker-compose
   homebrew:
     name: docker-compose
-    state: present
   tags: [ docker ]

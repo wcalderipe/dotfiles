@@ -1,13 +1,11 @@
 - name: Install Java JDK
   homebrew:
     name: java
-    state: present
   tags: [ java ]
 
 - name: Install jEnv
   homebrew:
     name: jenv
-    state: present
   tags: [ java ]
 
 # TODO: jEnv initialization in the .zshenv which isn't working on MacOS.

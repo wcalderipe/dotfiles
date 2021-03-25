@@ -22,7 +22,6 @@
 - name: Install wordnet required by wordnut
   homebrew:
     name: wordnet
-    state: present
   tags: [ emacs, deps ]
 
 - name: Install xclip required by emacsmirror/xclip
@@ -34,7 +33,6 @@
 - name: Install fd required by projectile
   homebrew:
     name: fd
-    state: present
   tags: [ emacs, deps ]
 
 # Convert bin/plantuml output into a suitable image format to be rendered in the
@@ -42,38 +40,32 @@
 - name: Install imagemagick required by plantuml-mode
   homebrew:
     name: imagemagick
-    state: present
   tags: [ emacs, deps ]
 
 # Markdown text to HTML used to live preview while editing `.md` files.
 - name: Install markdown required by org-roam
   homebrew:
     name: markdown
-    state: present
   tags: [ emacs, deps ]
 
 - name: Install graphviz required by org-roam
   homebrew:
     name: graphviz
-    state: present
   tags: [ emacs, deps ]
 
 - name: Install sqlite3 required by org-roam
   homebrew:
     name: sqlite3
-    state: present
   tags: [ emacs, deps ]
 
 - name: Install ripgrep required by Wilfred/deadgrep
   homebrew:
     name: ripgrep
-    state: present
   tags: [ emacs, deps ]
 
 - name: Install GNU core utils required by dired
   homebrew:
     name: coreutils
-    state: present
   tags: [ emacs, deps ]
 
 - name: Create .emacs.d link

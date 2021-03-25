@@ -2,56 +2,47 @@
 - name: Install htop
   homebrew:
     name: htop
-    state: present
 
 # A code searching tool similar to ack, with a focus on speed.
 - name: Install the_silver_searcher
   homebrew:
     name: the_silver_searcher
-    state: present
 
 # Language objects index files for quick lookups.
 - name: Install ctags-exuberant
   homebrew:
     name: ctags
-    state: present
 
 # Known as libssl-dev and libffi-dev on Linux.
 - name: Install openssl
   homebrew:
     name: openssl
-    state: present
 
 # Enhanced git interface for the terminal.
 - name: Install tig
   homebrew:
     name: tig
-    state: present
 
 # Lightweight command-line JSON processor.
 - name: Install jq
   homebrew:
     name: jq
-    state: present
 
 # Faster and user-friendly alternative to find.
 - name: Install fd
   homebrew:
     name: fd
-    state: present
 
 # Display directories as trees.
 - name: Install tree
   homebrew:
     name: tree
-    state: present
 
 # Useful comand-line HTML to PDF converter.
 # TODO: Verify if it needs sudo privileges.
 - name: Install wkhtmltopdf
   homebrew_cask:
     name: wkhtmltopdf
-    state: present
 
 - name: Create shell/aliases link
   file:
@@ -90,7 +81,6 @@
 - name: Install fzf
   homebrew:
     name: fzf
-    state: present
 
 - name: Set FZF_DEFAULT_OPTS
   lineinfile:
@@ -116,7 +106,6 @@
 - name: Install PlantUML
   homebrew:
     name: plantuml
-    state: present
 
 - name: Link plantuml to ~/.local/bin
   file:

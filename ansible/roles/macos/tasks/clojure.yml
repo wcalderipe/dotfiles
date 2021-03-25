@@ -1,13 +1,11 @@
 - name: Install Java JDK
   homebrew:
     name: java
-    state: present
   tags: [ clojure ]
 
 - name: Install Clojure CLI
   homebrew:
     name: clojure/tools/clojure
-    state: present
   tags: [ clojure ]
 
 - name: Check Clojure's version. If not present, install the latest

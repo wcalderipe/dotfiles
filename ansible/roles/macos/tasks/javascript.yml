@@ -1,19 +1,16 @@
 - name: Install Node.js
   homebrew:
     name: node@15
-    state: present
   tags: [ javascript ]
 
 - name: Install npm
   homebrew:
     name: npm
-    state: present
   tags: [ javascript ]
 
 - name: Install yarn
   homebrew:
     name: yarn
-    state: present
   tags: [ javascript ]
 
 #
