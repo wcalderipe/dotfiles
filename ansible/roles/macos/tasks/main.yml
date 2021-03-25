@@ -1,31 +1,23 @@
-- name: Run common tasks
-  include_tasks: common.yml
+- include_tasks: common.yml
   tags: [ common ]
 
-- name: Run iTerm2 tasks
-  include_tasks: iterm2.yml
+- include_tasks: iterm2.yml
   tags: [ iterm2 ]
 
-- name: Run emacs tasks
-  include_tasks: emacs.yml
+- include_tasks: emacs.yml
   tags: [ emacs ]
 
-- name: Run JavaScript tasks
-  include_tasks: javascript.yml
+- include_tasks: javascript.yml
   tags: [ javascript ]
 
-- name: Run Java tasks
-  include_tasks: java.yml
+- include_tasks: java.yml
   tags: [ java ]
 
-- name: Run Clojure tasks
-  include_tasks: clojure.yml
+- include_tasks: clojure.yml
   tags: [ clojure ]
 
-- name: Run Docker tasks
-  include_tasks: docker.yml
+- include_tasks: docker.yml
   tags: [ docker ]
 
-- name: Run applications tasks
-  include_tasks: apps.yml
+- include_tasks: apps.yml
   tags: [ apps ]
