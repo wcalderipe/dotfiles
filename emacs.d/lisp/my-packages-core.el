@@ -248,17 +248,6 @@
    "gs" #'magit-status))
 
 
-;; Evil keybindings for Magit.
-(use-package evil-magit
-  :straight t
-  :defer t
-
-  :hook (magit-mode . evil-magit-init)
-
-  :init
-  (setq evil-magit-state 'normal))
-
-
 ;; Allows Emacs to copy and to paste from the system clipboard.
 (use-package xclip
   :straight t
