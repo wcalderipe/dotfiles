@@ -380,7 +380,7 @@
 
   ;; It's recommended to use fd as a replacement for both git ls-files
   ;; and find.
-  (setq projectile-generic-command "fdfind . --color=never --type f -0 -H -E .git"
+  (setq projectile-generic-command (concat (if (my/macos?) "fd" "fdfind") " . --color=never --type f -0 -H -E .git")
         projectile-git-command projectile-generic-command)
 
   ;; Skip warnings about unsafe variables in .dir-locals.el
