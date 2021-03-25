@@ -103,6 +103,9 @@
 ;; 2560x1440 (16:9).
 (set-face-attribute 'default nil :height 103)
 
+;; Set left and right fringe 4 pixels wide.
+(fringe-mode '(4 . 4))
+
 (provide 'my-emacs)
 
 ;;; my-emacs ends here.
