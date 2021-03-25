@@ -208,6 +208,13 @@
     (let ((hook (intern (concat (symbol-name mode) "-hook"))))
       (add-hook hook #'aggressive-indent-mode))))
 
+
+;; Ensure environment variables inside Emacs look the same as in the user's
+;; shell.
+(use-package exec-path-from-shell
+  :straight t)
+
+
 (provide 'my-packages-misc)
 
 ;;; my-packages-misc ends here.
