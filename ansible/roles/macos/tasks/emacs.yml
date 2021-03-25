@@ -1,7 +1,21 @@
-- name: Install emacs (GUI)
-  homebrew_cask:
-    name: emacs
-    state: present # 27.1
+# Follow Doom Emacs installation guide
+# See https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#on-macos
+- name: Tap Homebrew railwaycat/emacsmacport
+  homebrew_tap:
+    name: railwaycat/emacsmacport
+  tags: [ emacs ]
+
+- name: Install Emacs
+  homebrew:
+    name: emacs-mac
+    install_options: with-modules
+  tags: [ emacs ]
+
+- name: Create Emacs.app link in /Applications/
+  file:
+    src: /opt/homebrew/opt/emacs-mac/Emacs.app
+    dest: /Applications
+    state: link
   tags: [ emacs ]
 
 # Electronic lexical database of English language.
