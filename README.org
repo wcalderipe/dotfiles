@@ -1,4 +1,5 @@
 #+setupfile: ~/dev/dotfiles/setup.org
+#+options: toc:2
 
 * dotfiles
 
@@ -10,7 +11,7 @@ A continouos working in progress of my workstation personal configurations.
 
 See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
-** Installation
+** Install
 
    I'm using Ansible to manage system dependencies and configuration
    orchestration.
@@ -84,6 +85,14 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
     Unfortunately, a container has its limitations. It will only work for the
     Linux dotfiles. Moreover, it won't cover software that depends on GUI like
     Emacs (outside the terminal) and GNOME.
+
+
+** Uninstall
+
+   #+begin_src shell
+     # Remove all links created in your home directory.
+     $DOTFILES_DIR/shell/clean.sh
+   #+end_src
 
 ** Rationale
 
