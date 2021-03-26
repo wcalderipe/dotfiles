@@ -2,47 +2,56 @@
 - name: Install htop
   homebrew:
     name: htop
+  tags: [ common, deps ]
 
 # A code searching tool similar to ack, with a focus on speed.
 - name: Install the_silver_searcher
   homebrew:
     name: the_silver_searcher
+  tags: [ common, deps ]
 
 # Language objects index files for quick lookups.
 - name: Install ctags-exuberant
   homebrew:
     name: ctags
+  tags: [ common, deps ]
 
 # Known as libssl-dev and libffi-dev on Linux.
 - name: Install openssl
   homebrew:
     name: openssl
+  tags: [ common, deps ]
 
 # Enhanced git interface for the terminal.
 - name: Install tig
   homebrew:
     name: tig
+  tags: [ common, deps ]
 
 # Lightweight command-line JSON processor.
 - name: Install jq
   homebrew:
     name: jq
+  tags: [ common, deps ]
 
 # Faster and user-friendly alternative to find.
 - name: Install fd
   homebrew:
     name: fd
+  tags: [ common, deps ]
 
 # Display directories as trees.
 - name: Install tree
   homebrew:
     name: tree
+  tags: [ common, deps ]
 
 # Useful comand-line HTML to PDF converter.
 # TODO: Verify if it needs sudo privileges.
 - name: Install wkhtmltopdf
   homebrew_cask:
     name: wkhtmltopdf
+  tags: [ common, deps ]
 
 - name: Create shell/aliases link
   file:
@@ -50,6 +59,7 @@
     dest: "{{ lookup('env', 'HOME') }}/aliases"
     state: link
     force: yes
+  tags: [ common ]
 
 - name: Create shell/vars link
   file:
@@ -57,6 +67,7 @@
     dest: "{{ lookup('env', 'HOME') }}/vars"
     state: link
     force: yes
+  tags: [ common ]
 
 # Different from .zshrc, the .zshenv is read every time a session is started and
 # a command is issued.
@@ -68,11 +79,20 @@
   file:
     path: "{{ zshenv }}"
     state: touch
+  tags: [ common ]
 
 - name: Create ~/.local/bin directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/bin"
     state: directory
+  tags: [ common ]
+
+- name: Add ~/.local/bin to PATH
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+  tags: [ common ]
 
 #
 # fzf, a general-purpose command-line fuzzy finder.
@@ -81,12 +101,14 @@
 - name: Install fzf
   homebrew:
     name: fzf
+  tags: [ common, deps ]
 
 - name: Set FZF_DEFAULT_OPTS
   lineinfile:
     path: "{{ zshenv }}"
     regexp: '^export FZF_DEFAULT_OPTS='
     line: "export FZF_DEFAULT_OPTS='--layout=reverse --border --inline-info'"
+  tags: [ common, deps ]
 
 #
 # Git
@@ -106,6 +128,7 @@
 - name: Install PlantUML
   homebrew:
     name: plantuml
+  tags: [ common, deps ]
 
 - name: Link plantuml to ~/.local/bin
   file:
@@ -113,3 +136,4 @@
     dest: "{{ lookup('env', 'HOME') }}/.local/bin/plantuml"
     state: link
     force: yes
+  tags: [ common, deps ]
