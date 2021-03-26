@@ -6,7 +6,9 @@
 
 A continouos working in progress of my workstation personal configurations.
 
-[[resources/screenshot-emacs.png]]
+[[resources/linux-screenshot-emacs.png]]
+
+[[resources/macos-screenshot-emacs.png]]
 
 ** DONE Everything must have a purpose
    CLOSED: [2020-07-28 mar. 20:30]
