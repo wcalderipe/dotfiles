@@ -150,33 +150,21 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
      GitHub pages might be a good candidate.
 
-** PDF Operations
+** Cheat Sheet
 
-   To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
+*** PDF Operations
 
-   #+begin_src shell
-     wkhtmltopdf SOURCE.html TARGET.pdf
-   #+end_src
+    To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
 
-** VSCode
+    #+begin_src shell
+      wkhtmltopdf SOURCE.html TARGET.pdf
+    #+end_src
 
-   I use VSCode as backup text editor.
+*** Kill process by port
 
-   Install the dependencies listed in [[vscode/extensions.txt]].
-
-   #+begin_src shell
-     cat ~/dev/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
-
-     # To list the installed extensions.
-     code --list-extensions
-   #+end_src
-
-
-** Kill process by port
-
-   I often have ghost processes started from within Emacs but never properly
-   terminated blocking ports. The command below help me to kill a process by its
-   port number.
+    I often have ghost processes started from within Emacs but never properly
+    terminated blocking ports. The command below help me to kill a process by its
+    port number.
 
     #+begin_src shell
       kill -9 $(lsof -i tcp:3000 -t)
