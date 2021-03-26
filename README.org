@@ -159,6 +159,10 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
      GitHub pages might be a good candidate.
 
+*** TODO Fix export to HTML without a theme
+
+    See =setup.org= and =org.css=.:
+
 ** Cheat Sheet
 
 *** PDF Operations
