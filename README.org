@@ -58,6 +58,28 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
    I'm using Ansible to manage system dependencies and configuration
    orchestration.
 
+*** MacOS
+
+    You first need to install Homebrew by following the instructions from their
+    [[https://brew.sh/][official website]].
+
+    #+begin_src shell
+      # Install Xcode Command Line Tools
+      xcode-select --install
+
+      # Install git and ansible
+      brew install git ansible
+
+      # To install everything from scratch.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          ./ansible/macos.yml
+    #+end_src
+
+    See [[./ansible/macos.yml][ansible/macos.yml]] for the full list tags.
+
+*** Linux
+
    #+BEGIN_SRC shell
      # Before start, install the minimal dependencies.
      sudo apt-get install git ansible --quiet --yes
@@ -65,23 +87,23 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
      # To install everything from scratch.
      ansible-playbook \
          --inventory ./ansible/hosts \
-         ./ansible/main.yml
+         ./ansible/linux.yml
 
      # You can also filter or skip by tags.
      ansible-playbook \
          --inventory ./ansible/hosts \
          --tags "emacs" \
          --skip-tags "deps" \
-         ./ansible/main.yml
+         ./ansible/linux.yml
 
      # To install in a Docker container, skip apps, gnome and keyboard tags.
      ansible-playbook \
          --inventory ./ansible/hosts \
          --skip-tags "apps,gnome,keyboard" \
-         ./ansible/main.yml
+         ./ansible/linux.yml
    #+END_SRC
 
-   See [[ansible/main.yml]] for the full list tags.
+   See [[ansible/linux.yml]] for the full list tags.
 
 ** Emacs Key Bindings
 
