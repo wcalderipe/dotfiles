@@ -1,0 +1,35 @@
+- include_tasks: common.yml
+  tags: [ common ]
+
+- include_tasks: terminal.yml
+  tags: [ terminal ]
+
+- include_tasks: docker.yml
+  tags: [ docker ]
+
+- include_tasks: emacs.yml
+  tags: [ emacs ]
+
+- include_tasks: javascript.yml
+  tags: [ javascript ]
+
+- include_tasks: java.yml
+  tags: [ java ]
+
+- include_tasks: clojure.yml
+  tags: [ clojure ]
+
+- include_tasks: ruby.yml
+  tags: [ ruby ]
+
+- include_tasks: apps.yml
+  tags: [ apps ]
+
+- include_tasks: gnome.yml
+  tags: [ gnome ]
+
+- include_tasks: kubernetes.yml
+  tags: [ kubernetes ]
+
+- include_tasks: keyboard.yml
+  tags: [ keyboard ]

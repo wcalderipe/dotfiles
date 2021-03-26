@@ -1,0 +1,84 @@
+- name: Install emacs packages' system dependencies
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      # Some packages depends on build-essential tools such as `make`
+      # to build from source.
+      - build-essential
+      # Install makeinfo for the same reason above.
+      - texinfo
+
+      # Electronic lexical database of English language.
+      # Required by: wordnut
+      - wordnet
+
+      # Required by: emacsmirror/xclip
+      - xclip
+
+      # Required by: projectile
+      - fd-find
+
+      # Convert bin/plantuml output into a suitable image format to be
+      # rendered in the Emacs GUI.
+      # Required by: plantuml-mode
+      - imagemagick
+
+      # Markdown text to HTML used to live preview while editing `.md` files.
+      # Required by: markdown-mode
+      - markdown
+
+      # Roam replica built on top of Org-mode.
+      # Required by: org-roam
+      - graphviz
+      - sqlite3
+  tags: [ emacs ]
+
+
+# Faster recursive search using a regex patter.
+# Required by: Wilfred/deadgrep
+- name: Install ripgrep
+  become: yes
+  become_user: root
+  apt:
+    deb: https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+  tags: [ emacs ]
+
+- name: Install emacs
+  become: yes
+  become_user: root
+  apt:
+    name: emacs
+    state: present
+  tags: [ emacs ]
+
+- name: Create .emacs.d link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/emacs.d"
+    dest: "{{ lookup('env', 'HOME') }}/.emacs.d"
+    state: link
+    force: yes
+  tags: [ emacs ]
+
+- name: Create emacsclient --tty shorthand alias
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^alias e='
+    line: "alias e='emacsclient --tty'"
+  tags: [ emacs ]
+
+- name: Set EDITOR to emacsclient with --tty option
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^export EDITOR='
+    line: "export EDITOR='emacsclient --tty'"
+  tags: [ emacs ]
+
+# Editor to fallback to if the server is not running If EDITOR is the
+# empty string, start Emacs in daemon mode and try connecting again.
+- name: Set ALTERNATE_EDITOR to empty string
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: "^export ALTERNATE_EDITOR="
+    line: "export ALTERNATE_EDITOR=''"
+  tags: [ emacs ]

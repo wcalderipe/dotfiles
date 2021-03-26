@@ -1,0 +1,76 @@
+#
+# zsh
+#
+
+- name: Install zsh
+  become: yes
+  become_user: root
+  apt:
+    name: zsh
+    state: present
+  tags: [ terminal, zsh ]
+
+- name: Set zsh as default shell
+  become: yes
+  become_user: root
+  command: "chsh -s /bin/zsh {{ lookup('env', 'USER') }}"
+  tags: [ terminal, zsh ]
+
+- name: Install Base16 shell
+  git:
+    repo: https://github.com/chriskempson/base16-shell.git
+    dest: "{{ lookup('env', 'HOME') }}/.config/base16-shell"
+  tags: [ terminal, zsh ]
+
+- name: Create .zshrc link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.zshrc"
+    dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+    state: link
+    force: yes
+  tags: [ terminal, zsh ]
+
+#
+# zprezto
+#
+
+- name: Install zprezto
+  git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "{{ lookup('env', 'HOME') }}/.zprezto"
+    recursive: true
+  tags: [ terminal, zprezto ]
+
+- name: Create .zpreztorc link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.zpreztorc"
+    dest: "{{ lookup('env', 'HOME') }}/.zpreztorc"
+    state: link
+    force: yes
+  tags: [ terminal, zprezto ]
+
+#
+# tmux
+#
+
+- name: Install tmux
+  become: yes
+  become_user: root
+  apt:
+    name: tmux
+    state: present
+  tags: [ terminal, tmux ]
+
+- name: install tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+  tags: [ terminal, tmux ]
+
+- name: Create .tmux.conf link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.tmux.conf"
+    dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+    state: link
+    force: yes
+  tags: [ terminal, tmux ]

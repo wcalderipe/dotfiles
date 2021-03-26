@@ -1,0 +1,38 @@
+- name: Install packages
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      # Tool to adjust advanced configuration settings for GNOME.
+      - gnome-tweaks
+  tags: [ gnome ]
+
+- name: Setup gnome preferences
+  shell: |
+    # Modify CAPS to CTRL and set R-ALT as compose key.
+    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'compose:ralt']"
+
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+
+    gsettings set org.gnome.desktop.interface gtk-theme Yaru-dark
+    gsettings set org.gnome.desktop.interface show-battery-percentage true
+    gsettings set org.gnome.desktop.interface clock-format 12h
+    gsettings set org.gnome.desktop.interface clock-show-weekday true
+    gsettings set org.gnome.desktop.interface clock-show-date true
+
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
+    gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+
+    # Auto hide the dock. Note it will only work if both settings combined.
+    gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+
+    # Remove helper buttons from gnome-terminal title bar.
+    gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+    gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+  tags: [ gnome ]
+
+- name: Set wallpaper
+  command: "gsettings set org.gnome.desktop.background picture-uri file:////{{ lookup('env', 'DOTFILES_DIR') }}/resources/wallpaper.jpg"
+  tags: [ gnome ]

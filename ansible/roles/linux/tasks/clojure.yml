@@ -1,0 +1,26 @@
+# TODO: Update JDK version
+- name: Install Java JDK 11
+  become: yes
+  become_user: root
+  apt:
+    name: openjdk-11-jdk
+  tags: [ clojure ]
+
+- name: Ensure ~/.local/bin exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags: [ clojure ]
+
+- name: Download leiningen
+  get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/lein"
+    mode: "+x"
+  tags: [ clojure ]
+
+- name: Install Clojure
+  command: "{{ lookup('env', 'HOME') }}/.local/bin/lein -v"
+  tags: [ clojure ]
+
+# TODO: Add Clojure CLI
