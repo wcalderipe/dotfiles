@@ -103,8 +103,9 @@
 ;; 2560x1440 (16:9).
 (set-face-attribute 'default nil :height 103)
 
-;; Set left and right fringe 4 pixels wide.
-(fringe-mode '(4 . 4))
+;; Set right fringe 8 pixels wide and remove the left one.
+(when (my/macos?)
+  (fringe-mode '(0 . 0)))
 
 (provide 'my-emacs)
 
