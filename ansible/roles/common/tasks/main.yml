@@ -51,6 +51,12 @@
     path: "{{ lookup('env', 'HOME') }}/.local/bin"
     state: directory
 
+- name: Add ~/.local/bin to PATH
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+
 #
 # fzf
 #
