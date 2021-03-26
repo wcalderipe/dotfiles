@@ -15,7 +15,7 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
    I'm using Ansible to manage system dependencies and configuration
    orchestration.
 
-*** MacOS
+*** macOS
 
     You first need to install Homebrew by following the instructions from their
     [[https://brew.sh/][official website]].
@@ -37,8 +37,8 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
 *** Linux
 
-    ⚠️ I have been using MacOS lately. Keep in mind a few things may be out
-    of date on Linux.
+    ⚠️  I have been using macOS lately. Keep in mind a few things may be out of
+    date on Linux.
 
     #+begin_src shell
       # Before start, install the minimal dependencies.
@@ -203,13 +203,36 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
     https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029
 
+** macOS
 
-** MacOS
+*** defaults cheat sheet
+
+    #+begin_quote
+      macOS applications and other programs use the defaults system to record
+      user preferences and other information to be maintained when the
+      application isn't running (font for new documents, or the position of an
+      Info panel).
+    #+end_quote
+
+    See also https://macos-defaults.com
+
+    #+begin_src shell
+      # Boolean
+      defaults write -g ApplePressAndHoldEnabled -bool false
+      # Integer
+      defaults write -g InitialKeyRepeat -int 15
+      # Keys that belong to a domain
+      defaults read com.apple.Accessibility KeyRepeatDelay
+      # Get key type
+      defaults read-type com.apple.Accessibility KeyRepeatDelay
+    #+end_src
+
+    **Note** you'll need to log-out and log back in to apply the changes.
 
 *** Tmux
 
-    I have removed tmux because it was causing errors with Emacs'
-    exec-path-from-shell package.
+    I have removed Tmux because it was causing errors with Emacs'
+    =exec-path-from-shell= package.
 
     #+begin_src yaml
       # ansible/roles/macos/tasks/iterm2.yml

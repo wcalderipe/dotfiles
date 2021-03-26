@@ -21,3 +21,6 @@
 
 - include_tasks: apps.yml
   tags: [ apps ]
+
+- include_tasks: macos.yml
+  tags: [ macos ]
