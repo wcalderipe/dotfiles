@@ -10,49 +10,6 @@ A continouos working in progress of my workstation personal configurations.
 
 See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
-** DONE Everything must have a purpose
-   CLOSED: [2020-07-28 mar. 20:30]
-
-   If I don't know why it's there it will be removed. I normally tend to
-   forget things in the long run, so documentation here will be the key.
-
-** DONE Isolation
-   CLOSED: [2020-08-17 lun. 08:36]
-
-   Everything must be self contained. I want to be able to add and remove
-   configurations or softwares without a hassle - like the headache of hunting
-   scattered files and scripts in the codebase.
-
-** DONE Testability
-   CLOSED: [2020-07-28 mar. 20:32]
-
-   I like to run my dotfiles in an isolate docker container from time-to-time so I
-   can safely test new configurations outside of my daily workstation. This
-   practice gives me a minimal level of confidence that I won't blew my whole
-   local environment in a Monday morning because I was willing to test a new
-   software in my stack.
-
-   The driver that justify this effort is continuous improvement on my workflow.
-
-   #+BEGIN_SRC shell
-     docker build --tag dotfiles .
-
-     docker run -it \
-            --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
-            dotfiles
-   #+END_SRC
-
-   Unfortunately a container have some limitations. For instance, obviously
-   everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
-   GUI). I also have some custom configurations for my peripherals such as
-   keyboard, that isn't covered as well.
-
-** DONE Automation
-   CLOSED: [2020-07-28 mar. 20:32]
-
-   After push a button, it must have zero human interaction until
-   everything is done.
-
 ** Installation
 
    I'm using Ansible to manage system dependencies and configuration
@@ -80,7 +37,7 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
 *** Linux
 
-   #+BEGIN_SRC shell
+   #+begin_src shell
      # Before start, install the minimal dependencies.
      sudo apt-get install git ansible --quiet --yes
 
@@ -101,9 +58,57 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
          --inventory ./ansible/hosts \
          --skip-tags "apps,gnome,keyboard" \
          ./ansible/linux.yml
-   #+END_SRC
+   #+end_src
 
    See [[ansible/linux.yml]] for the full list tags.
+
+*** Docker
+
+    #+begin_src shell
+      docker build --tag dotfiles .
+
+      docker run -it \
+             --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
+             dotfiles
+
+      docker run dotfiles \
+             ansible-playbook \
+             --inventory ./ansible/hosts \
+             --skip-tags "apps,gnome,keyboard" \
+             ./ansible/linux.yml
+    #+end_src
+
+    Unfortunately, a container has its limitations. It will only work for the
+    Linux dotfiles. Moreover, it won't cover software that depends on GUI like
+    Emacs (outside the terminal) and GNOME.
+
+** Rationale
+
+*** Everything must have a purpose
+
+    If I don't know why it's there, it will remove it. I usually tend to forget
+    things in the long run, so documentation here will be the key.
+
+*** Isolation
+
+    Everything must be self-contained. I want to add and remove configurations
+    or software without a hassle - like the headache of hunting scattered files
+    and scripts in the codebase.
+
+*** Testability
+
+    I like to run my dotfiles in an isolated Docker container from time-to-time,
+    so I can safely test new configurations outside of my daily
+    workstation. This practice gives me a minimal level of confidence that I
+    won't blow my whole local environment on a Monday morning because I was
+    willing to test new software in my stack.
+
+    The driver that justifies this effort is continuous improvement on my workflow.
+
+*** Automation
+
+   After push a button, it must have zero human interaction until
+   everything is done.
 
 ** Emacs Key Bindings
 
