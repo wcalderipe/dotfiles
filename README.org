@@ -113,19 +113,22 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
    After push a button, it must have zero human interaction until
    everything is done.
 
-** Emacs Key Bindings
 
-   My key bindings are defined using [[https://github.com/noctuid/general.el#about][general.el]] within [[https://github.com/jwiegley/use-package][use-package]] scattered in
-   =lisp/my-*= files. So, if you want to check them all do =M-x
-   general-describe-keybindings=.
+** Emacs
 
-** Emacs Tabs
+*** Key Binding
 
-   I normally have multiple projects open at the same time in Emacs and I like
-   to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
-   with [[https://github.com/abo-abo/hydra][hydra]].
+    My key bindings are defined using [[https://github.com/noctuid/general.el#about][general.el]] within [[https://github.com/jwiegley/use-package][use-package]] scattered in
+    =lisp/my-*= files. So, if you want to check them all do =M-x
+    general-describe-keybindings=.
 
-   Hit =C-c + t= to see the menu.
+*** Emacs Tabs
+
+    I normally have multiple projects open at the same time in Emacs and I like
+    to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
+    with [[https://github.com/abo-abo/hydra][hydra]].
+
+    Hit =C-c + t= to see the menu.
 
 ** Org
 
