@@ -255,3 +255,14 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
           force: yes
         tags: [ iterm2 ]
     #+end_src
+
+*** TODO Automate iTerm2 theme download and installation
+
+    See https://iterm2colorschemes.com/
+
+*** TODO Add VSCode CLI
+
+    #+begin_src shell
+      # This is suppose to work
+      export PATH="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH"
+    #+end_src
