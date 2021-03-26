@@ -29,26 +29,3 @@
     state: link
     force: yes
   tags: [ iterm2 ]
-
-#
-# tmux
-#
-
-- name: Install tmux
-  homebrew:
-    name: tmux
-  tags: [ iterm2 ]
-
-- name: install tpm
-  git:
-    repo: https://github.com/tmux-plugins/tpm.git
-    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
-  tags: [ iterm2 ]
-
-- name: Create .tmux.conf link
-  file:
-    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.tmux.conf"
-    dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-    state: link
-    force: yes
-  tags: [ iterm2 ]
