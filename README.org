@@ -37,30 +37,33 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
 *** Linux
 
-   #+begin_src shell
-     # Before start, install the minimal dependencies.
-     sudo apt-get install git ansible --quiet --yes
+    ⚠️ I have been using MacOS lately. Keep in mind a few things may be out
+    of date on Linux.
 
-     # To install everything from scratch.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         ./ansible/linux.yml
+    #+begin_src shell
+      # Before start, install the minimal dependencies.
+      sudo apt-get install git ansible --quiet --yes
 
-     # You can also filter or skip by tags.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         --tags "emacs" \
-         --skip-tags "deps" \
-         ./ansible/linux.yml
+      # To install everything from scratch.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          ./ansible/linux.yml
 
-     # To install in a Docker container, skip apps, gnome and keyboard tags.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         --skip-tags "apps,gnome,keyboard" \
-         ./ansible/linux.yml
-   #+end_src
+      # You can also filter or skip by tags.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --tags "emacs" \
+          --skip-tags "deps" \
+          ./ansible/linux.yml
 
-   See [[ansible/linux.yml]] for the full list tags.
+      # To install in a Docker container, skip apps, gnome and keyboard tags.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --skip-tags "apps,gnome,keyboard" \
+          ./ansible/linux.yml
+    #+end_src
+
+    See [[ansible/linux.yml]] for the full list tags.
 
 *** Docker
 
