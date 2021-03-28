@@ -50,6 +50,14 @@
   (ivy-rich-mode))
 
 
+;; On-the-fly spell checking.
+(use-package flyspell
+  :defer t
+  :init
+  (when (my/macos?)
+    (setq ispell-program-name "aspell")))
+
+
 ;; Distraction-free words correction with flyspell via Ivy.
 (use-package flyspell-correct-ivy
   :straight t

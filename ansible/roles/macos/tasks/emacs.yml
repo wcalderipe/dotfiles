@@ -68,6 +68,11 @@
     name: coreutils
   tags: [ emacs, deps ]
 
+- name: Install aspell required by flyspell-mode
+  homebrew:
+    name: aspell
+  tags: [ emacs, deps ]
+
 - name: Create .emacs.d link
   file:
     src: "{{ lookup('env', 'DOTFILES_DIR') }}/emacs.d"
