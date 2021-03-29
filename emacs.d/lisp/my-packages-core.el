@@ -509,28 +509,28 @@
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'right))
-      (enlarge-window-horizontally arg)
+        (enlarge-window-horizontally arg)
       (shrink-window-horizontally arg)))
 
   (defun my/window-resize-left (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'right))
-      (shrink-window-horizontally arg)
+        (shrink-window-horizontally arg)
       (enlarge-window-horizontally arg)))
 
   (defun my/window-resize-up (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'up))
-      (enlarge-window arg)
+        (enlarge-window arg)
       (shrink-window arg)))
 
   (defun my/window-resize-down (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'up))
-      (shrink-window arg)
+        (shrink-window arg)
       (enlarge-window arg)))
 
   :config
