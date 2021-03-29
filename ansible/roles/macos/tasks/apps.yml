@@ -21,3 +21,15 @@
   homebrew_cask:
     name: insomnia
   tags: [ apps ]
+
+# Screenshot with annotation tool.
+- name: Install Skitch
+  homebrew_cask:
+    name: skitch
+  tags: [ apps ]
+
+# Top bar resources dashboards.
+- name: Install iGlance
+  homebrew_cask:
+    name: iglance
+  tags: [ apps ]
