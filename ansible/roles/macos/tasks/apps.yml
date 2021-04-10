@@ -33,3 +33,10 @@
   homebrew_cask:
     name: iglance
   tags: [ apps ]
+
+# Prevent macOS from automatically going to sleep, dimming the screen or
+# starting screen savers.
+- name: Install Caffeine
+  homebrew_cask:
+    name: caffeine
+  tags: [ apps ]
