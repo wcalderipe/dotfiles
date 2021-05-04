@@ -46,6 +46,12 @@
     name: tree
   tags: [ common, deps ]
 
+# OpenPGP standard implementation.
+- name: Install gnupg
+  homebrew:
+    name: gnupg
+  tags: [ common, deps ]
+
 # Useful comand-line HTML to PDF converter.
 # TODO: Verify if it needs sudo privileges.
 - name: Install wkhtmltopdf
