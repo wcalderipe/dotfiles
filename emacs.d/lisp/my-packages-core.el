@@ -132,12 +132,35 @@
   ;; https://www.orgroam.com/manual/Template-Walkthrough.html#Template-Walkthrough
   (defun my/org-roam--capture-templates ()
     "Create the default org-roam capture template with a custom head."
-    '(("d" "default" plain #'org-roam-capture--get-point
+    '(("d" "Default" plain #'org-roam-capture--get-point
        "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
        :unnarrowed t
        :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n")))
+#+title: ${title}\n")
+
+      ("r" "Reading list" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:reading-list.org][Reading list]]\n
+URL:
+Score: \n")
+
+      ("p" "People" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:20210429092104-people.org][People]]\n")
+
+      ("w" "Work" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:20210311170624-multis.org][Multis]]\n")))
 
   (setq org-roam-directory my/org-dir
         org-roam-db-location (concat my/org-dir ".config/org-roam.db"))
