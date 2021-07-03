@@ -148,8 +148,13 @@
        :head "#+setupfile: ~/dev/dotfiles/setup.org
 #+title: ${title}\n
 - tags :: [[file:reading-list.org][Reading list]]\n
-URL:
-Score: \n")
+* ${title}
+:PROPERTIES:
+:STATUS: unread
+:URL: nil
+:CREATED_AT: %t
+:RATE: 0
+:END:\n")
 
       ("p" "People" plain #'org-roam-capture--get-point
        "%?"
