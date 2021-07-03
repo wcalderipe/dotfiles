@@ -99,6 +99,12 @@
   :defer t)
 
 
+;; Instead of wrapping lines at the window edge, which is the standard behaviour
+;; of visual-line-mode, it wraps lines at fill-column.
+(use-package visual-fill-column
+  :straight t
+  :defer t)
+
 ;; A minor mode that builds a list of recently opened files.
 (use-package recentf
   :no-require t
