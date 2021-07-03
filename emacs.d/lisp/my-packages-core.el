@@ -87,6 +87,9 @@
   (setq org-directory my/org-dir
         ;; Stores notes in the Org directory.
         org-default-notes-file (concat my/org-dir "/notes.org")
+        ;; Sets agenda file
+        org-agenda-files (list my/org-dir
+                               (concat my/org-dir "/daily"))
         ;; Stores ID locations in the cache directory.
         org-id-locations-file (concat my/cache-dir "org-id-locations"))
 
