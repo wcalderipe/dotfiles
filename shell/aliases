@@ -12,5 +12,8 @@ alias conf='/usr/bin/git --git-dir=$HOME/.my-conf/ --work-tree=$HOME'
 
 alias e='emacsclient --tty'
 
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -out'
+if [ "$(uname -s)" != "Darwin" ]; then
+  # Mimic MacOS' pbcopy in Linux
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -out'
+fi

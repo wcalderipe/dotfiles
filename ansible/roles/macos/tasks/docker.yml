@@ -1,0 +1,9 @@
+- name: Install Docker
+  homebrew:
+    name: docker
+  tags: [ docker ]
+
+- name: Install docker-compose
+  homebrew:
+    name: docker-compose
+  tags: [ docker ]

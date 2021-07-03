@@ -1,0 +1,105 @@
+# Follow Doom Emacs installation guide
+# See https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#on-macos
+- name: Tap Homebrew railwaycat/emacsmacport
+  homebrew_tap:
+    name: railwaycat/emacsmacport
+  tags: [ emacs ]
+
+- name: Install Emacs
+  homebrew:
+    name: emacs-mac
+    install_options: with-modules
+  tags: [ emacs ]
+
+- name: Create Emacs.app link in /Applications/
+  file:
+    src: /opt/homebrew/opt/emacs-mac/Emacs.app
+    dest: /Applications
+    state: link
+  tags: [ emacs ]
+
+# Electronic lexical database of English language.
+- name: Install wordnet required by wordnut
+  homebrew:
+    name: wordnet
+  tags: [ emacs, deps ]
+
+- name: Install xclip required by emacsmirror/xclip
+  homebrew:
+    name: xclip
+    state: present
+  tags: [ emacs, deps ]
+
+- name: Install fd required by projectile
+  homebrew:
+    name: fd
+  tags: [ emacs, deps ]
+
+# Convert bin/plantuml output into a suitable image format to be rendered in the
+# Emacs GUI.
+- name: Install imagemagick required by plantuml-mode
+  homebrew:
+    name: imagemagick
+  tags: [ emacs, deps ]
+
+# Markdown text to HTML used to live preview while editing `.md` files.
+- name: Install markdown required by org-roam
+  homebrew:
+    name: markdown
+  tags: [ emacs, deps ]
+
+- name: Install graphviz required by org-roam
+  homebrew:
+    name: graphviz
+  tags: [ emacs, deps ]
+
+- name: Install sqlite3 required by org-roam
+  homebrew:
+    name: sqlite3
+  tags: [ emacs, deps ]
+
+- name: Install ripgrep required by Wilfred/deadgrep
+  homebrew:
+    name: ripgrep
+  tags: [ emacs, deps ]
+
+- name: Install GNU core utils required by dired
+  homebrew:
+    name: coreutils
+  tags: [ emacs, deps ]
+
+- name: Install aspell required by flyspell-mode
+  homebrew:
+    name: aspell
+  tags: [ emacs, deps ]
+
+- name: Create .emacs.d link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/emacs.d"
+    dest: "{{ lookup('env', 'HOME') }}/.emacs.d"
+    state: link
+    force: yes
+  tags: [ emacs ]
+
+- name: Create emacsclient --tty shorthand alias
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^alias e='
+    line: "alias e='emacsclient --tty'"
+  tags: [ emacs ]
+
+- name: Set EDITOR to emacsclient with --tty option
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: '^export EDITOR='
+    line: "export EDITOR='emacsclient --tty'"
+  tags: [ emacs ]
+
+# Editor to fallback to if the server is not running If EDITOR is the
+# empty string, start Emacs in daemon mode and try connecting again.
+- name: Set ALTERNATE_EDITOR to empty string
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: "^export ALTERNATE_EDITOR="
+    line: "export ALTERNATE_EDITOR=''"
+  tags: [ emacs ]

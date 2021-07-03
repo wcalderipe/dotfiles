@@ -1,0 +1,78 @@
+- name: Install system dependencies
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      # Required by: rbenv
+      # rbenv requires a C compiler to install any ruby version.
+      - build-essential
+
+      # Required by: rbenv
+      - zlib1g-dev
+      - libssl-dev
+      - libreadline-dev
+  tags: [ ruby ]
+
+- name: Clone rbenv
+  git:
+    repo: https://github.com/rbenv/rbenv.git
+    dest: "{{ lookup('env', 'HOME') }}/.rbenv"
+  tags: [ ruby ]
+
+# Simplify the installation of new ruby versions using `rbenv
+# install`.
+- name: Clone rbenv ruby-build plugin
+  git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: "{{ lookup('env', 'HOME') }}/.rbenv/plugins/ruby-build"
+  tags: [ ruby ]
+
+- name: Add ~/.rbenv/bin to PATH
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
+  tags: [ ruby ]
+
+- name: Add rbenv init eval
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'eval "$(rbenv init -)"'
+  tags: [ ruby ]
+
+- name: "Install Ruby {{ ruby_version }}"
+  # Source the .zshenv file before execute the rbenv in the current session.
+  # See https://stackoverflow.com/a/27541856
+  shell: ". {{ zshenv }} && rbenv install {{ ruby_version }}"
+  tags: [ ruby ]
+
+- name: "Set Ruby {{ ruby_version }} as global"
+  shell: ". {{ zshenv }} && rbenv global {{ ruby_version }}"
+  tags: [ ruby ]
+
+- name: Install Bundler gem
+  shell: ". {{ zshenv }} && gem install bundler"
+  tags: [ ruby ]
+
+- name: Install Pry gem
+  shell: ". {{ zshenv }} && gem install pry"
+  tags: [ ruby ]
+
+- name: Create ~/.irbrc file
+  become: yes
+  become_user: root
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.irbrc"
+    state: touch
+    force: yes
+  tags: [ ruby ]
+
+- name: Add Pry.start in the ~/.irbrc
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.irbrc"
+    block: |
+      require 'pry'
+      Pry.start
+      exit
+  tags: [ ruby ]

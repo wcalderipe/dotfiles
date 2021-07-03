@@ -132,12 +132,35 @@
   ;; https://www.orgroam.com/manual/Template-Walkthrough.html#Template-Walkthrough
   (defun my/org-roam--capture-templates ()
     "Create the default org-roam capture template with a custom head."
-    '(("d" "default" plain #'org-roam-capture--get-point
+    '(("d" "Default" plain #'org-roam-capture--get-point
        "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
        :unnarrowed t
        :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n")))
+#+title: ${title}\n")
+
+      ("r" "Reading list" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:reading-list.org][Reading list]]\n
+URL:
+Score: \n")
+
+      ("p" "People" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:20210429092104-people.org][People]]\n")
+
+      ("w" "Work" plain #'org-roam-capture--get-point
+       "%?"
+       :file-name "%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+setupfile: ~/dev/dotfiles/setup.org
+#+title: ${title}\n
+- tags :: [[file:20210311170624-multis.org][Multis]]\n")))
 
   (setq org-roam-directory my/org-dir
         org-roam-db-location (concat my/org-dir ".config/org-roam.db"))
@@ -207,6 +230,11 @@
   ;; Screens are larger nowadays, we can afford slightly larger thumbnails
   (setq image-dired-thumb-size 150)
 
+  (when (my/macos?)
+    ;; Fix dired directory listing issue on MacOS by using GNU ls.
+    ;; See https://emacs.stackexchange.com/q/53904
+    (setq insert-directory-program "/opt/homebrew/opt/coreutils/bin/gls"))
+
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
   :config
@@ -241,17 +269,6 @@
    :keymaps 'override
    :prefix my/leader
    "gs" #'magit-status))
-
-
-;; Evil keybindings for Magit.
-(use-package evil-magit
-  :straight t
-  :defer t
-
-  :hook (magit-mode . evil-magit-init)
-
-  :init
-  (setq evil-magit-state 'normal))
 
 
 ;; Allows Emacs to copy and to paste from the system clipboard.
@@ -386,7 +403,7 @@
 
   ;; It's recommended to use fd as a replacement for both git ls-files
   ;; and find.
-  (setq projectile-generic-command "fdfind . --color=never --type f -0 -H -E .git"
+  (setq projectile-generic-command (concat (if (my/macos?) "fd" "fdfind") " . --color=never --type f -0 -H -E .git")
         projectile-git-command projectile-generic-command)
 
   ;; Skip warnings about unsafe variables in .dir-locals.el
@@ -515,28 +532,28 @@
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'right))
-      (enlarge-window-horizontally arg)
+        (enlarge-window-horizontally arg)
       (shrink-window-horizontally arg)))
 
   (defun my/window-resize-left (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'right))
-      (shrink-window-horizontally arg)
+        (shrink-window-horizontally arg)
       (enlarge-window-horizontally arg)))
 
   (defun my/window-resize-up (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'up))
-      (enlarge-window arg)
+        (enlarge-window arg)
       (shrink-window arg)))
 
   (defun my/window-resize-down (arg)
     (interactive "p")
     (if (let ((windmove-wrap-around))
           (windmove-find-other-window 'up))
-      (shrink-window arg)
+        (shrink-window arg)
       (enlarge-window arg)))
 
   :config

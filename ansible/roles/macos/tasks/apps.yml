@@ -1,0 +1,42 @@
+- name: Install Visual Studio Code
+  homebrew_cask:
+    name: visual-studio-code
+
+- name: Install Spotify
+  homebrew_cask:
+    name: spotify
+  tags: [ apps ]
+
+- name: Install Brave
+  homebrew_cask:
+    name: brave-browser
+  tags: [ apps ]
+
+- name: Install Google Chrome
+  homebrew_cask:
+    name: google-chrome
+  tags: [ apps ]
+
+- name: Install Insomnia HTTP and GraphQL client
+  homebrew_cask:
+    name: insomnia
+  tags: [ apps ]
+
+# Screenshot with annotation tool.
+- name: Install Skitch
+  homebrew_cask:
+    name: skitch
+  tags: [ apps ]
+
+# Top bar resources dashboards.
+- name: Install iGlance
+  homebrew_cask:
+    name: iglance
+  tags: [ apps ]
+
+# Prevent macOS from automatically going to sleep, dimming the screen or
+# starting screen savers.
+- name: Install Caffeine
+  homebrew_cask:
+    name: caffeine
+  tags: [ apps ]

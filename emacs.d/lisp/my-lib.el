@@ -33,6 +33,10 @@
   (interactive)
   (kill-new (my/buffer-file-name)))
 
+(defun my/macos? ()
+  "Check if Emacs is running on MacOS."
+  (eq system-type 'darwin))
+
 (provide 'my-lib)
 
 ;;; my-lib ends here.

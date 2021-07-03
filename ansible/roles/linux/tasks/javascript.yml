@@ -1,0 +1,76 @@
+#
+# node & npm
+#
+
+- name: Install Node.js and npm
+  become: yes
+  become_user: root
+  apt:
+    pkg:
+      - nodejs
+      - npm
+  tags: [ javascript ]
+
+# See https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
+- name: Create ~/.local/npm directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/npm"
+    state: directory
+  tags: [ javascript ]
+
+- name: Change npm global packages directory
+  shell: "npm config set prefix {{ lookup('env', 'HOME') }}/.local/npm"
+  tags: [ javascript ]
+
+- name: Add ~/.local/npm/bin to PATH
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    line: 'export PATH="$HOME/.local/npm/bin:$PATH"'
+  tags: [ javascript ]
+
+#
+# nvm
+#
+
+- name: Install nvm
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ lookup('env', 'HOME') }}/.nvm"
+  tags: [ javascript ]
+
+- name: Add nvm load script in .zshenv
+  lineinfile:
+    path: "{{ zshenv }}"
+    create: yes
+    regexp: 'nvm.sh$'
+    line: "[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh"
+  tags: [ javascript ]
+
+#
+# yarn
+#
+
+- name: Add yarn repository public key
+  become: yes
+  become_user: root
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+  tags: [ javascript ]
+
+- name: Add yarn package to sources.list
+  become: yes
+  become_user: root
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
+  tags: [ javascript ]
+
+- name: Update cache and install yarn
+  become: yes
+  become_user: root
+  apt:
+    name: yarn
+    update_cache: yes
+  tags: [ javascript ]

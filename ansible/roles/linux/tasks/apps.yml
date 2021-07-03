@@ -1,0 +1,81 @@
+- name: Install Slack with --classic option
+  snap:
+    name: slack
+    classic: yes
+  tags: [ apps, slack ]
+
+- name: Install Spotify
+  snap:
+    name: spotify
+  tags: [ apps, spotify ]
+
+- name: Install Insomnia HTTP and GraphQL client
+  snap:
+    name: insomnia
+  tags: [ apps, insomnia ]
+
+- name: Install Zoom
+  snap:
+    name: zoom-client
+  tags: [ apps, zoom ]
+
+- name: Install Google Chrome
+  become: yes
+  become_user: root
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  tags: [ apps, google-chrome ]
+
+- name: Set BROWSER to google-chrome
+  lineinfile:
+    path: "{{ zshenv }}"
+    regexp: "^export BROWSER="
+    line: "export BROWSER=google-chrome"
+  tags: [ apps, google-chrome ]
+
+#
+# flameshot is a powerful yet simple to use screenshot software.
+#
+
+- name: Install flameshot
+  become: yes
+  become_user: root
+  apt:
+    name: flameshot
+  tags: [ apps, flameshot ]
+
+- name: Ensure flameshot .config/Dharkael folder existsS
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/Dharkael"
+    state: directory
+  tags: [ apps, flameshot ]
+- name: Create ~/.config/Dharkael/flameshot.ini settings file
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/Dharkael/flameshot.ini"
+    state: touch
+  tags: [ apps, flameshot ]
+
+- name: Add personal settings in flameshot.ini
+  blockinfile:
+    path: "{{ lookup('env', 'HOME') }}/.config/Dharkael/flameshot.ini"
+    block: |
+      [General]
+      buttons=@Variant(\0\0\0\x7f\0\0\0\vQList<int>\0\0\0\0\x10\0\0\0\0\0\0\0\x1\0\0\0\x2\0\0\0\x3\0\0\0\x4\0\0\0\x5\0\0\0\x6\0\0\0\x12\0\0\0\xf\0\0\0\a\0\0\0\b\0\0\0\t\0\0\0\x10\0\0\0\n\0\0\0\v\0\0\0\f)
+      contastUiColor=#20092a
+      disabledTrayIcon=false
+      drawColor=#ff0000
+      drawThickness=0
+      showDesktopNotification=false
+      showHelp=false
+      startupLaunch=false
+      uiColor=#545454
+  tags: [ apps, flameshot ]
+
+# Graphical system load indicator for resources.
+# Indicator template: CPU $(percent(cpu.inuse)) Mem $(size(mem.user)) Net ↓$(speed(net.down))↑$(speed(net.up))
+- name: Install indicator-multiload
+  become: yes
+  become_user: root
+  apt:
+    name: indicator-multiload
+  tags: [ apps ]

@@ -1,0 +1,22 @@
+- name: Set a faster key repeat interval and a short delay until repeat
+  shell: |
+    defaults write -g InitialKeyRepeat -int 15
+    defaults write -g KeyRepeat -int 2
+    defaults write com.apple.Accessibility KeyRepeatDelay -float 0.5
+    defaults write com.apple.Accessibility KeyRepeatInterval -float 0.083
+    defaults write com.apple.Accessibility KeyRepeatEnabled -int 1
+  tags: [ macos ]
+
+- name: Disable key press and hold to choose between accented forms of a character
+  shell: defaults write -g ApplePressAndHoldEnabled -bool false
+  tags: [ macos ]
+
+- name: Show hidden files in Finder
+  shell: defaults write com.apple.Finder AppleShowAllFiles true
+  tags: [ macos ]
+
+# The Emoji & Symbols has two binds on macOS: fn and ctrl-cmd-space. The second
+# one is inconvenient on Emacs because it often clashes with other important
+# bindings like `mark-sexp'.
+- name: Unbind Emoji & Symbols out of ctrl-cmd-space
+  shell: "defaults write -g NSUserKeyEquivalents -dict-add 'Emoji & Symbols' '\0'"

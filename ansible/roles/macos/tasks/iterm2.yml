@@ -1,0 +1,31 @@
+- name: Install iTerm2
+  homebrew_cask:
+    name: iterm2
+  tags: [ iterm2 ]
+
+- name: Create .zshrc link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.zshrc"
+    dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+    state: link
+    force: yes
+  tags: [ iterm2 ]
+
+#
+# zprezto
+#
+
+- name: Install zprezto
+  git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "{{ lookup('env', 'HOME') }}/.zprezto"
+    recursive: true
+  tags: [ iterm2 ]
+
+- name: Create .zpreztorc link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.zpreztorc"
+    dest: "{{ lookup('env', 'HOME') }}/.zpreztorc"
+    state: link
+    force: yes
+  tags: [ iterm2 ]

@@ -307,42 +307,6 @@
   (add-to-list 'company-backends '(company-tide company-files)))
 
 
-(use-package js2-mode
-  :straight t
-  :defer t
-  :mode "\\.m?js\\'"
-  :init
-  (setq js-indent-level 2
-        js2-bounce-indent-p nil)
-
-  ;; Disable all parse errors and warnings by default,
-  ;; leaving room for flycheck to handle them.
-  (setq js2-mode-show-parse-errors nil
-        js2-mode-show-strict-warnings nil
-        js2-strict-missing-semi-warning nil)
-
-  ;; Adds highlighting of many Ecma built-in functions.
-  (setq js2-highlight-level 3))
-
-
-;; A major mode for editing JSX.
-(use-package rjsx-mode
-  :straight t
-  :defer t
-  :mode "components/.+\\.js$"
-  :init
-  (defun my/javascript-jsx-file-p ()
-    "Detect React or preact imports early in the file."
-    (and buffer-file-name
-         (string= (file-name-extension buffer-file-name) "js")
-         (re-search-forward "\\(^\\s-*import +React\\|\\( from \\|require(\\)[\"']p?react\\)"
-                            magic-mode-regexp-match-limit t)
-         (progn (goto-char (match-beginning 1))
-                (not (sp-point-in-string-or-comment)))))
-
-  (add-to-list 'magic-mode-alist '(my/javascript-jsx-file-p . rjsx-mode)))
-
-
 ;; Emulates Surround.vim for Evil. Everything about "surroundings":
 ;; parentheses, brackets, quotes, XML tags, and more.
 (use-package evil-surround

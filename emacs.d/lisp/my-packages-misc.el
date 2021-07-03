@@ -50,6 +50,14 @@
   (ivy-rich-mode))
 
 
+;; On-the-fly spell checking.
+(use-package flyspell
+  :defer t
+  :init
+  (when (my/macos?)
+    (setq ispell-program-name "aspell")))
+
+
 ;; Distraction-free words correction with flyspell via Ivy.
 (use-package flyspell-correct-ivy
   :straight t
@@ -90,6 +98,12 @@
   :straight t
   :defer t)
 
+
+;; Instead of wrapping lines at the window edge, which is the standard behaviour
+;; of visual-line-mode, it wraps lines at fill-column.
+(use-package visual-fill-column
+  :straight t
+  :defer t)
 
 ;; A minor mode that builds a list of recently opened files.
 (use-package recentf
@@ -207,6 +221,19 @@
                   cider-repl-mode))
     (let ((hook (intern (concat (symbol-name mode) "-hook"))))
       (add-hook hook #'aggressive-indent-mode))))
+
+
+;; Ensure environment variables inside Emacs look the same as in the user's
+;; shell.
+(use-package exec-path-from-shell
+  :straight t
+  :if (my/macos?)
+  :config
+  ;; Set JAVA_HOME to fix an error raised by cider during the execution of
+  ;; cider-jack-in-clj(s).
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME"))
+
+  (exec-path-from-shell-initialize))
 
 (provide 'my-packages-misc)
 

@@ -1,0 +1,30 @@
+- name: Install Java JDK
+  homebrew:
+    name: java
+  tags: [ clojure ]
+
+- name: Install Clojure CLI
+  homebrew:
+    name: clojure/tools/clojure
+  tags: [ clojure ]
+
+- name: Check Clojure's version. If not present, install the latest
+  shell: clojure --version
+  tags: [ clojure ]
+
+- name: Ensure ~/.local/bin exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  tags: [ clojure ]
+
+- name: Download leiningen
+  get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/lein"
+    mode: "+x"
+  tags: [ clojure ]
+
+- name: Install Clojure via lein
+  command: "{{ lookup('env', 'HOME') }}/.local/bin/lein -v"
+  tags: [ clojure ]

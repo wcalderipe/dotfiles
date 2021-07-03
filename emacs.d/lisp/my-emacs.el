@@ -101,7 +101,11 @@
 ;; Set default font size (`:height' is 1/10pt).
 ;; This configuration is taking into account a 27" screen with a resolution of
 ;; 2560x1440 (16:9).
-(set-face-attribute 'default nil :height 103)
+(set-face-attribute 'default nil :height 110)
+
+;; Set right fringe 8 pixels wide and remove the left one.
+(when (my/macos?)
+  (fringe-mode '(0 . 0)))
 
 (provide 'my-emacs)
 

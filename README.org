@@ -1,4 +1,5 @@
 #+setupfile: ~/dev/dotfiles/setup.org
+#+options: toc:2
 
 * dotfiles
 
@@ -6,94 +7,137 @@
 
 A continouos working in progress of my workstation personal configurations.
 
-[[resources/screenshot-emacs.png]]
+[[resources/macos-screenshot-emacs.png]]
 
-** DONE Everything must have a purpose
-   CLOSED: [2020-07-28 mar. 20:30]
+See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
-   If I don't know why it's there it will be removed. I normally tend to
-   forget things in the long run, so documentation here will be the key.
-
-** DONE Isolation
-   CLOSED: [2020-08-17 lun. 08:36]
-
-   Everything must be self contained. I want to be able to add and remove
-   configurations or softwares without a hassle - like the headache of hunting
-   scattered files and scripts in the codebase.
-
-** DONE Testability
-   CLOSED: [2020-07-28 mar. 20:32]
-
-   I like to run my dotfiles in an isolate docker container from time-to-time so I
-   can safely test new configurations outside of my daily workstation. This
-   practice gives me a minimal level of confidence that I won't blew my whole
-   local environment in a Monday morning because I was willing to test a new
-   software in my stack.
-
-   The driver that justify this effort is continuous improvement on my workflow.
-
-   #+BEGIN_SRC shell
-     docker build --tag dotfiles .
-
-     docker run -it \
-            --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
-            dotfiles
-   #+END_SRC
-
-   Unfortunately a container have some limitations. For instance, obviously
-   everything that depends on a GUI won't be covered (e.g. GNOME and Emacs
-   GUI). I also have some custom configurations for my peripherals such as
-   keyboard, that isn't covered as well.
-
-** DONE Automation
-   CLOSED: [2020-07-28 mar. 20:32]
-
-   After push a button, it must have zero human interaction until
-   everything is done.
-
-** Installation
+** Install
 
    I'm using Ansible to manage system dependencies and configuration
    orchestration.
 
-   #+BEGIN_SRC shell
-     # Before start, install the minimal dependencies.
-     sudo apt-get install git ansible --quiet --yes
+*** macOS
 
-     # To install everything from scratch.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         ./ansible/main.yml
+    You first need to install Homebrew by following the instructions from their
+    [[https://brew.sh/][official website]].
 
-     # You can also filter or skip by tags.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         --tags "emacs" \
-         --skip-tags "deps" \
-         ./ansible/main.yml
+    #+begin_src shell
+      # Install Xcode Command Line Tools
+      xcode-select --install
 
-     # To install in a Docker container, skip apps, gnome and keyboard tags.
-     ansible-playbook \
-         --inventory ./ansible/hosts \
-         --skip-tags "apps,gnome,keyboard" \
-         ./ansible/main.yml
-   #+END_SRC
+      # Install git and ansible
+      brew install git ansible
 
-   See [[ansible/main.yml]] for the full list tags.
+      # To install everything from scratch.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          ./ansible/macos.yml
+    #+end_src
 
-** Emacs Key Bindings
+    See [[./ansible/macos.yml][ansible/macos.yml]] for the full list tags.
 
-   My key bindings are defined using [[https://github.com/noctuid/general.el#about][general.el]] within [[https://github.com/jwiegley/use-package][use-package]] scattered in
-   =lisp/my-*= files. So, if you want to check them all do =M-x
-   general-describe-keybindings=.
+*** Linux
 
-** Emacs Tabs
+    ⚠️  I have been using macOS lately. Keep in mind a few things may be out of
+    date on Linux.
 
-   I normally have multiple projects open at the same time in Emacs and I like
-   to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
-   with [[https://github.com/abo-abo/hydra][hydra]].
+    #+begin_src shell
+      # Before start, install the minimal dependencies.
+      sudo apt-get install git ansible --quiet --yes
 
-   Hit =C-c + t= to see the menu.
+      # To install everything from scratch.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          ./ansible/linux.yml
+
+      # You can also filter or skip by tags.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --tags "emacs" \
+          --skip-tags "deps" \
+          ./ansible/linux.yml
+
+      # To install in a Docker container, skip apps, gnome and keyboard tags.
+      ansible-playbook \
+          --inventory ./ansible/hosts \
+          --skip-tags "apps,gnome,keyboard" \
+          ./ansible/linux.yml
+    #+end_src
+
+    See [[ansible/linux.yml]] for the full list tags.
+
+*** Docker
+
+    #+begin_src shell
+      docker build --tag dotfiles .
+
+      docker run -it \
+             --volume ~/dev/dotfiles/ansible:/home/tester/dev/dotfiles/ansible \
+             dotfiles
+
+      docker run dotfiles \
+             ansible-playbook \
+             --inventory ./ansible/hosts \
+             --skip-tags "apps,gnome,keyboard" \
+             ./ansible/linux.yml
+    #+end_src
+
+    Unfortunately, a container has its limitations. It will only work for the
+    Linux dotfiles. Moreover, it won't cover software that depends on GUI like
+    Emacs (outside the terminal) and GNOME.
+
+
+** Uninstall
+
+   #+begin_src shell
+     # Remove all links created in your home directory.
+     $DOTFILES_DIR/shell/clean.sh
+   #+end_src
+
+** Rationale
+
+*** Everything must have a purpose
+
+    If I don't know why it's there, it will remove it. I usually tend to forget
+    things in the long run, so documentation here will be the key.
+
+*** Isolation
+
+    Everything must be self-contained. I want to add and remove configurations
+    or software without a hassle - like the headache of hunting scattered files
+    and scripts in the codebase.
+
+*** Testability
+
+    I like to run my dotfiles in an isolated Docker container from time-to-time,
+    so I can safely test new configurations outside of my daily
+    workstation. This practice gives me a minimal level of confidence that I
+    won't blow my whole local environment on a Monday morning because I was
+    willing to test new software in my stack.
+
+    The driver that justifies this effort is continuous improvement on my workflow.
+
+*** Automation
+
+   After push a button, it must have zero human interaction until
+   everything is done.
+
+
+** Emacs
+
+*** Key Binding
+
+    My key bindings are defined using [[https://github.com/noctuid/general.el#about][general.el]] within [[https://github.com/jwiegley/use-package][use-package]] scattered in
+    =lisp/my-*= files. So, if you want to check them all do =M-x
+    general-describe-keybindings=.
+
+*** Emacs Tabs
+
+    I normally have multiple projects open at the same time in Emacs and I like
+    to have them separated by workspace. For that, I have been using [[https://depp.brause.cc/eyebrowse/][eyebrowse]]
+    with [[https://github.com/abo-abo/hydra][hydra]].
+
+    Hit =C-c + t= to see the menu.
 
 ** Org
 
@@ -115,33 +159,25 @@ A continouos working in progress of my workstation personal configurations.
 
      GitHub pages might be a good candidate.
 
-** PDF Operations
+*** TODO Fix export to HTML without a theme
 
-   To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
+    See =setup.org= and =org.css=.:
 
-   #+begin_src shell
-     wkhtmltopdf SOURCE.html TARGET.pdf
-   #+end_src
+** Cheat Sheet
 
-** VSCode
+*** PDF Operations
 
-   I use VSCode as backup text editor.
+    To convert HTML to PDF I use [[https://wkhtmltopdf.org/][wkhtmltopdf]].
 
-   Install the dependencies listed in [[vscode/extensions.txt]].
+    #+begin_src shell
+      wkhtmltopdf SOURCE.html TARGET.pdf
+    #+end_src
 
-   #+begin_src shell
-     cat ~/dev/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
+*** Kill process by port
 
-     # To list the installed extensions.
-     code --list-extensions
-   #+end_src
-
-
-** Kill process by port
-
-   I often have ghost processes started from within Emacs but never properly
-   terminated blocking ports. The command below help me to kill a process by its
-   port number.
+    I often have ghost processes started from within Emacs but never properly
+    terminated blocking ports. The command below help me to kill a process by its
+    port number.
 
     #+begin_src shell
       kill -9 $(lsof -i tcp:3000 -t)
@@ -153,20 +189,70 @@ A continouos working in progress of my workstation personal configurations.
 
 ** Tasks
 
-*** TODO look at spacemacs js and ts config
-
-    https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Blang/javascript/packages.el
-
-*** TODO better ruby interop :emacs:
-
-    https://github.com/syl20bnr/spacemacs/issues/6462
-
-    https://github.com/chief/.emacs.d/blob/a1c4546b708b47f95e4130ccf0e8b4b8ae5adddf/packages/init-ruby.el#L66
-
-    https://github.com/alecvn/dotfiles/blob/c5ac92ab50f41ecd656b488b48cf6ca44552914f/config/init-ruby.el
-
-*** TODO how to cancel a rspec compilation buffer while a test is running? :emacs:
-
 *** TODO org-roam and org-protocol to easy open files from the graph view
 
     https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029
+
+** macOS
+
+*** defaults cheat sheet
+
+    #+begin_quote
+      macOS applications and other programs use the defaults system to record
+      user preferences and other information to be maintained when the
+      application isn't running (font for new documents, or the position of an
+      Info panel).
+    #+end_quote
+
+    See also https://macos-defaults.com
+
+    #+begin_src shell
+      # Boolean
+      defaults write -g ApplePressAndHoldEnabled -bool false
+      # Integer
+      defaults write -g InitialKeyRepeat -int 15
+      # Keys that belong to a domain
+      defaults read com.apple.Accessibility KeyRepeatDelay
+      # Get key type
+      defaults read-type com.apple.Accessibility KeyRepeatDelay
+    #+end_src
+
+    *Note* you'll need to log-out and log back in to apply the changes.
+
+*** Tmux
+
+    I have removed Tmux because it was causing errors with Emacs'
+    =exec-path-from-shell= package.
+
+    #+begin_src yaml
+      # ansible/roles/macos/tasks/iterm2.yml
+      - name: Install tmux
+        homebrew:
+          name: tmux
+        tags: [ iterm2 ]
+
+      - name: install tpm
+        git:
+          repo: https://github.com/tmux-plugins/tpm.git
+          dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+        tags: [ iterm2 ]
+
+      - name: Create .tmux.conf link
+        file:
+          src: "{{ lookup('env', 'DOTFILES_DIR') }}/.tmux.conf"
+          dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+          state: link
+          force: yes
+        tags: [ iterm2 ]
+    #+end_src
+
+*** TODO Automate iTerm2 theme download and installation
+
+    See https://iterm2colorschemes.com/
+
+*** TODO Add VSCode CLI
+
+    #+begin_src shell
+      # This is suppose to work
+      export PATH="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH"
+    #+end_src
