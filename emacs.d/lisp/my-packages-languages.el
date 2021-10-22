@@ -125,9 +125,10 @@
    "d" #'cider-doc
    "e" #'cider-eval-defun-at-point
    "E" #'cider-eval-last-sexp
+   "n" #'cider-eval-ns-form
+   "r" #'cider-load-all-project-ns
    "p" #'cider-pprint-eval-defun-at-point
    "P" #'cider-pprint-eval-last-sexp
-   "r" #'cider-load-all-project-ns
    "s" #'cider-browse-spec
    "u" #'my/cider--reload-user-namespace
    "ta" #'cider-test-run-project-tests
@@ -142,7 +143,6 @@
   :defer t
   :after (cider)
   :hook ((clojure-mode clojurescript-mode) . cider-hydra-mode))
-
 
 (use-package ruby-mode
   :config
