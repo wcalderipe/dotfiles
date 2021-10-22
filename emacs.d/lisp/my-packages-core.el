@@ -17,6 +17,11 @@
   ;; from the evil-collection package.
   (setq evil-want-keybinding nil)
 
+  ;; Allow the cursor to move beyond the last character of a line. It fixes the
+  ;; annoying incompatibility of lisp modes eval last sexp.
+  (setq evil-move-cursor-back t)
+  (setq evil-move-beyond-eol t)
+
   :init
   (defun my/evil-vim-split ()
     "Splits the current window horizontally and switch to the new window."
