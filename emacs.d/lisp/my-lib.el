@@ -1,3 +1,5 @@
+;;; my-lib.el --- -*- lexical-binding: t; -*-
+
 (defun my/install-package-manager ()
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -37,6 +39,10 @@
   "Check if Emacs is running on MacOS."
   (eq system-type 'darwin))
 
+(defun my/load-theme-advice (original-fn theme &optional no-confirm no-enable)
+  (mapc #'disable-theme (remq theme custom-enabled-themes))
+  (funcall original-fn theme 'no-confirm no-enable))
+
 (provide 'my-lib)
 
-;;; my-lib ends here.
+;;; my-lib.el ends here

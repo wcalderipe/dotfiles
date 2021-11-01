@@ -1,3 +1,7 @@
+;;; my-editor.el --- -*- lexical-binding: t; -*-
+
+;;; Configuration changing Emacs' default settings.
+
 ;; Remove top menubar.
 (menu-bar-mode -1)
 
@@ -103,10 +107,14 @@
 ;; 2560x1440 (16:9).
 (set-face-attribute 'default nil :height 110)
 
-;; Set right fringe 8 pixels wide and remove the left one.
+;; Set fringe to 8 pixels wide.
 (when (my/macos?)
-  (fringe-mode '(0 . 0)))
+  (fringe-mode '(8 . 8)))
+
+;; Change the default load-theme with a custom function that removes set faces
+;; before loading the new theme.
+(advice-add 'load-theme :around #'my/load-theme-advice)
 
 (provide 'my-emacs)
 
-;;; my-emacs ends here.
+;;; my-emacs.el ends here

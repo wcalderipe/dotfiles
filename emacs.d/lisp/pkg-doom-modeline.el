@@ -1,36 +1,38 @@
-(use-package zenburn-theme
-  :straight t
-  :defer t)
+;;; pkg-doom-modeline.el --- -*- lexical-binding: t; -*-
 
+;;; A minimal and modern mode-line.
 
-;; A minimal and modern mode-line.
+(require 'use-package)
+
 (use-package doom-modeline
   :straight t
   :defer t
-  :hook (after-init . my/init-load-theme)
+  :hook (after-init . pkg-doom-modeline/init-load-theme)
   :preface
   ;; I'm not happy on where custom-set-faces are being set inside of
   ;; doom-modeline.
-  (defun my/init-load-theme ()
+  (defun pkg-doom-modeline/init-load-theme ()
     (doom-modeline-mode +1)
     (load-theme 'zenburn t nil)
 
-    (custom-set-faces
-     `(ivy-current-match              ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
-     `(ivy-highlight-face             ((t :background nil :foreground nil :underline unspecified :weight unspecified)))
-     `(ivy-minibuffer-match-face-1    ((t :background nil :inherit bold)))
-     `(ivy-minibuffer-match-face-2    ((t :background nil :foreground ,my/color-cyan :underline t)))
-     `(ivy-minibuffer-match-face-3    ((t :background nil :foreground ,my/color-cyan :underline t)))
-     `(ivy-minibuffer-match-face-4    ((t :background nil :foreground ,my/color-cyan :underline t)))
-     `(ivy-minibuffer-match-highlight ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
-     `(ivy-subdir                     ((t :background nil :underline unspecified :weight unspecified))))
+    (with-eval-after-load 'ivy
+      (custom-theme-set-faces
+       'zenburn
+       `(ivy-current-match              ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
+       `(ivy-highlight-face             ((t :background nil :foreground nil :underline unspecified :weight unspecified)))
+       `(ivy-minibuffer-match-face-1    ((t :background nil :inherit bold)))
+       `(ivy-minibuffer-match-face-2    ((t :background nil :foreground ,my/color-cyan :underline t)))
+       `(ivy-minibuffer-match-face-3    ((t :background nil :foreground ,my/color-cyan :underline t)))
+       `(ivy-minibuffer-match-face-4    ((t :background nil :foreground ,my/color-cyan :underline t)))
+       `(ivy-minibuffer-match-highlight ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
+       `(ivy-subdir                     ((t :background nil :underline unspecified :weight unspecified)))))
 
     (custom-theme-set-faces
      'zenburn
      ;; Removes the annoying secondary color in the buffer divider --
      ;; called fringe.
      `(fringe ((t (:background "#3F3F3F"))))))
-:init
+  :config
   ;; Determines the style used by `doom-modeline-buffer-file-name'.
   ;;
   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
@@ -66,30 +68,9 @@
   ;; face.
   (setq doom-modeline-enable-variable-pitch nil)
 
-  :config
+
   (doom-modeline-mode 1))
 
+(provide 'pkg-doom-modeline)
 
-;; An alternative to the built-in Emacs help that provides much more
-;; contextual information.
-(use-package helpful
-  :straight t
-  :commands (helpful--read-symbol)
-  :init
-  (general-define-key
-   [remap describe-key] #'helpful-key
-   "C-h ." #'helpful-at-point))
-
-
-;; Toggle highlighting of the symbol at point.
-(use-package highlight-symbol
-  :straight t
-  :defer t
-  :hook ((emacs-lisp-mode ruby-mode) . highlight-symbol-mode)
-  :init
-  ;; Reduce default idle delay of 1.5s.
-  (setq highlight-symbol-idle-delay 0.5))
-
-(provide 'my-editor)
-
-;;; my-editor ends here.
+;;; pkg-doom-modeline.el ends here
