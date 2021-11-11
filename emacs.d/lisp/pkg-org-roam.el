@@ -59,8 +59,6 @@
        ;; See https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html
        :head "#+title: %<%Y-%m-%d (%A)>\n
 * Today\n
-** What am I worried about?\n
-** What am I grateful for?\n
 ** What would make my day great?\n")))
 
   (setq org-roam-directory my/org-dir

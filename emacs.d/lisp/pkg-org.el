@@ -38,7 +38,14 @@
   (add-hook 'org-mode-hook (lambda () (electric-indent-mode -1)))
 
   ;; Languages which can be evaluated in Org buffers.
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+
+  (general-define-key
+   :prefix my/mode-leader
+   :states 'normal
+   :keymaps 'org-mode-map
+   "t c" #'org-todo
+   "t t" #'org-show-todo-tree))
 
 (provide 'pkg-org)
 
