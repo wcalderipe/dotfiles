@@ -55,6 +55,62 @@
   (add-hook 'cider-repl-mode-hook #'pkg-cider/cider--trailing-whitespace)
   (add-hook 'cider-test-report-mode-hook #'pkg-cider/cider--trailing-whitespace)
 
+  ;; For some reason, define keys in the `:config' scope doesn't work.
+  (general-define-key
+   :prefix my/mode-leader
+   :states 'normal
+   :keymaps 'clojure-mode-map
+   ;; Eval
+   "e L"   #'cider-load-all-project-ns
+   "e P"   #'cider-pprint-eval-last-sexp
+   "e b"   #'cider-eval-buffer
+   "e e"   #'cider-eval-defun-at-point
+   "e f"   #'cider-load-file
+   "e i"   #'cider-inspect-last-sexp
+   "e l"   #'cider-eval-last-sexp
+   "e n"   #'cider-eval-ns-form
+   "e p"   #'cider-pprint-eval-defun-at-point
+   "e r"   #'cider-load-all-project-ns
+   ;; Help
+   "h d"   #'cider-doc
+   "h a"   #'cider-apropos
+   "h c"   #'cider-clojuredocs
+   ;; Inspect
+   "i ."   #'cider-inspect
+   "i r"   #'cider-inspect-last-result
+   ;; Macroexpand
+   "m m"   #'cider-macroexpand-1
+   "m M"   #'cider-macroexpand-all
+   ;; Namespace
+   "n l l" #'cider-ns-reload
+   "n l a" #'cider-ns-reload-all
+   "n b b" #'cider-browse-ns
+   "n b a" #'cider-browse-ns-all
+   "n r"   #'cider-ns-refresh
+   ;; Debug
+   "d f"   #'cider-debug-defun-at-point
+   ;; REPL
+   "r C"   #'cider-connect-clj
+   "r R"   #'cider-restart
+   "r b"   #'cider-switch-to-repl-buffer
+   "r c"   #'cider-repl-clear-buffer
+   "r n"   #'cider-repl-set-ns
+   "r s"   #'cider-jack-in
+   "r x"   #'cider-quit
+   ;; Test
+   "t f"   #'cider-test-run-ns-tests
+   "t l"   #'cider-test-rerun-test
+   "t n"   #'cider-test-run-ns
+   "t p"   #'cider-test-run-project-tests
+   "t t"   #'cider-test-run-test)
+
+  (general-define-key
+   :prefix my/mode-leader
+   :states 'normal
+   :keymaps 'clojurescript-mode-map
+   ;; REPL
+   "r C"   #'cider-connect-cljs)
+
   :config
   ;; Indentation settings
   (define-clojure-indent
@@ -62,41 +118,7 @@
 
   (with-eval-after-load 'evil
     ;; Add to jump list, i.e. record location prior to running commands.
-    (evil-add-command-properties #'cider-test-run-project-tests :jump t))
-
-  (general-define-key
-   :prefix "m"
-   :states 'normal
-   :keymaps 'clojure-mode-map
-   ;; Eval
-   "e L" #'cider-load-all-project-ns
-   "e P" #'cider-pprint-eval-last-sexp
-   "e e" #'cider-eval-defun-at-point
-   "e f" #'cider-load-file
-   "e l" #'cider-eval-last-sexp
-   "e n" #'cider-eval-ns-form
-   "e p" #'cider-pprint-eval-defun-at-point
-   "e r" #'cider-load-all-project-ns
-
-   ;; Help
-   "h d" #'cider-doc
-   "h a" #'cider-apropos
-
-   ;; Inspect
-   "m i r" #'cider-inspect-last-result
-
-   "s" #'cider-browse-spec
-   "u" #'pkg-cider/cider--reload-user-namespace
-
-   ;; Debug
-
-   ;; REPL
-
-   ;; Test
-   "t a" #'cider-test-run-project-tests
-   "t f" #'cider-test-run-ns-tests
-   "t l" #'cider-test-rerun-test
-   "t t" #'cider-test-run-test))
+    (evil-add-command-properties #'cider-test-run-project-tests :jump t)))
 
 (provide 'pkg-cider)
 
