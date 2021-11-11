@@ -13,6 +13,10 @@
   ;; cider-jack-in-clj(s).
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME"))
 
+  ;; Fix an issue with tmux being auto started.
+  ;; See https://github.com/purcell/exec-path-from-shell/issues/11#issuecomment-49550381
+  (setq exec-path-from-shell-arguments '("-l"))
+
   (exec-path-from-shell-initialize))
 
 (provide 'pkg-exec-path-from-shell)

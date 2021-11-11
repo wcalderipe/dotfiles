@@ -1,0 +1,24 @@
+- name: Install tmux
+  homebrew:
+    name: tmux
+  tags: [ tmux ]
+
+- name: Install tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+  tags: [ tmux ]
+
+- name: Create .tmux.conf link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.tmux.conf"
+    dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+    state: link
+    force: yes
+  tags: [ tmux ]
+
+- name: Clone doom-one-dark tmux theme
+  git:
+    repo: git@github.com:sei40kr/tmux-doom-one-dark.git
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/themes/doom-one-dark"
+  tags: [ tmux ]
