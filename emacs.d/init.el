@@ -33,6 +33,8 @@
 
 ;;; Theme
 (require 'pkg-zenburn-theme)
+(require 'pkg-doom-themes)
+(require 'pkg-theme)
 
 ;;; UI
 (require 'pkg-all-the-icons)
