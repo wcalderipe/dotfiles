@@ -16,9 +16,11 @@
         cider-repl-wrap-history t
         cider-show-error-buffer 'except-in-repl)
 
-  ;; Prevent 'cider-load-buffer from prompting to save the file
-  ;; corresponding to the buffer being loaded, if it's modified.
-  (setq cider-save-file-on-load t)
+  ;; Do not save the file on load. Eval is one thing, saving a file is another
+  ;; with potential side-effects. This is specially important when developing
+  ;; with hot reload (e.g. Shadow CLJS). ELisp also doesn't save the file when
+  ;; `eval-buffer' is called.
+  (setq cider-save-file-on-load nil)
 
   ;; Do not prompt for symbol confirmation (e.g. show docs and jump to
   ;; definition without asking).
