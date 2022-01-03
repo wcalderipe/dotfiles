@@ -13,11 +13,12 @@
   ;; doom-modeline.
   (defun pkg-doom-modeline/init-load-theme ()
     (doom-modeline-mode +1)
-    (load-theme 'zenburn t nil)
 
-    (with-eval-after-load 'ivy
+    (with-eval-after-load 'zenburn-theme
       (custom-theme-set-faces
        'zenburn
+       ;; Removes the annoying secondary color in the buffer divider called fringe.
+       `(fringe ((t (:background "#3F3F3F"))))
        `(ivy-current-match              ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
        `(ivy-highlight-face             ((t :background nil :foreground nil :underline unspecified :weight unspecified)))
        `(ivy-minibuffer-match-face-1    ((t :background nil :inherit bold)))
@@ -25,13 +26,7 @@
        `(ivy-minibuffer-match-face-3    ((t :background nil :foreground ,my/color-cyan :underline t)))
        `(ivy-minibuffer-match-face-4    ((t :background nil :foreground ,my/color-cyan :underline t)))
        `(ivy-minibuffer-match-highlight ((t :background ,my/color-gray :foreground nil :underline unspecified :weight unspecified)))
-       `(ivy-subdir                     ((t :background nil :underline unspecified :weight unspecified)))))
-
-    (custom-theme-set-faces
-     'zenburn
-     ;; Removes the annoying secondary color in the buffer divider --
-     ;; called fringe.
-     `(fringe ((t (:background "#3F3F3F"))))))
+       `(ivy-subdir                     ((t :background nil :underline unspecified :weight unspecified))))))
   :config
   ;; Determines the style used by `doom-modeline-buffer-file-name'.
   ;;
