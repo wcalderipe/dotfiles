@@ -4,6 +4,9 @@
 - include_tasks: iterm2.yml
   tags: [ iterm2 ]
 
+- include_tasks: alacritty.yml
+  tags: [ alacritty ]
+
 - include_tasks: tmux.yml
   tags: [ tmux ]
 

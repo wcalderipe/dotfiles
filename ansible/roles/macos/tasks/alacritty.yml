@@ -1,0 +1,12 @@
+- name: Install Alacritty terminal emulator
+  homebrew_cask:
+    name: alacritty
+  tags: [ alacritty ]
+
+- name: Create .alacritty.yml link
+  file:
+    src: "{{ lookup('env', 'DOTFILES_DIR') }}/.alacritty.yml"
+    dest: "{{ lookup('env', 'HOME') }}/.alacritty.yml"
+    state: link
+    force: yes
+  tags: [ alacritty ]
