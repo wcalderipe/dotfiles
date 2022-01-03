@@ -14,6 +14,7 @@
 (require 'pkg-evil-collection)
 (require 'pkg-evil-surround)
 (require 'pkg-evil-nerd-commenter)
+(require 'pkg-evil-cleverparens)
 (require 'pkg-dired)
 (require 'pkg-magit)
 (require 'pkg-xclip)
