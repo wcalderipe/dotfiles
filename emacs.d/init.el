@@ -89,3 +89,4 @@
 (require 'pkg-plantuml-mode)
 (require 'pkg-web-mode)
 (require 'pkg-typescript-mode)
+(require 'pkg-terraform-mode)
