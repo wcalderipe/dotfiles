@@ -33,17 +33,36 @@
            "TODO"
            "DONE")))
 
+  ;; Expand priority from A to D so it can match with Eisenhower's matrix
+  ;; quadrants.
+  (setq org-highest-priority ?A
+        org-default-priority ?B
+        org-lowest-priority  ?D)
+
   :config
   ;; Disables auto indentation in BEGIN blocks. Let me handle it.
   (add-hook 'org-mode-hook (lambda () (electric-indent-mode -1)))
 
+  ;;;; Babel
+
+  (setq org-confirm-babel-evaluate nil)
+
   ;; Languages which can be evaluated in Org buffers.
-  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)
+     (shell . t)
+     (clojure . t)))
+
+;;;; Keybinding
 
   (general-define-key
    :prefix my/mode-leader
    :states 'normal
    :keymaps 'org-mode-map
+   "S"   #'org-schedule
+   "p"   #'org-priority
+   "s"   #'org-sort
    "t c" #'org-todo
    "t t" #'org-show-todo-tree))
 

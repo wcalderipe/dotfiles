@@ -30,6 +30,7 @@
 (defconst my/lisp-modes '(emacs-lisp-mode
                           common-lisp-mode
                           lisp-mode
+                          lisp-interaction-mode
                           clojure-mode
                           clojurec-mode
                           clojurescript-mode
