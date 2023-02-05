@@ -13,19 +13,17 @@
   ;; https://www.orgroam.com/manual/Template-Walkthrough.html#Template-Walkthrough
   (defun my/org-roam-capture-templates ()
     "Create the default org-roam capture template with a custom head."
-    '(("d" "Default" plain #'org-roam-capture--get-point
-       "%?"
+    '(("d" "Default" plain #'org-roam-capture--get-point "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
        :unnarrowed t
-       :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n
+       :head "#+SETUPFILE: ~/dev/dotfiles/setup.org
+#+TITLE: ${title}\n
 * ${title}\n\n")
 
-      ("r" "Reading list" plain #'org-roam-capture--get-point
-       "%?"
+      ("r" "Reading list" plain #'org-roam-capture--get-point "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n
+       :head "#+SETUPFILE: ~/dev/dotfiles/setup.org
+#+TITLE: ${title}\n
 - tags :: [[file:reading-list.org][Reading list]]\n
 * ${title}
 :PROPERTIES:
@@ -35,31 +33,28 @@
 :RATE: 0
 :END:\n")
 
-      ("p" "People" plain #'org-roam-capture--get-point
-       "%?"
+      ("p" "People" plain #'org-roam-capture--get-point "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n
-- tags :: [[file:20210429092104-people.org][People]]\n")
+       :head "#+SETUPFILE: ~/dev/dotfiles/setup.org
+#+TITLE: ${title}\n
+- tags :: [[file:20210429092104-people.org][People]]\n
+* ${title}\n\n")
 
-      ("w" "Work" plain #'org-roam-capture--get-point
-       "%?"
+      ("w" "Work" plain #'org-roam-capture--get-point "%?"
        :file-name "%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+setupfile: ~/dev/dotfiles/setup.org
-#+title: ${title}\n
+       :head "#+SETUPFILE: ~/dev/dotfiles/setup.org
+#+ROAM_TAGS: Multis
+#+TITLE: ${title}\n
 - tags :: [[file:20210311170624-multis.org][Multis]]\n
 * ${title}\n\n")))
 
   (defun my/org-roam-dailies-capture-templates ()
-    '(("d" "Default" entry
-       #'org-roam-capture--get-point
-       "* %?"
+    '(("d" "Default" entry #'org-roam-capture--get-point "* %?"
        :file-name "daily/%<%Y-%m-%d>"
        ;; Format the title with the date and the day of the week.
        ;; See https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html
-       :head "#+title: %<%Y-%m-%d (%A)>\n
-* Today\n
-** What would make my day great?\n")))
+       :head "#+TITLE: %<%Y-%m-%d (%A)>\n
+* Today\n")))
 
   (setq org-roam-directory my/org-dir
         org-roam-db-location (concat my/org-dir ".config/org-roam.db")
