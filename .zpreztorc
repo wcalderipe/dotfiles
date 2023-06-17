@@ -16,7 +16,6 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'git' \
   'tmux'
-}
 
 # Set the key mapping style to 'emacs' or 'vi'
 zstyle ':prezto:module:editor' key-bindings 'vi'
