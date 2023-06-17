@@ -110,11 +110,26 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
 ** Change 🌐 key to show Emoji & Symbols (macOS)
 
-    1. Launch System Preferences.
-    1. Go to =Keyboard=.
-    1. Click on =Input Sources=.
-    1. Change "Press 🌐 key to" to "Show Emoji & Symbols"
-  
+  1. Launch System Preferences.
+  1. Go to =Keyboard=.
+  1. Click on =Input Sources=.
+  1. Change "Press 🌐 key to" to "Show Emoji & Symbols"
+
+** Final steps for jEnv (macOS)
+
+  Add the installed OpenJDK to jEnv.
+
+  #+begin_src shell
+    # This is an example. Check where the JDK was installed on your machine. 
+    jenv add /opt/homebrew/opt/java/libexec/openjdk.jdk/Contents/Home/
+  #+end_src
+
+  Add a global version.
+
+  #+begin_src shell
+    jenv global 20.0.1 
+  #+end_src
+
 * Uninstall
 
    #+begin_src shell

@@ -7,13 +7,3 @@
   homebrew:
     name: jenv
   tags: [ java ]
-
-# TODO: jEnv initialization in the .zshenv which isn't working on MacOS.
-#       See .zshrc file
-# - name: Add jEnv initialization script in the .zshenv
-#   blockinfile:
-#     path: "{{ zshenv }}"
-#     block: |
-#       export PATH="$HOME/.jenv/bin:$PATH"
-#       eval "$(jenv init -)"
-#   tags: [ java ]
