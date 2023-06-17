@@ -17,7 +17,7 @@
     name: google-chrome
   tags: [ apps ]
 
-- name: Install Insomnia HTTP and GraphQL client
+- name: Install Insomnia HTTP client
   homebrew_cask:
     name: insomnia
   tags: [ apps ]
