@@ -1,6 +1,6 @@
-- name: Install Node.js
+- name: Install latest Node.js
   homebrew:
-    name: node@15
+    name: node
   tags: [ javascript ]
 
 - name: Install npm
