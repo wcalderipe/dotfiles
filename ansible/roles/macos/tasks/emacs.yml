@@ -11,13 +11,6 @@
     install_options: with-modules
   tags: [ emacs ]
 
-- name: Create Emacs.app link in /Applications/
-  file:
-    src: /opt/homebrew/opt/emacs-mac/Emacs.app
-    dest: /Applications
-    state: link
-  tags: [ emacs ]
-
 # Electronic lexical database of English language.
 - name: Install wordnet required by wordnut
   homebrew:
