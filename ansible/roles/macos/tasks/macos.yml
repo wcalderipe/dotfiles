@@ -14,9 +14,3 @@
 - name: Show hidden files in Finder
   shell: defaults write com.apple.Finder AppleShowAllFiles true
   tags: [ macos ]
-
-# The Emoji & Symbols has two binds on macOS: fn and ctrl-cmd-space. The second
-# one is inconvenient on Emacs because it often clashes with other important
-# bindings like `mark-sexp'.
-- name: Unbind Emoji & Symbols out of ctrl-cmd-space
-  shell: "defaults write -g NSUserKeyEquivalents -dict-add 'Emoji & Symbols' '\0'"

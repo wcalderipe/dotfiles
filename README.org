@@ -99,6 +99,22 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
    For more iTerm themes see [[https://iterm2colorschemes.com/][iterm2-color-schemes]].
 
+** Change =capslock= to control (macOS)
+
+   1. Launch System Preferences.
+   1. Go to =Keyboard=.
+   1. Click on =Modifier Keys...=.
+   1. Change =Caps Lock= to =^ Control=.
+
+   Make sure to do the same for the external keyboard if you have one.
+
+** Change 🌐 key to show Emoji & Symbols (macOS)
+
+    1. Launch System Preferences.
+    1. Go to =Keyboard=.
+    1. Click on =Input Sources=.
+    1. Change "Press 🌐 key to" to "Show Emoji & Symbols"
+  
 * Uninstall
 
    #+begin_src shell
