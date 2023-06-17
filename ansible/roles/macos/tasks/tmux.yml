@@ -19,6 +19,6 @@
 
 - name: Clone doom-one-dark tmux theme
   git:
-    repo: git@github.com:sei40kr/tmux-doom-one-dark.git
+    repo: https://github.com/sei40kr/tmux-doom-one-dark.git
     dest: "{{ lookup('env', 'HOME') }}/.tmux/themes/doom-one-dark"
   tags: [ tmux ]
