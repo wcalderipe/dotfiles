@@ -115,7 +115,7 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
   1. Click on =Input Sources=.
   1. Change "Press 🌐 key to" to "Show Emoji & Symbols"
 
-** Final steps for jEnv (macOS)
+** jEnv (macOS)
 
   Add the installed OpenJDK to jEnv.
 
@@ -128,6 +128,44 @@ See also a [[./resources/linux-screenshot-emacs.png][Linux screenshot]].
 
   #+begin_src shell
     jenv global 20.0.1 
+  #+end_src
+
+** Display settings (macOS)
+
+  1. Launch System Preferences.
+  1. Go to =Displays=.
+  1. Change =Resolution= to =Scaled=.
+  1. Change =More Space=.
+
+  To prevent external monitor flickering issues:
+
+  1. Go to =Displays > Display Settings=.
+  1. Change the external monitor's color profile to =Color LCD=.
+  1. Change the external monitor's refresh rate to =60 Hz=.
+  1. Turn off =Auto Adjust Brightness=, =True Tone=, and =Night Shift=.
+
+** GitHub
+
+  Generate a new SSH key (you can follow the GitHub's official steps
+  [[https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent][here]]).
+
+  1. Copy the SSH key to the clipboard.
+  1. Go to GitHub settings.
+  1. Go to SSH and GPG keys.
+  1. Click on =New SSH key=.
+  1. Paste the key and save.
+
+  For the GPG key, you can follow the GitHub's official steps
+  [[https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key][here]].
+
+  [[https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key][Tell Git to automatically sign all commits.]]
+
+  #+begin_src shell
+    # Set your signing key
+    git config --global user.signingkey <YOUR_GPG_KEY_ID>
+
+    # Tell Git to automatically sign all commits.
+    git config --global commit.gpgsign true
   #+end_src
 
 * Uninstall
