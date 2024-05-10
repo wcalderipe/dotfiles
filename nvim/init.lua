@@ -10,6 +10,9 @@ vim.g.maplocalleader = ' '
 -- Make line numbers default.
 vim.opt.number = true
 
+-- Show relative line numbers.
+vim.opt.relativenumber = true
+
 -- Enable mouse mode, can be useful for resizing splits for example.
 vim.opt.mouse = 'a'
 
@@ -57,6 +60,9 @@ vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Disable auto folding.
+vim.opt.foldenable = false
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -464,6 +470,14 @@ require('lazy').setup {
           end,
         },
       }
+
+      require('lspconfig').tsserver.setup {
+        init_options = {
+          preferences = {
+            importModuleSpecifierPreference = 'project-relative',
+          },
+        },
+      }
     end,
   },
 
@@ -508,8 +522,6 @@ require('lazy').setup {
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
 
@@ -672,6 +684,7 @@ require('lazy').setup {
           'json',
           'lua',
           'markdown',
+          'rust',
           'typescript',
           'vim',
           'vimdoc',
@@ -690,7 +703,7 @@ require('lazy').setup {
   --  Here are some example plugins that I've included in the kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
