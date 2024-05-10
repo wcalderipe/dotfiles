@@ -7,16 +7,13 @@ return {
     'sindrets/diffview.nvim',
     'nvim-telescope/telescope.nvim',
   },
-  -- TODO: Using lazy load for some reason doesn't register the
-  -- keymap.
-  -- lazy = true,
   config = function()
     local neogit = require 'neogit'
 
     neogit.setup {}
 
-    vim.keymap.set('n', '<leader>Gs', function()
+    vim.keymap.set('n', '<leader>gs', function()
       neogit.open()
-    end, { desc = 'Git status' })
+    end, { desc = '[G]it [s]tatus' })
   end,
 }
