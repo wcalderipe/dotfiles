@@ -10,7 +10,9 @@ return {
   config = function()
     local neogit = require 'neogit'
 
-    neogit.setup {}
+    neogit.setup {
+      kind = 'tab',
+    }
 
     vim.keymap.set('n', '<leader>gs', function()
       neogit.open()

@@ -64,11 +64,36 @@ vim.opt.scrolloff = 10
 -- Disable auto folding.
 vim.opt.foldenable = false
 
+-- Set highlight on search, but clear on pressing <Esc> in normal mode.
+vim.opt.hlsearch = true
+
+-- Does not copy on delete.
+vim.opt.clipboard = 'unnamedplus'
+
+vim.filetype.add {
+  extension = {
+    -- Golang templ support.
+    templ = 'templ',
+  },
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode.
-vim.opt.hlsearch = true
+-- Move block up and down.
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- Keep the cursor in the middle when moving half page up and down.
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- Keep the cursos in the middle when navigating through search matches.
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+vim.keymap.set('x', '<leader>p', [["_dP]])
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -115,7 +140,7 @@ vim.keymap.set('n', '<C-w>P', '<cmd>tabprevious<CR>', { desc = 'Move focus to th
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('wcalderipe-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -195,11 +220,16 @@ require('lazy').setup {
       require('which-key').setup()
       -- Document existing key chains
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>c_', hidden = true },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d_', hidden = true },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>s_', hidden = true },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w_', hidden = true },
       }
     end,
   },
@@ -215,6 +245,7 @@ require('lazy').setup {
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-tree/nvim-web-devicons',
       'nvim-telescope/telescope-project.nvim',
+      'mollerhoj/telescope-recent-files.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -265,9 +296,11 @@ require('lazy').setup {
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'recent-files')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      local utils = require 'telescope.utils'
 
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -279,17 +312,19 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', function()
+        require('telescope').extensions['recent-files'].recent_files {
+          -- Keep default patterns but remove .env from being ignored
+          file_ignore_patterns = {
+            'node_modules/.*',
+            '.git/.*',
+          },
+          -- Show hidden files like .env
+          hidden = true,
+        }
+      end, { desc = '[S]earch [F]iles' })
 
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to telescope to change theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 
       -- Also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -304,10 +339,23 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>sF', function()
+        builtin.find_files { cwd = utils.buffer_dir() }
+      end, { desc = '[S]earch [F]iles in current buffer path' })
     end,
   },
 
-  -- LSP Configuration.
+  -- Java Configuration
+  -- IMPORTANT: It must call setup before the LSP.
+  {
+    'nvim-java/nvim-java',
+    config = function()
+      require('java').setup()
+    end,
+  },
+
+  -- LSP Configuration
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -320,7 +368,7 @@ require('lazy').setup {
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        group = vim.api.nvim_create_augroup('wcalderipe-lsp-attach', { clear = true }),
         callback = function(event)
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -412,8 +460,20 @@ require('lazy').setup {
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs.
         gopls = {},
-        -- Is `tsserver` getting slow? See https://github.com/pmizio/typescript-tools.nvim
-        tsserver = {},
+        -- IMPORTANT: Requires `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
+        golangci_lint_ls = {
+          -- Configure with recommended settings
+          settings = {
+            golangci_lint = {
+              command = 'golangci-lint',
+              -- Recommended to run on save
+              run_on_save = true,
+              -- Allow up to 5s for linting process
+              timeout = '5s',
+            },
+          },
+        },
+        ts_ls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -440,6 +500,23 @@ require('lazy').setup {
             },
           },
         },
+        jdtls = {},
+        -- IMPORTANT: Requires `npm i -g vscode-langservers-extracted`.
+        html = { filetypes = { 'html', 'templ' } },
+        -- IMPORTANT: Requires `cargo install htmx-lsp`.
+        htmx = { filetypes = { 'html', 'templ' } },
+        emmet_language_server = {},
+        tailwindcss = {
+          filetypes = { 'templ', 'javascript', 'typescript', 'react' },
+          settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                templ = 'html',
+              },
+            },
+          },
+        },
+        templ = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -471,7 +548,7 @@ require('lazy').setup {
         },
       }
 
-      require('lspconfig').tsserver.setup {
+      require('lspconfig').ts_ls.setup {
         init_options = {
           preferences = {
             importModuleSpecifierPreference = 'project-relative',
@@ -494,9 +571,20 @@ require('lazy').setup {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports', 'gofmt' },
+        handlebars = { 'prettier' },
         -- A sub-list will run only the first available formatter.
-        javascript = { { 'prettierd', 'prettier' } },
-        typescript = { { 'prettierd', 'prettier' } },
+        -- Conform will run the first available formatter when
+        -- `stop_after_first` is enabled.
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        javascript = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        javascriptreact = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        less = { 'prettierd', 'prettier', stop_after_first = true },
+        postcss = { 'prettierd', 'prettier', stop_after_first = true },
+        scss = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        typescriptreact = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        templ = { 'templ' },
       },
     },
   },
@@ -698,19 +786,16 @@ require('lazy').setup {
     end,
   },
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for kickstart
-  --
-  --  Here are some example plugins that I've included in the kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'wcalderipe.plugins.debug',
+  -- require 'wcalderipe.plugins.indent_line',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
+  -- NOTE: The import below can automatically add your own plugins,
+  -- configuration, etc from `lua/custom/plugins/*.lua` This is the easiest way
+  -- to modularize your config.
   --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
+  --  Uncomment the following line and add your plugins to
+  --  `lua/custom/plugins/*.lua` to get going. For additional information, see
+  --  `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 }
 
