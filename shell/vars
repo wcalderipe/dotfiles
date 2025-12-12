@@ -65,3 +65,16 @@ export FZF_DEFAULT_COMMAND='fdfind --hidden --exclude=.local --exclude=.config -
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type=d"
 # Default command for finding files
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type=f"
+
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+jwt-decode() {
+  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
+}
