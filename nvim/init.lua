@@ -70,6 +70,8 @@ vim.opt.hlsearch = true
 -- Does not copy on delete.
 vim.opt.clipboard = 'unnamedplus'
 
+vim.env.PATH = '~/.rbenv/shims:' .. vim.env.PATH
+
 vim.filetype.add {
   extension = {
     -- Golang templ support.
@@ -131,6 +133,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --  `<C-w>T` to open a window into a new tab.
 vim.keymap.set('n', '<C-w>N', '<cmd>tabnext<CR>', { desc = 'Move focus to the next tab' })
 vim.keymap.set('n', '<C-w>P', '<cmd>tabprevious<CR>', { desc = 'Move focus to the previous tab' })
+
+-- Replace visual selection
+vim.keymap.set('v', '<Leader>r', 'y:%s/<C-r>0//g<Left><Left>', { desc = 'Replace visual selection' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -277,15 +282,11 @@ require('lazy').setup {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
-        -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          path_display = { 'truncate' },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -343,15 +344,16 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sF', function()
         builtin.find_files { cwd = utils.buffer_dir() }
       end, { desc = '[S]earch [F]iles in current buffer path' })
-    end,
-  },
 
-  -- Java Configuration
-  -- IMPORTANT: It must call setup before the LSP.
-  {
-    'nvim-java/nvim-java',
-    config = function()
-      require('java').setup()
+      vim.keymap.set('n', '<leader>sE', function()
+        vim.ui.input({ prompt = 'File extension: ' }, function(input)
+          if input then
+            builtin.live_grep {
+              glob_pattern = '*.' .. input,
+            }
+          end
+        end)
+      end, { desc = '[S]earch in File [E]xtension' })
     end,
   },
 
@@ -500,11 +502,10 @@ require('lazy').setup {
             },
           },
         },
-        jdtls = {},
         -- IMPORTANT: Requires `npm i -g vscode-langservers-extracted`.
         html = { filetypes = { 'html', 'templ' } },
         -- IMPORTANT: Requires `cargo install htmx-lsp`.
-        htmx = { filetypes = { 'html', 'templ' } },
+        -- htmx = { filetypes = { 'html', 'templ' } },
         emmet_language_server = {},
         tailwindcss = {
           filetypes = { 'templ', 'javascript', 'typescript', 'react' },
@@ -516,7 +517,13 @@ require('lazy').setup {
             },
           },
         },
-        templ = {},
+        -- templ = {},
+        ruby_lsp = {
+          init_options = {
+            formatter = 'rubocop',
+          },
+        },
+        elixirls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -536,6 +543,7 @@ require('lazy').setup {
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        automatic_installation = false,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -564,27 +572,28 @@ require('lazy').setup {
     opts = {
       notify_on_error = false,
       format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 1000,
         lsp_fallback = true,
       },
       -- See https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports', 'gofmt' },
-        handlebars = { 'prettier' },
+        handlebars = { 'prettierd', 'prettier' },
         -- A sub-list will run only the first available formatter.
         -- Conform will run the first available formatter when
         -- `stop_after_first` is enabled.
         css = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd', 'prettier', stop_after_first = true },
-        javascript = { { 'prettierd', 'prettier' }, stop_after_first = true },
-        javascriptreact = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         less = { 'prettierd', 'prettier', stop_after_first = true },
         postcss = { 'prettierd', 'prettier', stop_after_first = true },
         scss = { 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { { 'prettierd', 'prettier' }, stop_after_first = true },
-        typescriptreact = { { 'prettierd', 'prettier' }, stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         templ = { 'templ' },
+        ruby = { 'rubocop' },
       },
     },
   },
