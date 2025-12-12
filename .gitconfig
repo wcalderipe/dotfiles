@@ -8,6 +8,11 @@
   lo = log --pretty=oneline
   todo = grep -EI 'TODO(:|\\s)|FIXME(:|\\s)'
 [core]
-  editor = emacsclient --tty
+  editor = vi
 [push]
   default = simple
+	autoSetupRemote = true
+[commit]
+	gpgsign = true
+[pull]
+	rebase = true
