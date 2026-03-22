@@ -1,9 +1,0 @@
-- name: Install Java JDK
-  homebrew:
-    name: java
-  tags: [ java ]
-
-- name: Install jEnv
-  homebrew:
-    name: jenv
-  tags: [ java ]

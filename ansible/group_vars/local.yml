@@ -1,3 +1,0 @@
-zshenv: "{{ lookup('env', 'HOME') }}/.zshenv"
-
-ruby_version: 2.6.5
