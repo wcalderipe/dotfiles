@@ -11,6 +11,10 @@ log_warn()  { echo -e "${YELLOW}[warn]${RESET} $1"; }
 log_error() { echo -e "${RED}[error]${RESET} $1"; }
 log_step()  { echo -e "\n${BOLD}--- $1 ---${RESET}"; }
 
+is_framework_13() {
+  grep -q "Laptop 13" /sys/devices/virtual/dmi/id/product_name 2>/dev/null
+}
+
 pkg_install() {
   log_info "installing: $*"
   yay -S --noconfirm --needed "$@"
