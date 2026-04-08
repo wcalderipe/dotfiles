@@ -4,6 +4,8 @@
 
 - Every command must be idempotent: running any script once or ten times
   produces the same result with no errors.
+- One command must kick off everything: `./scripts/all.sh` is the single
+  entry point that handles all setup from a fresh install.
 
 ## Commit Messages
 
