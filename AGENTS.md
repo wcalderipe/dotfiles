@@ -1,5 +1,10 @@
 # AGENTS.md
 
+## Principles
+
+- Every command must be idempotent: running any script once or ten times
+  produces the same result with no errors.
+
 ## Commit Messages
 
 We use Conventional Commits (see `docs/adr/015-use-conventional-commits.md`).
