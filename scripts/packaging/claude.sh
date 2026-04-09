@@ -6,3 +6,5 @@ else
   log_info "installing: claude-code"
   curl -fsSL https://claude.ai/install.sh | bash
 fi
+
+pkg_install claude-desktop-appimage

@@ -16,8 +16,8 @@ pkg_install ansible
 pkg_install droidcam
 pkg_install darktable
 pkg_install 1password-cli
+source "$SCRIPTS_DIR/packaging/claude.sh"
 source "$SCRIPTS_DIR/packaging/dev-envs.sh"
-source "$SCRIPTS_DIR/packaging/claude-code.sh"
 
 log_step "config"
 source "$SCRIPTS_DIR/config/stow-dotfiles.sh"
