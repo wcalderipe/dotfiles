@@ -14,6 +14,7 @@ pkg_install dbeaver
 pkg_install terraform
 pkg_install ansible
 pkg_install droidcam
+pkg_install cameractrls
 pkg_install darktable
 pkg_install 1password-cli
 source "$SCRIPTS_DIR/packaging/claude.sh"
