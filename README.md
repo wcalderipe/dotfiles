@@ -31,23 +31,27 @@ Works with any external monitor on any output.
 
 ## Keyboard
 
-Layout is plain `us` with **Compose on Right Alt** (`compose:ralt` in
+Layout is plain `us` with **Compose on Right Ctrl** (`compose:rctrl` in
 `hypr/.config/hypr/input.conf`; Caps is remapped to Ctrl). Accents are typed as
-Compose sequences: tap and release Right Alt, then type the keys in order. It
+Compose sequences: tap and release Right Ctrl, then type the keys in order. It
 is not a chord. Because this is `us` and not `us-intl`, the keys `'` `"` `` `
 `` `~` still type literally, which keeps them clean for code.
+
+Compose lives on Right Ctrl rather than Right Alt because the external keyboard
+(Womier RD75, a compact 75%) has no Right Alt. Right Ctrl is given up freely:
+Ctrl is still reachable via Caps (remapped) and Left Ctrl.
 
 ### Portuguese accents
 
 | Want        | Sequence                | Notes              |
 |-------------|-------------------------|--------------------|
-| ã õ         | `RAlt` `~` vowel      | til                |
-| á é í ó ú   | `RAlt` `'` vowel      | agudo              |
-| â ê ô       | `RAlt` `^` vowel      | circunflexo (`^` = Shift+6) |
-| à           | `RAlt` `` ` `` `a`      | crase              |
-| ç           | `RAlt` `,` `c`          | cedilha            |
+| ã õ         | `RCtrl` `~` vowel      | til                |
+| á é í ó ú   | `RCtrl` `'` vowel      | agudo              |
+| â ê ô       | `RCtrl` `^` vowel      | circunflexo (`^` = Shift+6) |
+| à           | `RCtrl` `` ` `` `a`      | crase              |
+| ç           | `RCtrl` `,` `c`          | cedilha            |
 
-Uppercase: add Shift on the letter. `RAlt` `,` `Shift+C` → Ç.
+Uppercase: add Shift on the letter. `RCtrl` `,` `Shift+C` → Ç.
 
 ### French and Spanish
 
@@ -55,8 +59,8 @@ The same Compose key covers them:
 
 | Want      | Sequence                            | Notes             |
 |-----------|-------------------------------------|-------------------|
-| ñ         | `RAlt` `~` `n`                       | español           |
-| ü ë ï     | `RAlt` `"` vowel                   | trema / tréma     |
-| è ù       | `RAlt` `` ` `` vowel               | accent grave      |
-| ¿ ¡       | `RAlt` `?` `?`  /  `RAlt` `!` `!`    | español           |
+| ñ         | `RCtrl` `~` `n`                       | español           |
+| ü ë ï     | `RCtrl` `"` vowel                   | trema / tréma     |
+| è ù       | `RCtrl` `` ` `` vowel               | accent grave      |
+| ¿ ¡       | `RCtrl` `?` `?`  /  `RCtrl` `!` `!`    | español           |
 
