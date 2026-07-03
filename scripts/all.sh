@@ -25,6 +25,10 @@ pkg_install cameractrls
 pkg_install darktable
 # 1Password command-line client
 pkg_install 1password-cli
+# Shell history: searchable, synced, ctrl-r
+pkg_install atuin
+# preexec/precmd hooks for bash, required by atuin's shell integration
+pkg_install bash-preexec
 source "$SCRIPTS_DIR/packaging/claude.sh"
 source "$SCRIPTS_DIR/packaging/dev-envs.sh"
 

@@ -1,0 +1,29 @@
+# atuin shell history. Only settings that differ from the defaults live here;
+# everything else uses atuin's built-in defaults.
+# Full reference: https://docs.atuin.sh/configuration/config/
+
+# On ctrl-r, Enter drops the selected command onto the prompt to edit instead of
+# running it immediately (default true runs on Enter).
+enter_accept = false
+
+# Fuzzy search answered by the local daemon.
+search_mode = "daemon-fuzzy"
+
+# TUI height in terminal lines (0 = full screen). Total height incl. search
+# bar/tabs/help. ctrl-r uses inline_height; up-arrow (↑) uses its own value.
+inline_height = 35
+inline_height_shell_up_key_binding = 20
+
+[sync]
+# Record-based sync protocol (sync v2).
+records = true
+
+[daemon]
+# Background daemon for faster search and syncing; started on demand.
+enabled = true
+autostart = true
+
+[ui]
+# Drop the "duration" column (how long each command took to run) that shows up
+# as 4ms / 1h; keep only relative time + the command.
+columns = ["time", "command"]
